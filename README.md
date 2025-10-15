@@ -1,2 +1,7 @@
-# FE_MoneyManager
-Money Manager feladat Dóczi Adrián Márkkal
+# MoneyManager FE & BE
+
+# Használt könyvtárak
+
+# TAGOK:
+- Bujáki Erik Attila (13.A)
+- Dóczi Adrián Márk (13.A)
