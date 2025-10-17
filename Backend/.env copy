@@ -1,0 +1,6 @@
+DB_HOST = localhost
+DB_USERNAME = root
+DB_PASS = 
+DB_NAME = 2025_moneymanager
+
+PORT = 3000
