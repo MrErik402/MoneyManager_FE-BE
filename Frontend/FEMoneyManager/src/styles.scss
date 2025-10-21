@@ -1,1 +1,41 @@
 @import "tailwindcss";
+
+/* Dark mode theme improvements */
+.dark {
+  /* Dark mode background gradients */
+  --dark-bg-primary: #0f0f23;
+  --dark-bg-secondary: #1a1a2e;
+  --dark-bg-tertiary: #16213e;
+  --dark-bg-card: #1e1e3f;
+  --dark-bg-hover: #2a2a4a;
+
+  /* Dark mode text colors */
+  --dark-text-primary: #e2e8f0;
+  --dark-text-secondary: #94a3b8;
+  --dark-text-muted: #64748b;
+
+  /* Dark mode accent colors */
+  --dark-accent-primary: #3b82f6;
+  --dark-accent-secondary: #8b5cf6;
+  --dark-accent-success: #10b981;
+  --dark-accent-warning: #f59e0b;
+  --dark-accent-error: #ef4444;
+
+  /* Dark mode borders */
+  --dark-border-primary: #374151;
+  --dark-border-secondary: #4b5563;
+  --dark-border-accent: #6b7280;
+}
+
+/* Dark mode utility classes */
+.dark .bg-dark-primary {
+  background-color: var(--dark-bg-primary);
+}
+
+.bekkground {
+  background-color: #ffffff;
+}
+
+.dark .bekkground {
+  background-color: #000000;
+}
