@@ -1,5 +1,26 @@
 @import "tailwindcss";
 
+body {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+:root {
+  --white-bg-primary: #5be4fc2d;
+  --white-bg-secondary: #1a1a2e;
+  --white-bg-tertiary: #16213e;
+  --white-bg-card: #1e1e3f;
+  --white-bg-hover: #2a2a4a;
+  --white-text-primary: #042046;
+  --white-text-secondary: #94a3b8;
+  --white-text-muted: #64748b;
+  --white-accent-primary: #3babf6;
+  --white-accent-secondary: #5c66f6;
+  --white-accent-success: #10b981;
+  --white-accent-warning: #f59e0b;
+  --white-accent-error: #ef4444;
+}
+
 /* Dark mode theme improvements */
 .dark {
   /* Dark mode background gradients */
@@ -32,10 +53,24 @@
   background-color: var(--dark-bg-primary);
 }
 
-.bekkground {
-  background-color: #ffffff;
+.mainBackground {
+  background-color: var(--white-bg-primary);
 }
 
-.dark .bekkground {
-  background-color: #000000;
+.dark .mainBackground {
+  background-color: var(--dark-bg-primary);
+}
+
+.h1-text {
+  color: var(--white-text-primary);
+  font-size: 2rem;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  text-align: center;
+}
+
+.dark .h1-text {
+  color: var(--dark-text-primary);
 }

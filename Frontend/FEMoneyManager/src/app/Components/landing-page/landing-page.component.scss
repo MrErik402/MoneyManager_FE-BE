@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+.text-primary {
+  color: var(--white-text-primary);
+}
+
+.dark .text-primary {
+  color: var(--dark-text-primary);
+}
+
+.text-secondary {
+  color: var(--white-text-secondary);
+}
+
+.dark .text-secondary {
+  color: var(--dark-text-secondary);
+}
+
+.text-muted {
+  color: var(--white-text-muted);
+}
+
+.dark .text-muted {
+  color: var(--dark-text-muted);
+}
+
+.text-accent {
+  color: var(--white-accent-primary);
+}
+
+.dark .text-accent {
+  color: var(--dark-accent-primary);
+}
+
+/* Ha majd másik szin kell, vagy átmenet itt változtasd */
+.text-accent-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--white-accent-primary),
+    var(--white-accent-primary)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dark .text-accent-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--dark-accent-primary),
+    var(--dark-accent-primary)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Buttons */
+.btn-primary {
+  @apply px-8 py-3 rounded-full font-semibold text-white transition-all duration-300;
+  @apply shadow-lg hover:bg-black;
+  background: linear-gradient(
+    135deg,
+    var(--white-accent-primary),
+    var(--white-accent-primary)
+  );
+}
+
+.dark .btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--dark-accent-primary),
+    var(--dark-accent-secondary)
+  );
+}
+
+.btn-secondary {
+  @apply px-5 py-3 rounded-full font-semibold transition-all duration-300;
+  @apply shadow-md hover:shadow-lg hover:scale-105 active:scale-95;
+  background-color: transparent;
+  border: 2px solid var(--white-accent-primary);
+  color: var(--white-accent-primary);
+}
+
+.dark .btn-secondary {
+  border-color: var(--dark-accent-primary);
+  color: var(--dark-accent-primary);
+}
+
+/* Kartyak*/
+.feature-card {
+  @apply p-5 rounded-2xl backdrop-blur-sm transition-all duration-300;
+  @apply hover:bg-black/10 hover:shadow-xl cursor-pointer;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(41, 8, 8, 0.6);
+}
+
+.dark .feature-card {
+  background-color: rgba(30, 30, 63, 0.5);
+  border-color: rgba(59, 130, 246, 0.2);
+}
