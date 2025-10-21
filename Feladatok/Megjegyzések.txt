@@ -1,0 +1,1 @@
+Az adatbázisban azért az összes ID varchar, mivel UID-t használunk mindenhol.

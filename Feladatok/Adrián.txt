@@ -5,6 +5,7 @@ Főoldal
 Categoria frontend
 TRANZAKCIÓK frontend
 Értesítések FRONTEND
+SÖTÉTMÓD - VILÁGOSMÓD [FEKETE PIROS FEHÉR] - [FEHÉR VILÁGOSKÉK FEKETE]
 
 #########BACKEND##############
 CATEGORIA KEZELÉS -> Étkezés ajándék stb [DATALISTBŐL VÁLASZTHATÓ]

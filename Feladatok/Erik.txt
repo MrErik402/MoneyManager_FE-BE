@@ -15,3 +15,7 @@ Navbar
 Footer
 Header
 
+
+############EGYÉB###############
+
+UniqID megoldása
