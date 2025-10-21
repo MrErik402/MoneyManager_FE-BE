@@ -1,0 +1,2 @@
+User lekérdezés az adminoknak
+Ezek adatainak módosítása

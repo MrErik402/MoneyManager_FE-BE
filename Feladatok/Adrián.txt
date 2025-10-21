@@ -1,0 +1,13 @@
+
+##########FRONTEND#############
+GRAFIKON frontend rész
+Főoldal
+Categoria frontend
+TRANZAKCIÓK frontend
+Értesítések FRONTEND
+
+#########BACKEND##############
+CATEGORIA KEZELÉS -> Étkezés ajándék stb [DATALISTBŐL VÁLASZTHATÓ]
+TRANSACTION KEZELÉS -> Bevétel kiadás 
+ÁLLANDÓ TRANZAKCIÓK
+ÉRTESÍTÉSEK

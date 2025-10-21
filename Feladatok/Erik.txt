@@ -1,0 +1,17 @@
+#########BACKEND##############
+
+Adatbázis tábla
+USER KEZELÉS -> Regisztráció, bejelentkezés, kijelentkezés, profilom [CRUD MŰVELETEK]
+WALLET KEZELÉS -> id userid nev összeg
+Adatbázis kapcsolatot
+Log rendszer [WINSTON]
+
+##########FRONTEND#############
+
+Bejelentkezés Regisztráció frontend 
+Profilom frontend 
+Naptár frontend rész
+Navbar
+Footer
+Header
+
