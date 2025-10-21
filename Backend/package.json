@@ -15,6 +15,7 @@
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "mysql": "^2.18.1",
+    "uniqid": "^5.4.0",
     "winston": "^3.18.3"
   },
   "devDependencies": {

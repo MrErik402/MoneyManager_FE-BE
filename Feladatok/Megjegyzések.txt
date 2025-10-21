@@ -1,1 +1,2 @@
-Az adatbázisban azért az összes ID varchar, mivel UID-t használunk mindenhol.
+Az adatbázisban azért az összes ID varchar, mivel UID-t használunk mindenhol. [npmjsen a **uniqid**]
+Jelszó titkosításra a bcryptet használjuk. [npmjsen a **bcrypt**]

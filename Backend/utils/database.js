@@ -10,6 +10,7 @@ let pool = mysql.createPool({
   password: process.env.DBPASS,
   database: process.env.DBNAME
 });
+
 pool.on('acquire', function (connection) {
     logger.info('Connection %d acquired', connection.threadId);
   });
