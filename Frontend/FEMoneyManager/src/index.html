@@ -1,13 +1,45 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>FEMoneyManager</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>FEMoneyManager</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  </head>
+  <body class="bekkground min-h-screen">
+    <app-root></app-root>
+  </body>
+
+  <script>
+    function changeTheme() {
+      let theme = localStorage.getItem("theme");
+      if (theme === "dark") {
+        localStorage.setItem("theme", "light");
+        document.documentElement.classList.remove("dark");
+      } else {
+        localStorage.setItem("theme", "dark");
+        document.documentElement.classList.add("dark");
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      let theme = localStorage.getItem("theme");
+      console.log(theme);
+      const browserDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+
+      if (theme !== null) {
+        if (theme === "dark") {
+          console.log("Dark theme");
+          document.documentElement.classList.add("dark");
+        }
+      } else if (browserDark) {
+        document.documentElement.classList.add("dark");
+      }
+    });
+
+    console.log("!", document.documentElement.classList);
+  </script>
 </html>
