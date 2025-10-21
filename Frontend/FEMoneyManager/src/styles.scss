@@ -11,10 +11,11 @@ body {
   --white-bg-tertiary: #16213e;
   --white-bg-card: #1e1e3f;
   --white-bg-hover: #2a2a4a;
-  --white-text-primary: #042046;
+  --white-text-primary: #6387b9;
+  --white-text-primary2: rgb(185, 201, 224) 9;
   --white-text-secondary: #94a3b8;
   --white-text-muted: #64748b;
-  --white-accent-primary: #3babf6;
+  --white-accent-primary: #52b5f7;
   --white-accent-secondary: #5c66f6;
   --white-accent-success: #10b981;
   --white-accent-warning: #f59e0b;
@@ -62,7 +63,7 @@ body {
 }
 
 .h1-text {
-  color: var(--white-text-primary);
+  color: var(--white-text-primary2);
   font-size: 2rem;
   font-weight: 600;
   font-family: "Montserrat", sans-serif;
@@ -72,5 +73,55 @@ body {
 }
 
 .dark .h1-text {
-  color: var(--dark-text-primary);
+  color: whitesmoke;
+}
+
+.dark .h3-text {
+  color: whitesmoke;
+}
+
+.h4-text {
+  color: var(--white-text-primary2);
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  text-align: center;
+}
+
+.dark .h4-text {
+  color: whitesmoke;
+}
+
+.mini-text {
+  color: var(--white-text-primary2);
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  text-align: center;
+}
+
+.dark .mini-text {
+  color: whitesmoke;
+}
+
+.mini-text-no-center {
+  color: var(--white-text-primary2);
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  text-align: left;
+}
+
+.dark .mini-text-no-center {
+  color: whitesmoke;
+}
+
+input {
+  background-color: transparent !important;
 }

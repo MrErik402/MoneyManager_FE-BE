@@ -66,14 +66,6 @@
   );
 }
 
-.dark .btn-primary {
-  background: linear-gradient(
-    135deg,
-    var(--dark-accent-primary),
-    var(--dark-accent-secondary)
-  );
-}
-
 .btn-secondary {
   @apply px-5 py-3 rounded-full font-semibold transition-all duration-300;
   @apply shadow-md hover:shadow-lg hover:scale-105 active:scale-95;
@@ -93,9 +85,4 @@
   @apply hover:bg-black/10 hover:shadow-xl cursor-pointer;
   background-color: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(41, 8, 8, 0.6);
-}
-
-.dark .feature-card {
-  background-color: rgba(30, 30, 63, 0.5);
-  border-color: rgba(59, 130, 246, 0.2);
 }

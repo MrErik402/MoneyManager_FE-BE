@@ -49,61 +49,22 @@
     <div
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-12 max-w-4xl border-1 border-black/10"
     >
-      <div class="feature-card flex flex-col items-center justify-center">
-        <div class="text-3xl mb-1">
-          <img src="images/penztarca.png" alt="Pénztárcák" class="w-20 h-20" />
-        </div>
-        <h3 class="font-semibold text-lg text-primary mb-1">Pénztárcák</h3>
-        <p class="text-sm text-muted">Több pénztárca kezelése egyszerűen</p>
-      </div>
-
-      <div class="feature-card flex flex-col items-center justify-center">
+      @for (karty of kartyak; track karty.title) {
+      <div
+        class="feature-card flex flex-col items-center justify-center"
+        [routerLink]="karty.link"
+      >
         <div class="text-3xl mb-1">
           <img
-            src="images/tranzakcio.png"
-            alt="Tranzakciók"
+            src="images/{{ karty.icon }}"
+            alt="karty.title"
             class="w-20 h-20"
           />
         </div>
-        <h3 class="font-semibold text-lg text-primary mb-1">Tranzakciók</h3>
-        <p class="text-sm text-muted">Bevételek és kiadások kezelése</p>
+        <h3 class="font-semibold text-lg h3-text mb-1">{{ karty.title }}</h3>
+        <p class="text-sm text-muted">{{ karty.description }}</p>
       </div>
-
-      <div class="feature-card flex flex-col items-center justify-center">
-        <div class="text-3xl mb-1">
-          <img src="images/kategoria.png" alt="Kategóriák" class="w-20 h-20" />
-        </div>
-        <h3 class="font-semibold text-lg text-primary mb-1">Kategóriák</h3>
-        <p class="text-sm text-muted">Rendszerezett költségkövetés</p>
-      </div>
-
-      <div class="feature-card flex flex-col items-center justify-center">
-        <div class="text-3xl mb-1">
-          <img src="images/ertesites.png" alt="Értesítések" class="w-20 h-20" />
-        </div>
-        <h3 class="font-semibold text-lg text-primary mb-1">Értesítések</h3>
-        <p class="text-sm text-muted">Értesítéseid megtekintése</p>
-      </div>
-
-      <div class="feature-card flex flex-col items-center justify-center">
-        <div class="text-3xl mb-1">
-          <img
-            src="images/statisztika.png"
-            alt="Statisztikák"
-            class="w-20 h-20"
-          />
-        </div>
-        <h3 class="font-semibold text-lg text-primary mb-1">Statisztikák</h3>
-        <p class="text-sm text-muted">Átlátható pénzügyi kimutatások</p>
-      </div>
-
-      <div class="feature-card flex flex-col items-center justify-center">
-        <div class="text-3xl mb-1">
-          <img src="images/profilom.png" alt="Profilom" class="w-20 h-20" />
-        </div>
-        <h3 class="font-semibold text-lg text-primary mb-1">Profilom</h3>
-        <p class="text-sm text-muted">Profilom megtekintése és módosítása</p>
-      </div>
+      }
     </div>
   </div>
 </div>

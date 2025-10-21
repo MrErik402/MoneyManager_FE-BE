@@ -1,0 +1,171 @@
+@import "tailwindcss";
+
+/* =========================================================
+   THEME VARIABLES — LIGHT & DARK
+   ========================================================= */
+
+:root {
+  /* Base colors (Light Mode) */
+  --color-bg: #ffffff;
+  --color-surface: #f8fafc;
+  --color-text: #0f172a;
+  --color-muted: #64748b;
+
+  /* Accent colors */
+  --color-primary: #60a5fa; /* Soft Sky Blue */
+  --color-primary-hover: #3b82f6;
+  --color-border: #e2e8f0;
+
+  /* Shadows & focus */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.1);
+  --focus-ring: 0 0 0 3px rgba(96, 165, 250, 0.4);
+}
+
+.dark {
+  /* Base colors (Dark Mode) */
+  --color-bg: #0f172a;
+  --color-surface: #1e293b;
+  --color-text: #f8fafc;
+  --color-muted: #94a3b8;
+
+  /* Accent colors */
+  --color-primary: #60a5fa;
+  --color-primary-hover: #93c5fd;
+  --color-border: #334155;
+
+  /* Shadows & focus */
+  --shadow-sm: 0 1px 2px rgba(255, 255, 255, 0.05);
+  --shadow-md: 0 2px 6px rgba(255, 255, 255, 0.1);
+  --focus-ring: 0 0 0 3px rgba(96, 165, 250, 0.5);
+}
+
+/* =========================================================
+     GLOBAL STYLES
+     ========================================================= */
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--color-primary-hover);
+  }
+}
+
+button {
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    background-color: var(--color-primary-hover);
+    box-shadow: var(--shadow-md);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+}
+
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-sm);
+  padding: 1.25rem;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+input,
+textarea,
+select {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  transition: border-color 0.2s ease, background-color 0.2s ease,
+    color 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: var(--focus-ring);
+  }
+}
+
+/* =========================================================
+     UTILITY CLASSES
+     ========================================================= */
+
+.text-muted {
+  color: var(--color-muted);
+}
+
+.border {
+  border: 1px solid var(--color-border);
+}
+
+.shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.shadow-md {
+  box-shadow: var(--shadow-md);
+}
+
+.form-input-ugly {
+  @apply w-full px-3 py-2 text-lg border-2 rounded;
+  @apply focus:outline-none;
+
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+
+  background-color: transparent;
+  color: gray;
+  border-color: var(--white-text-secondary);
+
+  &:hover {
+    border-color: var(--white-text-primary);
+  }
+
+  &:focus {
+    border-color: var(--white-accent-primary);
+  }
+
+  &::placeholder {
+    color: var(--white-text-muted);
+  }
+}
+
+.dark .form-input-ugly {
+  background-color: transparent;
+  border-color: var(--dark-text-secondary);
+
+  &:hover {
+    border-color: var(--dark-text-primary);
+  }
+
+  &:focus {
+    border-color: var(--dark-accent-primary);
+  }
+
+  &::placeholder {
+    color: var(--dark-text-muted);
+  }
+}

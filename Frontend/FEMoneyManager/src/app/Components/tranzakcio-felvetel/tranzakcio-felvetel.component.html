@@ -1,0 +1,81 @@
+<div class="w-full max-w-6xl mx-auto px-3 py-6">
+  <div class="mb-8 text-center">
+    <h1 class="h1-text mb-3">Tranzakciók kezelése</h1>
+    <p class="mini-text max-w-xl mx-auto">
+      Itt láthatod az összes tranzakciókat, valamint itt tudsz felvenni,
+      szerkeszteni és törölni.
+    </p>
+  </div>
+
+  <div
+    class="mainBackground rounded-lg shadow-lg border border-gray-200 p-6 mb-6"
+  >
+    <div class="mb-6">
+      <h2 class="h4-text mb-1">Új tranzakció felvétele</h2>
+      <div class="w-12 h-0.5 bg-gray-700"></div>
+    </div>
+
+    <form class="space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label for="wallet" class="mini-text-no-center block mb-1">
+            Pénztárca
+          </label>
+          <input
+            type="number"
+            id="wallet"
+            class="form-input-ugly"
+            placeholder="Melyik pénztárcádhoz tartozik?"
+          />
+        </div>
+
+        <div>
+          <label for="category" class="mini-text-no-center block mb-1">
+            Kategória
+          </label>
+          <input
+            type="text"
+            id="category"
+            class="form-input-ugly"
+            placeholder="Melyik kategóriába tartozik?"
+          />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label for="amount" class="mini-text-no-center block mb-1">
+            Mennyiség
+          </label>
+          <input
+            type="number"
+            min="0"
+            id="amount"
+            max="999999999"
+            class="form-input-ugly"
+            placeholder="Mennyiség"
+          />
+        </div>
+
+        <div class="">
+          <label for="type" class="mini-text-no-center block mb-1">
+            Típus
+          </label>
+          <select id="type" class="form-input-ugly">
+            <option class="" value="">Válassz típust</option>
+            <option value="income">Bevétel</option>
+            <option value="expense">Kiadás</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="flex justify-center pt-2">
+        <button type="submit" class="form-button-ugly">
+          Tranzakció felvétele
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-tranzakcio-megjelenit></app-tranzakcio-megjelenit>
