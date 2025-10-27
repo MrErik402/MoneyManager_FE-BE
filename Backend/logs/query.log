@@ -38,3 +38,8 @@
 [2025-10-27 11:25:29] - [32minfo[39m: server listening on port 3000
 [2025-10-27 11:25:31] - [32minfo[39m: server listening on port 3000
 [2025-10-27 11:26:02] - [32minfo[39m: server listening on port 3000
+[2025-10-27 11:26:44] - [36mverbose[39m: [GET /users] -> 5 rekord küldve válaszként
+[2025-10-27 11:26:51] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-10-27 11:33:50] - [32minfo[39m: server listening on port 3000
+[2025-10-27 11:33:52] - [32minfo[39m: server listening on port 3000
+[2025-10-27 11:34:06] - [32minfo[39m: server listening on port 3000

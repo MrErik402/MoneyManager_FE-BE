@@ -1,17 +1,31 @@
 const express = require("express");
+const session = require("express-session");
 const cors = require("cors");
 
-const tables = require("./modules/tables");
-const logger  = require("./utils/logger");
+const tablesRouter = require("./modules/tables");
+const authRouter = require("./modules/auth");
+
 const app = express();
 
-// Middlewarek
-app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })) // req.body-n keresztül átmenjen az adat
+app.use(cors({
+  origin: "http://localhost:4200",
+  credentials: true, // cookie-k engedélyezése
+}));
 
-app.use("/", tables);
+app.use(session({
+  secret: "nagyonTitkosKulcs",
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: false,
+    sameSite: "lax",
+    maxAge: 1000 * 60 * 60, // 1 óra
+  },
+}));
 
-app.listen(3000, () => {
-   logger.log('info', 'server listening on port 3000')
-});
+app.use("/auth", authRouter);
+app.use("/", tablesRouter);
+
+app.listen(3000, () => console.log("API fut: http://localhost:3000"));
