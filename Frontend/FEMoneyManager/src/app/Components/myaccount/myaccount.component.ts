@@ -1,20 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import { AuthService } from '../../Services/auth.service';  
+import { User } from '../../Interfaces/User';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-myaccount',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './myaccount.component.html',
   styleUrl: './myaccount.component.scss'
 })
 export class MyaccountComponent implements OnInit {
-  userProfile = {
-    fullName: 'Kovács János',
-    email: 'janos.kovacs@gmail.com',
-    phone: '+36 30 123 4567',
-    birthDate: '1990-05-15',
-    username: 'janos123'
+  userProfile: User = {
+    id: '',
+    name: '',
+    email: '',
+    password: '',
+    role: { role: 'user' },
+    status: true
   };
 
   passwordData = {
@@ -29,6 +32,8 @@ export class MyaccountComponent implements OnInit {
     memberSince: '2023. január'
   };
 
+  constructor(private authService: AuthService) {}
+
   ngOnInit() {
     // TODO: Load user data from API
     this.loadUserProfile();
@@ -37,6 +42,9 @@ export class MyaccountComponent implements OnInit {
   loadUserProfile() {
     // TODO: Implement API call to load user profile
     console.log('Loading user profile...');
+    this.authService.me().then((response: any) => {
+      console.log(response);
+    });
   }
 
   saveProfile() {
