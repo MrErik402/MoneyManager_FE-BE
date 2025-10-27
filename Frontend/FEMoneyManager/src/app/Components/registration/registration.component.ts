@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../Services/api.service';
 import { AuthService } from '../../Services/auth.service';
+<<<<<<< HEAD
 import { ApiResponse } from '../../Interfaces/ApiResponse';
+=======
+import { ApiResponse } from '../../interfaces/ApiResponse';
+>>>>>>> f1d419bd41c6487e93b84a5261428887ea486c7e
 import { User } from '../../Interfaces/User';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
