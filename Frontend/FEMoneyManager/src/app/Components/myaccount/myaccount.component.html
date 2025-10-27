@@ -1,37 +1,36 @@
-<div class="w-full max-w-4xl flex flex-col mx-auto mb-10 mt-10">
+<div class="w-full max-w-3xl flex flex-col mx-auto mb-10 mt-10">
   <!-- Profil fejléc -->
   <div class="text-center mb-8">
-    <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+    <div class="w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
       <img 
         src="images/profilom.png" 
         alt="Profil kép" 
         class="w-full h-full object-cover"
         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
       />
-      <div class="w-full h-full flex items-center justify-center text-4xl text-gray-500 dark:text-gray-400" style="display: none;">
+      <div class="w-full h-full flex items-center justify-center text-3xl text-gray-500 dark:text-gray-400" style="display: none;">
         👤
       </div>
     </div>
     <h1 class="h1-text mb-2">Profilom</h1>
-    <p class="text-secondary">Személyes adatok és beállítások kezelése</p>
+    <p class="text-secondary">Felhasználói adatok és beállítások kezelése</p>
   </div>
 
   <!-- Profil információk -->
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-    <!-- Személyes adatok -->
-    <div class="background shadow-md rounded-lg p-6">
-      <h2 class="h4-text mb-4">Személyes adatok</h2>
-      <form class="space-y-4">
+  <div class="background shadow-md rounded-lg p-6 mb-6">
+    <h2 class="h4-text mb-4">Felhasználói adatok</h2>
+    <form class="space-y-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label class="block text-primary text-sm font-bold mb-2" for="fullName">
-            Teljes név
+          <label class="block text-primary text-sm font-bold mb-2" for="name">
+            Név
           </label>
           <input
             class="shadow appearance-none rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline placeholder-gray-600 dark:placeholder-gray-400"
-            id="fullName"
+            id="name"
             type="text"
             placeholder="Pl.: Kovács János"
-            [(ngModel)]="userProfile.fullName"
+            [(ngModel)]="userProfile.name"
           />
         </div>
         <div>
@@ -46,60 +45,46 @@
             [(ngModel)]="userProfile.email"
           />
         </div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label class="block text-primary text-sm font-bold mb-2" for="phone">
-            Telefonszám
+          <label class="block text-primary text-sm font-bold mb-2" for="role">
+            Felhasználói szerepkör
           </label>
-          <input
-            class="shadow appearance-none rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline placeholder-gray-600 dark:placeholder-gray-400"
-            id="phone"
-            type="tel"
-            placeholder="Pl.: +36 30 123 4567"
-            [(ngModel)]="userProfile.phone"
-          />
+          <div class="shadow appearance-none rounded w-full py-2 px-3 text-primary leading-tight bg-gray-100 dark:bg-gray-800">
+            {{ userProfile.role.role === 'admin' ? '👑 Adminisztrátor' : '👤 Felhasználó' }}
+          </div>
         </div>
         <div>
-          <label class="block text-primary text-sm font-bold mb-2" for="birthDate">
-            Születési dátum
+          <label class="block text-primary text-sm font-bold mb-2" for="status">
+            Fiók állapota
           </label>
-          <input
-            class="shadow appearance-none rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline placeholder-gray-600 dark:placeholder-gray-400"
-            id="birthDate"
-            type="date"
-            [(ngModel)]="userProfile.birthDate"
-          />
+          <div class="shadow appearance-none rounded w-full py-2 px-3 text-primary leading-tight bg-gray-100 dark:bg-gray-800">
+            {{ userProfile.status ? '✅ Aktív' : '❌ Inaktív' }}
+          </div>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
+  </div>
 
-    <!-- Fiók beállítások -->
-    <div class="background shadow-md rounded-lg p-6">
-      <h2 class="h4-text mb-4">Fiók beállítások</h2>
-      <form class="space-y-4">
-        <div>
-          <label class="block text-primary text-sm font-bold mb-2" for="username">
-            Felhasználónév
-          </label>
-          <input
-            class="shadow appearance-none rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline placeholder-gray-600 dark:placeholder-gray-400"
-            id="username"
-            type="text"
-            placeholder="Pl.: janos123"
-            [(ngModel)]="userProfile.username"
-          />
-        </div>
-        <div>
-          <label class="block text-primary text-sm font-bold mb-2" for="currentPassword">
-            Jelenlegi jelszó
-          </label>
-          <input
-            class="shadow appearance-none rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline placeholder-gray-600 dark:placeholder-gray-400"
-            id="currentPassword"
-            type="password"
-            placeholder="******************"
-            [(ngModel)]="passwordData.currentPassword"
-          />
-        </div>
+  <!-- Jelszó módosítás -->
+  <div class="background shadow-md rounded-lg p-6 mb-6">
+    <h2 class="h4-text mb-4">Jelszó módosítása</h2>
+    <form class="space-y-4">
+      <div>
+        <label class="block text-primary text-sm font-bold mb-2" for="currentPassword">
+          Jelenlegi jelszó
+        </label>
+        <input
+          class="shadow appearance-none rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline placeholder-gray-600 dark:placeholder-gray-400"
+          id="currentPassword"
+          type="password"
+          placeholder="******************"
+          [(ngModel)]="passwordData.currentPassword"
+        />
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label class="block text-primary text-sm font-bold mb-2" for="newPassword">
             Új jelszó
@@ -124,31 +109,12 @@
             [(ngModel)]="passwordData.confirmPassword"
           />
         </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Statisztikák -->
-  <div class="background shadow-md rounded-lg p-6 mb-8">
-    <h2 class="h4-text mb-4">Fiók statisztikák</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div class="text-center p-4 rounded-lg bg-gray-100 dark:bg-gray-800">
-        <div class="text-2xl font-bold text-accent">{{ userStats.totalTransactions }}</div>
-        <div class="text-sm text-secondary">Összes tranzakció</div>
       </div>
-      <div class="text-center p-4 rounded-lg bg-gray-100 dark:bg-gray-800">
-        <div class="text-2xl font-bold text-accent">{{ userStats.totalWallets }}</div>
-        <div class="text-sm text-secondary">Pénztárcák száma</div>
-      </div>
-      <div class="text-center p-4 rounded-lg bg-gray-100 dark:bg-gray-800">
-        <div class="text-2xl font-bold text-accent">{{ userStats.memberSince }}</div>
-        <div class="text-sm text-secondary">Tagja óta</div>
-      </div>
-    </div>
+    </form>
   </div>
 
   <!-- Műveletek -->
-  <div class="flex flex-col sm:flex-row gap-4 justify-center">
+  <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
     <button
       (click)="saveProfile()"
       class="btnbackground text-primary hover:opacity-80 font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline transition-opacity duration-300"
@@ -162,13 +128,6 @@
       type="button"
     >
       🔒 Jelszó módosítása
-    </button>
-    <button
-      (click)="exportData()"
-      class="btnbackground text-primary hover:opacity-80 font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline transition-opacity duration-300"
-      type="button"
-    >
-      📤 Adatok exportálása
     </button>
   </div>
 

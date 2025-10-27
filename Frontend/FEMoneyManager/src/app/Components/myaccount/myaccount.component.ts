@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../Services/auth.service';  
 import { User } from '../../Interfaces/User';
 import { CommonModule } from '@angular/common';
+import { ApiService } from '../../Services/api.service';
 @Component({
   selector: 'app-myaccount',
   standalone: true,
@@ -26,13 +27,8 @@ export class MyaccountComponent implements OnInit {
     confirmPassword: ''
   };
 
-  userStats = {
-    totalTransactions: 156,
-    totalWallets: 3,
-    memberSince: '2023. január'
-  };
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private apiService: ApiService) {}
 
   ngOnInit() {
     // TODO: Load user data from API
@@ -40,10 +36,19 @@ export class MyaccountComponent implements OnInit {
   }
 
   loadUserProfile() {
-    // TODO: Implement API call to load user profile
     console.log('Loading user profile...');
     this.authService.me().then((response: any) => {
-      console.log(response);
+      if (response && response.data) {
+        this.userProfile.id = response.data.id || '';
+        this.userProfile.name = response.data.name || '';
+        this.userProfile.email = response.data.email || '';
+        this.userProfile.password = response.data.password || '';
+        this.userProfile.role = response.data.role || { role: 'user' };
+        this.userProfile.status = response.data.status !== undefined ? response.data.status : true;
+      }
+    }).catch((error) => {
+      console.error('Error loading user profile:', error);
+      alert('Hiba történt a felhasználói adatok betöltése során!');
     });
   }
 
@@ -55,6 +60,11 @@ export class MyaccountComponent implements OnInit {
   }
 
   changePassword() {
+    if (!this.passwordData.currentPassword) {
+      alert('Kérjük, adja meg a jelenlegi jelszót!');
+      return;
+    }
+
     if (this.passwordData.newPassword !== this.passwordData.confirmPassword) {
       alert('Az új jelszavak nem egyeznek!');
       return;
@@ -77,11 +87,6 @@ export class MyaccountComponent implements OnInit {
     };
   }
 
-  exportData() {
-    // TODO: Implement data export functionality
-    console.log('Exporting user data...');
-    alert('Adatok exportálása elkezdődött. Emailben küldjük el a fájlt.');
-  }
 
   deleteAccount() {
     const confirmed = confirm(
@@ -97,9 +102,16 @@ export class MyaccountComponent implements OnInit {
       );
 
       if (doubleConfirmed) {
-        // TODO: Implement API call to delete account
-        console.log('Deleting account...');
-        alert('Fiók törlése folyamatban...');
+        this.apiService.delete('/users', parseInt(this.userProfile.id)).then((response: any) => {
+          console.log(response);
+          if (response.status === 200) {
+            alert('Fiók sikeresen törölve!');
+          } else {
+            alert('Sikertelen fiók törlés!');
+          }
+        });
+      } else {
+        alert('Fiók törlése megtagadva!');
       }
     }
   }
