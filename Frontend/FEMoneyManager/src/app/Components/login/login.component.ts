@@ -21,8 +21,6 @@ export class LoginComponent implements OnInit {
     
   }
 
-
-
   loginHandler() {
     if (!this.email || !this.password) {
       alert('Minden mező kitöltése kötelező');
