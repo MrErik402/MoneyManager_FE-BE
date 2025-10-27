@@ -4,6 +4,7 @@ import { AuthService } from '../../Services/auth.service';
 import { User } from '../../Interfaces/User';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../Services/api.service';
+import { NotificationsService } from '../../Services/notifications.service';
 @Component({
   selector: 'app-myaccount',
   standalone: true,
@@ -28,7 +29,7 @@ export class MyaccountComponent implements OnInit {
   };
 
 
-  constructor(private authService: AuthService, private apiService: ApiService) {}
+  constructor(private authService: AuthService, private apiService: ApiService, private notificationsService: NotificationsService) {}
 
   ngOnInit() {
     // TODO: Load user data from API
@@ -48,43 +49,68 @@ export class MyaccountComponent implements OnInit {
       }
     }).catch((error) => {
       console.error('Error loading user profile:', error);
-      alert('Hiba történt a felhasználói adatok betöltése során!');
+      this.notificationsService.show('error', 'Hiba', 'Hiba történt a felhasználói adatok betöltése során!');
     });
   }
 
   saveProfile() {
-    // TODO: Implement API call to save profile
-    console.log('Saving profile:', this.userProfile);
-    // Show success message
-    alert('Profil sikeresen mentve!');
+    if (!this.userProfile.name || !this.userProfile.email) {
+      this.notificationsService.show('error', 'Hiba', 'Név és email mezők kitöltése kötelező!');
+      return;
+    }
+
+    // Update user profile via API
+    this.apiService.patch('http://localhost:3000/users', parseInt(this.userProfile.id), {
+      name: this.userProfile.name,
+      email: this.userProfile.email
+    }).then((response: any) => {
+      if (response.status === 200) {
+        this.notificationsService.show('success', 'Siker', 'Profil sikeresen mentve!');
+      } else {
+        this.notificationsService.show('error', 'Hiba', 'Sikertelen profil mentés!');
+      }
+    }).catch((error) => {
+      console.error('Error saving profile:', error);
+      this.notificationsService.show('error', 'Hiba', 'Hiba történt a profil mentése során!');
+    });
   }
 
   changePassword() {
     if (!this.passwordData.currentPassword) {
-      alert('Kérjük, adja meg a jelenlegi jelszót!');
+      this.notificationsService.show('error', 'Hiba', 'Kérjük, adja meg a jelenlegi jelszót!');
       return;
     }
 
     if (this.passwordData.newPassword !== this.passwordData.confirmPassword) {
-      alert('Az új jelszavak nem egyeznek!');
+      this.notificationsService.show('error', 'Hiba', 'Az új jelszavak nem egyeznek!');
       return;
     }
 
     if (this.passwordData.newPassword.length < 6) {
-      alert('Az új jelszó legalább 6 karakter hosszú legyen!');
+      this.notificationsService.show('error', 'Hiba', 'Az új jelszó legalább 6 karakter hosszú legyen!');
       return;
     }
 
-    // TODO: Implement API call to change password
-    console.log('Changing password...');
-    alert('Jelszó sikeresen módosítva!');
-    
-    // Clear password fields
-    this.passwordData = {
-      currentPassword: '',
-      newPassword: '',
-      confirmPassword: ''
-    };
+    // Update password via API
+    this.apiService.patch('http://localhost:3000/users', parseInt(this.userProfile.id), {
+      currentPassword: this.passwordData.currentPassword,
+      newPassword: this.passwordData.newPassword
+    }).then((response: any) => {
+      if (response.status === 200) {
+        this.notificationsService.show('success', 'Siker', 'Jelszó sikeresen módosítva!');
+        // Clear password fields
+        this.passwordData = {
+          currentPassword: '',
+          newPassword: '',
+          confirmPassword: ''
+        };
+      } else {
+        this.notificationsService.show('error', 'Hiba', 'Sikertelen jelszó módosítás!');
+      }
+    }).catch((error) => {
+      console.error('Error changing password:', error);
+      this.notificationsService.show('error', 'Hiba', 'Hiba történt a jelszó módosítása során!');
+    });
   }
 
 
@@ -102,16 +128,23 @@ export class MyaccountComponent implements OnInit {
       );
 
       if (doubleConfirmed) {
-        this.apiService.delete('/users', parseInt(this.userProfile.id)).then((response: any) => {
+        this.apiService.delete('http://localhost:3000/users', parseInt(this.userProfile.id)).then((response: any) => {
           console.log(response);
           if (response.status === 200) {
-            alert('Fiók sikeresen törölve!');
+            this.notificationsService.show('success', 'Siker', 'Fiók sikeresen törölve!');
+            // Redirect to login or home page after successful deletion
+            setTimeout(() => {
+              window.location.href = '/';
+            }, 2000);
           } else {
-            alert('Sikertelen fiók törlés!');
+            this.notificationsService.show('error', 'Hiba', 'Sikertelen fiók törlés!');
           }
+        }).catch((error: any) => {
+          console.error('Error deleting account:', error);
+          this.notificationsService.show('error', 'Hiba', 'Hiba történt a fiók törlése során!');
         });
       } else {
-        alert('Fiók törlése megtagadva!');
+        this.notificationsService.show('info', 'Mégse', 'Fiók törlése megtagadva!');
       }
     }
   }
