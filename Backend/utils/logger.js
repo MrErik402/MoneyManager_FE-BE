@@ -13,9 +13,9 @@ const logger = winston.createLogger({
     defaultMeta: { service: 'user-service' },
     transports: [
         new winston.transports.Console(),
-        new winston.transports.File({ filename: './logs/error.log', level: 'error' }), //Ide jönnek a hibák
-        new winston.transports.File({ filename: './logs/query.log', level: 'verbose' }), //Ide megy az összes lekérdezés eredménye
-        new winston.transports.File({ filename: './logs/server.log', level: 'info' }), //Ide jönnek az általános infok
+        new winston.transports.File({ filename: './logs/error.log', level: 'error' }),
+        new winston.transports.File({ filename: './logs/query.log', level: 'verbose' }),
+        new winston.transports.File({ filename: './logs/server.log' }),
     ],
 });
 

@@ -1,1 +1,43 @@
 @url = http://localhost:3000
+
+//"id": "u001",
+//"name": "Kiss Péter",
+//"email": "peter.kiss@example.com",
+//"password": "hashed_pw_123",
+//"role": "user",
+//"status": 1
+
+### Get all users
+GET {{url}}/users
+
+### Get one user by id
+GET {{url}}/users/1
+
+### Create a new user
+POST {{url}}/users
+Content-Type: application/json
+
+{
+    "id": "uuid123",
+    "name": "Kiss Péter János Celőd",
+    "email": "peter.celo@example.com",
+    "password": "hashed_pw_123",
+    "role": "user",
+    "status": 1
+}
+
+### Update a user by id
+PATCH {{url}}/users/uuid123
+Content-Type: application/json
+
+{
+    "id": "uuid123",
+    "name": "Kiss Péter János Celőd",
+    "email": "peter.celo@example.com",
+    "password": "hashed_pw_123",
+    "role": "user",
+    "status": 0
+}
+
+### Delete a user by id
+DELETE {{url}}/users/uuid123

@@ -1,0 +1,40 @@
+[2025-10-27 11:03:59] - [32minfo[39m: server listening on port 3000
+[2025-10-27 11:09:08] - [32minfo[39m: server listening on port 3000
+[2025-10-27 11:09:34] - [32minfo[39m: server listening on port 3000
+[2025-10-27 11:09:56] - [32minfo[39m: server listening on port 3000
+[2025-10-27 11:10:48] - [32minfo[39m: server listening on port 3000
+[2025-10-27 11:11:11] - [32minfo[39m: server listening on port 3000
+[2025-10-27 11:11:13] - [32minfo[39m: server listening on port 3000
+[2025-10-27 11:11:21] - [36mverbose[39m: [GET /users] -> 5 rekord küldve válaszként
+[2025-10-27 11:12:20] - [36mverbose[39m: [GET /users] -> 1 rekord küldve válaszként
+[2025-10-27 11:13:11] - [32minfo[39m: server listening on port 3000
+[2025-10-27 11:13:25] - [32minfo[39m: server listening on port 3000
+[2025-10-27 11:14:47] - [36mverbose[39m: [POST /users] -> undefined rekord küldve válaszként
+[2025-10-27 11:14:53] - [36mverbose[39m: [GET /users] -> 6 rekord küldve válaszként
+[2025-10-27 11:15:55] - [36mverbose[39m: [GET /users] -> undefined rekord küldve válaszként
+[2025-10-27 11:15:56] - [36mverbose[39m: [GET /users] -> 5 rekord küldve válaszként
+[2025-10-27 11:20:41] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-10-27 11:20:43] - [36mverbose[39m: [POST /wallets] -> undefined rekord küldve válaszként
+[2025-10-27 11:20:44] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-10-27 11:21:44] - [36mverbose[39m: [POST /transactions] -> undefined rekord küldve válaszként
+[2025-10-27 11:21:46] - [36mverbose[39m: [GET /transactions] -> 1 rekord küldve válaszként
+[2025-10-27 11:21:55] - [36mverbose[39m: [GET /transactions] -> 1 rekord küldve válaszként
+[2025-10-27 11:23:15] - [36mverbose[39m: [GET /categories] -> 0 rekord küldve válaszként
+[2025-10-27 11:23:17] - [36mverbose[39m: [POST /categories] -> undefined rekord küldve válaszként
+[2025-10-27 11:23:18] - [36mverbose[39m: [GET /categories] -> 1 rekord küldve válaszként
+[2025-10-27 11:23:24] - [36mverbose[39m: [PATCH /categories] -> undefined rekord küldve válaszként
+[2025-10-27 11:23:25] - [36mverbose[39m: [GET /categories] -> 1 rekord küldve válaszként
+[2025-10-27 11:23:28] - [36mverbose[39m: [PATCH /categories] -> undefined rekord küldve válaszként
+[2025-10-27 11:23:39] - [36mverbose[39m: [GET /categories] -> 0 rekord küldve válaszként
+[2025-10-27 11:23:48] - [36mverbose[39m: [GET /categories] -> 1 rekord küldve válaszként
+[2025-10-27 11:24:14] - [36mverbose[39m: [POST /categories] -> undefined rekord küldve válaszként
+[2025-10-27 11:24:16] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-10-27 11:24:21] - [36mverbose[39m: [PATCH /categories] -> undefined rekord küldve válaszként
+[2025-10-27 11:24:24] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-10-27 11:24:46] - [36mverbose[39m: [GET /users] -> 5 rekord küldve válaszként
+[2025-10-27 11:24:48] - [36mverbose[39m: [GET /users] -> 5 rekord küldve válaszként
+[2025-10-27 11:25:24] - [32minfo[39m: server listening on port 3000
+[2025-10-27 11:25:26] - [32minfo[39m: server listening on port 3000
+[2025-10-27 11:25:29] - [32minfo[39m: server listening on port 3000
+[2025-10-27 11:25:31] - [32minfo[39m: server listening on port 3000
+[2025-10-27 11:26:02] - [32minfo[39m: server listening on port 3000

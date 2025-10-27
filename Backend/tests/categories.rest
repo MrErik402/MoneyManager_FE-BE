@@ -1,1 +1,32 @@
 @url = http://localhost:3000
+
+//	id	name	
+
+
+
+### Get all categories
+GET {{url}}/categories
+
+### Get one category by id
+GET {{url}}/categories/1
+
+### Create a new category
+POST {{url}}/categories
+Content-Type: application/json
+
+{
+    "id": "custom_category_id1",
+    "name": "Szórakozás"
+}
+
+### Update a category by id
+PATCH {{url}}/categories/custom_category_id1
+Content-Type: application/json
+
+{
+    "id": "custom_category_id1",
+    "name": "Szórakozás2"
+}
+
+### Delete a category by id
+DELETE {{url}}/categories/custom_category_id1
