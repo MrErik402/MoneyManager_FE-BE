@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../Services/api.service';
 import { AuthService } from '../../Services/auth.service';
 import { ApiResponse } from '../../interfaces/ApiResponse';
-import { User } from '../../interfaces/User';
+import { User } from '../../Interfaces/User';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
