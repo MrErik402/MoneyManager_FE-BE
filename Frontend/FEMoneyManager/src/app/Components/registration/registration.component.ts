@@ -8,6 +8,7 @@ import { ApiResponse } from '../../Interfaces/ApiResponse';
 import { User } from '../../Interfaces/User';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NotificationsService } from '../../Services/notifications.service';
 
 @Component({
   selector: 'app-registration',
@@ -24,7 +25,7 @@ export class RegistrationComponent implements OnInit {
   name = '';
   checkbox = false;
 
-  constructor(private api: ApiService, private authService: AuthService) {}
+  constructor(private api: ApiService, private authService: AuthService, private notificationsService: NotificationsService) {}
 
   ngOnInit() {
 
@@ -34,15 +35,20 @@ export class RegistrationComponent implements OnInit {
 
   registrationHandler() {
     if (!this.email || !this.password || !this.passwordConfirm || !this.name || !this.checkbox) {
-      alert('Minden mező kitöltése kötelező');
+      this.notificationsService.show('error', 'Hiba', 'Minden mező kitöltése kötelező');
       return;
     }
     if (this.password !== this.passwordConfirm) {
-      alert('A jelszavak nem egyeznek');
+      this.notificationsService.show('error', 'Hiba', 'A jelszavak nem egyeznek');
       return;
     }
     this.authService.register(this.name, this.email, this.password).then((response: any) => {
-      console.log(response);
+      
+      if (response.status > 199 && response.status < 300) {
+        this.notificationsService.show('success', 'Sikeres regisztráció', 'Sikeresen regisztráltál');
+      } else {
+        this.notificationsService.show('error', 'Hiba', 'Sikertelen regisztráció');
+      }
     });
   }
 }
