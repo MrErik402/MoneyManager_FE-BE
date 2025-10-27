@@ -44,6 +44,13 @@
 [2025-10-27 11:33:52] - [32minfo[39m: server listening on port 3000
 [2025-10-27 11:34:06] - [32minfo[39m: server listening on port 3000
 [2025-10-27 11:57:10] - [36mverbose[39m: [AUTH /register] user létrehozva: csipicsupirubiraba@gmail.hu
+<<<<<<< HEAD
+[2025-10-27 11:58:28] - [36mverbose[39m: [GET /users] -> 6 rekord küldve válaszként
+=======
 [2025-10-27 12:06:49] - [36mverbose[39m: [AUTH /register] user létrehozva: mr.erik402@gmail.com
+<<<<<<< HEAD
 [2025-10-27 12:10:32] - [36mverbose[39m: [AUTH /login] bejelentkezve: mr.erik402@gmail.com
 [2025-10-27 12:11:11] - [36mverbose[39m: [AUTH /login] bejelentkezve: mr.erik402@gmail.com
+=======
+>>>>>>> f1d419bd41c6487e93b84a5261428887ea486c7e
+>>>>>>> 2ac23727c22e971370cd9f91568a35250ab4485d
