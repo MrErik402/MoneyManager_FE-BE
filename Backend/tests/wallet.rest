@@ -1,1 +1,34 @@
 @url = http://localhost:3000
+
+//	id	userID	name	balance	
+
+### Get all wallets
+GET {{url}}/wallets
+
+### Get one wallet by id
+GET {{url}}/wallets/1
+
+### Create a new wallet
+POST {{url}}/wallets
+Content-Type: application/json
+
+{
+    "id": "custom_wallet_id1",
+    "userID": "uuid123",
+    "name": "Revolut Wallet",
+    "balance": 100000
+}
+
+### Update a wallet by id
+PATCH {{url}}/wallets/custom_wallet_id1
+Content-Type: application/json
+
+{
+    "id": "custom_wallet_id1",
+    "userID": "uuid123",
+    "name": "Revolut Wallet",
+    "balance": 100000
+}
+
+### Delete a wallet by id
+DELETE {{url}}/wallets/custom_wallet_id1

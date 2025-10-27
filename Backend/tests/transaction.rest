@@ -1,1 +1,37 @@
 @url = http://localhost:3000
+
+//	id	walletID	amount	categoryID	type	
+
+
+### Get all transactions
+GET {{url}}/transactions
+
+### Get one transaction by id
+GET {{url}}/transactions/1
+
+### Create a new transaction
+POST {{url}}/transactions
+Content-Type: application/json
+
+{
+    "id": "custom_transaction_id1",
+    "walletID": "custom_wallet_id1",
+    "amount": 100000,
+    "categoryID": "custom_category_id1",
+    "type": "bejövő"
+}
+
+### Update a transaction by id
+PATCH {{url}}/transactions/custom_transaction_id1
+Content-Type: application/json
+
+{
+    "id": "custom_transaction_id1",
+    "walletID": "custom_wallet_id1",
+    "amount": 100000,
+    "categoryID": "custom_category_id1",
+    "type": "kiadás"
+}
+
+### Delete a transaction by id
+DELETE {{url}}/transactions/custom_transaction_id1
