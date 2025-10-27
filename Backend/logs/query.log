@@ -45,3 +45,5 @@
 [2025-10-27 11:34:06] - [32minfo[39m: server listening on port 3000
 [2025-10-27 11:57:10] - [36mverbose[39m: [AUTH /register] user létrehozva: csipicsupirubiraba@gmail.hu
 [2025-10-27 12:06:49] - [36mverbose[39m: [AUTH /register] user létrehozva: mr.erik402@gmail.com
+[2025-10-27 12:10:32] - [36mverbose[39m: [AUTH /login] bejelentkezve: mr.erik402@gmail.com
+[2025-10-27 12:11:11] - [36mverbose[39m: [AUTH /login] bejelentkezve: mr.erik402@gmail.com
