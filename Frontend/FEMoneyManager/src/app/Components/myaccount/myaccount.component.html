@@ -1,1 +1,189 @@
-<p>myaccount works!</p>
+<div class="w-full max-w-4xl flex flex-col mx-auto mb-10 mt-10">
+  <!-- Profil fejléc -->
+  <div class="text-center mb-8">
+    <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+      <img 
+        src="images/profilom.png" 
+        alt="Profil kép" 
+        class="w-full h-full object-cover"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+      />
+      <div class="w-full h-full flex items-center justify-center text-4xl text-gray-500 dark:text-gray-400" style="display: none;">
+        👤
+      </div>
+    </div>
+    <h1 class="h1-text mb-2">Profilom</h1>
+    <p class="text-secondary">Személyes adatok és beállítások kezelése</p>
+  </div>
+
+  <!-- Profil információk -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <!-- Személyes adatok -->
+    <div class="background shadow-md rounded-lg p-6">
+      <h2 class="h4-text mb-4">Személyes adatok</h2>
+      <form class="space-y-4">
+        <div>
+          <label class="block text-primary text-sm font-bold mb-2" for="fullName">
+            Teljes név
+          </label>
+          <input
+            class="shadow appearance-none rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline placeholder-gray-600 dark:placeholder-gray-400"
+            id="fullName"
+            type="text"
+            placeholder="Pl.: Kovács János"
+            [(ngModel)]="userProfile.fullName"
+          />
+        </div>
+        <div>
+          <label class="block text-primary text-sm font-bold mb-2" for="email">
+            E-mail cím
+          </label>
+          <input
+            class="shadow appearance-none rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline placeholder-gray-600 dark:placeholder-gray-400"
+            id="email"
+            type="email"
+            placeholder="Pl.: janos.kovacs@gmail.com"
+            [(ngModel)]="userProfile.email"
+          />
+        </div>
+        <div>
+          <label class="block text-primary text-sm font-bold mb-2" for="phone">
+            Telefonszám
+          </label>
+          <input
+            class="shadow appearance-none rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline placeholder-gray-600 dark:placeholder-gray-400"
+            id="phone"
+            type="tel"
+            placeholder="Pl.: +36 30 123 4567"
+            [(ngModel)]="userProfile.phone"
+          />
+        </div>
+        <div>
+          <label class="block text-primary text-sm font-bold mb-2" for="birthDate">
+            Születési dátum
+          </label>
+          <input
+            class="shadow appearance-none rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline placeholder-gray-600 dark:placeholder-gray-400"
+            id="birthDate"
+            type="date"
+            [(ngModel)]="userProfile.birthDate"
+          />
+        </div>
+      </form>
+    </div>
+
+    <!-- Fiók beállítások -->
+    <div class="background shadow-md rounded-lg p-6">
+      <h2 class="h4-text mb-4">Fiók beállítások</h2>
+      <form class="space-y-4">
+        <div>
+          <label class="block text-primary text-sm font-bold mb-2" for="username">
+            Felhasználónév
+          </label>
+          <input
+            class="shadow appearance-none rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline placeholder-gray-600 dark:placeholder-gray-400"
+            id="username"
+            type="text"
+            placeholder="Pl.: janos123"
+            [(ngModel)]="userProfile.username"
+          />
+        </div>
+        <div>
+          <label class="block text-primary text-sm font-bold mb-2" for="currentPassword">
+            Jelenlegi jelszó
+          </label>
+          <input
+            class="shadow appearance-none rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline placeholder-gray-600 dark:placeholder-gray-400"
+            id="currentPassword"
+            type="password"
+            placeholder="******************"
+            [(ngModel)]="passwordData.currentPassword"
+          />
+        </div>
+        <div>
+          <label class="block text-primary text-sm font-bold mb-2" for="newPassword">
+            Új jelszó
+          </label>
+          <input
+            class="shadow appearance-none rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline placeholder-gray-600 dark:placeholder-gray-400"
+            id="newPassword"
+            type="password"
+            placeholder="******************"
+            [(ngModel)]="passwordData.newPassword"
+          />
+        </div>
+        <div>
+          <label class="block text-primary text-sm font-bold mb-2" for="confirmPassword">
+            Jelszó megerősítés
+          </label>
+          <input
+            class="shadow appearance-none rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline placeholder-gray-600 dark:placeholder-gray-400"
+            id="confirmPassword"
+            type="password"
+            placeholder="******************"
+            [(ngModel)]="passwordData.confirmPassword"
+          />
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Statisztikák -->
+  <div class="background shadow-md rounded-lg p-6 mb-8">
+    <h2 class="h4-text mb-4">Fiók statisztikák</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="text-center p-4 rounded-lg bg-gray-100 dark:bg-gray-800">
+        <div class="text-2xl font-bold text-accent">{{ userStats.totalTransactions }}</div>
+        <div class="text-sm text-secondary">Összes tranzakció</div>
+      </div>
+      <div class="text-center p-4 rounded-lg bg-gray-100 dark:bg-gray-800">
+        <div class="text-2xl font-bold text-accent">{{ userStats.totalWallets }}</div>
+        <div class="text-sm text-secondary">Pénztárcák száma</div>
+      </div>
+      <div class="text-center p-4 rounded-lg bg-gray-100 dark:bg-gray-800">
+        <div class="text-2xl font-bold text-accent">{{ userStats.memberSince }}</div>
+        <div class="text-sm text-secondary">Tagja óta</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Műveletek -->
+  <div class="flex flex-col sm:flex-row gap-4 justify-center">
+    <button
+      (click)="saveProfile()"
+      class="btnbackground text-primary hover:opacity-80 font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline transition-opacity duration-300"
+      type="button"
+    >
+      💾 Adatok mentése
+    </button>
+    <button
+      (click)="changePassword()"
+      class="btnbackground text-primary hover:opacity-80 font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline transition-opacity duration-300"
+      type="button"
+    >
+      🔒 Jelszó módosítása
+    </button>
+    <button
+      (click)="exportData()"
+      class="btnbackground text-primary hover:opacity-80 font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline transition-opacity duration-300"
+      type="button"
+    >
+      📤 Adatok exportálása
+    </button>
+  </div>
+
+  <!-- Veszélyes műveletek -->
+  <div class="mt-8 p-4 border-l-4 border-red-500 bg-red-50 dark:bg-red-900/20 rounded">
+    <h3 class="text-lg font-bold text-red-700 dark:text-red-400 mb-2">Veszélyes műveletek</h3>
+    <p class="text-sm text-red-600 dark:text-red-300 mb-4">
+      Ezek a műveletek visszavonhatatlanok. Kérjük, gondosan gondolja át a döntését.
+    </p>
+    <button
+      (click)="deleteAccount()"
+      class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-300"
+      type="button"
+    >
+      🗑️ Fiók törlése
+    </button>
+  </div>
+</div>

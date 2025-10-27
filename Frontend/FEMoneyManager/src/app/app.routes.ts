@@ -3,6 +3,7 @@ import { LandingPageComponent } from './Components/landing-page/landing-page.com
 import { TranzakcioFelvetelComponent } from './Components/tranzakcio-felvetel/tranzakcio-felvetel.component';
 import { RegistrationComponent } from './Components/registration/registration.component';
 import { LoginComponent } from './Components/login/login.component';
+import { MyaccountComponent } from './Components/myaccount/myaccount.component';
 
 export const routes: Routes = [
   {
@@ -24,5 +25,9 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'myaccount',
+    component: MyaccountComponent,
   },
 ];

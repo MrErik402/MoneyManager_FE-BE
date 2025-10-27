@@ -181,3 +181,56 @@ input {
 .dark .link{
   color: lightblue
 }
+
+/* Profile page specific styles */
+.profile-card {
+  background-color: var(--white-bg-popup);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.dark .profile-card {
+  background-color: var(--dark-bg-popup);
+  border: 1px solid var(--dark-border-primary);
+}
+
+.profile-input {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.dark .profile-input {
+  background-color: var(--dark-bg-tertiary);
+  border: 1px solid var(--dark-border-primary);
+}
+
+.profile-input:focus {
+  border-color: var(--white-accent-primary);
+  box-shadow: 0 0 0 3px rgba(82, 181, 247, 0.1);
+}
+
+.dark .profile-input:focus {
+  border-color: var(--dark-accent-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.stat-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.dark .stat-card {
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--dark-border-primary);
+}
+
+.danger-zone {
+  border-left: 4px solid var(--white-accent-error);
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.dark .danger-zone {
+  background-color: rgba(239, 68, 68, 0.2);
+}
