@@ -1,25 +1,24 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import axios from 'axios';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private apiUrl = 'http://localhost:3000/';
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
       // auth.service.ts
     register(name: string, email: string, password: string) {
-      return this.http.post('http://localhost:3000/auth/register', { name, email, password }, { withCredentials: true });
+      return axios.post(`${this.apiUrl}auth/register`, { name, email, password }, { withCredentials: true });
     }
     login(email: string, password: string) {
-      return this.http.post('http://localhost:3000/auth/login', { email, password }, { withCredentials: true });
+      return axios.post(`${this.apiUrl}auth/login`, { email, password }, { withCredentials: true });
     }
     logout() {
-      return this.http.post('http://localhost:3000/auth/logout', {}, { withCredentials: true });
+      return axios.post(`${this.apiUrl}auth/logout`, {}, { withCredentials: true });
     }
     me() {
-      return this.http.get('http://localhost:3000/auth/me', { withCredentials: true });
+      return axios.get(`${this.apiUrl}auth/me`, { withCredentials: true });
     }
 
 }
