@@ -43,7 +43,7 @@ export class LandingPageComponent {
       title: 'Profilom',
       description: 'Profilom megtekintése és módosítása',
       icon: 'profilom.png',
-      link: '/profilom',
+      link: '/myaccount',
     },
   ];
 }

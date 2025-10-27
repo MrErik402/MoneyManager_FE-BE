@@ -234,3 +234,63 @@ input {
 .dark .danger-zone {
   background-color: rgba(239, 68, 68, 0.2);
 }
+
+/* Navbar specific styles */
+.navbar-container {
+  background-color: var(--white-bg-popup);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.dark .navbar-container {
+  background-color: var(--dark-bg-popup);
+  border-bottom: 1px solid var(--dark-border-primary);
+}
+
+.navbar-logo .logo-text {
+  color: var(--white-text-primary);
+}
+
+.dark .navbar-logo .logo-text {
+  color: var(--dark-text-primary);
+}
+
+.nav-link {
+  color: var(--white-text-primary);
+  transition: all 0.3s ease;
+}
+
+.dark .nav-link {
+  color: var(--dark-text-primary);
+}
+
+.nav-link:hover {
+  background-color: var(--white-bg-hover);
+}
+
+.dark .nav-link:hover {
+  background-color: var(--dark-bg-hover);
+}
+
+.nav-link.active {
+  background-color: var(--white-accent-primary);
+  color: white;
+}
+
+.dark .nav-link.active {
+  background-color: var(--dark-accent-primary);
+  color: white;
+}
+
+.theme-toggle-btn {
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+  background-color: var(--white-bg-hover);
+}
+
+.dark .theme-toggle-btn:hover {
+  background-color: var(--dark-bg-hover);
+}
