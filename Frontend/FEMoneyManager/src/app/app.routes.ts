@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { LandingPageComponent } from './Components/landing-page/landing-page.component';
 import { TranzakcioFelvetelComponent } from './Components/tranzakcio-felvetel/tranzakcio-felvetel.component';
+import { RegistrationComponent } from './Components/registration/registration.component';
 
 export const routes: Routes = [
   {
@@ -14,5 +15,9 @@ export const routes: Routes = [
   {
     path: 'tranzakciok/:id',
     component: TranzakcioFelvetelComponent,
+  },
+  {
+    path: 'registration',
+    component: RegistrationComponent,
   },
 ];
