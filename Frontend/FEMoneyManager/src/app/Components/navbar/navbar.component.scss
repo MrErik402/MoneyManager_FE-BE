@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+.navbar-container {
+  @apply w-full bg-white dark:bg-gray-900 shadow-lg border-b border-gray-200 dark:border-gray-700;
+  background-color: var(--white-bg-popup);
+  transition: all 0.3s ease;
+}
+
+.dark .navbar-container {
+  background-color: var(--dark-bg-popup);
+}
+
+.navbar-content {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  @apply flex items-center justify-between h-16;
+}
+
+.navbar-logo {
+  @apply flex items-center space-x-2;
+}
+
+.logo-image {
+  @apply w-8 h-8 object-contain;
+}
+
+.logo-text {
+  @apply text-xl font-bold;
+  color: var(--white-text-primary);
+  font-family: "Montserrat", sans-serif;
+}
+
+.dark .logo-text {
+  color: var(--dark-text-primary);
+}
+
+.navbar-quest,
+.navbar-user {
+  @apply flex items-center;
+}
+
+.nav-list {
+  @apply flex items-center space-x-1;
+}
+
+.nav-item {
+  @apply relative;
+}
+
+.nav-link {
+  @apply flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-all duration-300;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  color: var(--white-text-primary);
+  text-decoration: none;
+}
+
+.dark .nav-link {
+  color: var(--dark-text-primary);
+}
+
+.nav-link:hover {
+  background-color: var(--white-bg-hover);
+}
+
+.dark .nav-link:hover {
+  background-color: var(--dark-bg-hover);
+}
+
+.nav-button {
+  @apply cursor-pointer border-none bg-transparent;
+}
+
+.nav-icon {
+  @apply text-base;
+}
+
+.nav-text {
+  @apply hidden sm:block;
+}
+
+.navbar-theme-toggle {
+  @apply flex items-center;
+}
+
+.theme-toggle-btn {
+  @apply p-2 rounded-full transition-all duration-300;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.theme-toggle-btn:hover {
+  background-color: var(--white-bg-hover);
+}
+
+.dark .theme-toggle-btn:hover {
+  background-color: var(--dark-bg-hover);
+}
+
+.theme-icon {
+  @apply text-lg;
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+  .navbar-content {
+    @apply px-2;
+  }
+  
+  .nav-text {
+    @apply hidden;
+  }
+  
+  .nav-link {
+    @apply px-2;
+  }
+  
+  .logo-text {
+    @apply hidden;
+  }
+}
+
+/* Active state for current page */
+.nav-link.active {
+  background-color: var(--white-accent-primary);
+  color: white;
+}
+
+.dark .nav-link.active {
+  background-color: var(--dark-accent-primary);
+}

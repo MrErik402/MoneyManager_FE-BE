@@ -52,7 +52,7 @@
           <label class="block text-primary text-sm font-bold mb-2" for="role">
             Felhasználói szerepkör
           </label>
-          <div class="shadow appearance-none rounded w-full py-2 px-3 text-primary leading-tight bg-gray-100 dark:bg-gray-800">
+          <div class="shadow appearance-none rounded w-full py-2 px-3 text-primary btnbackground leading-tight bg-gray-100 dark:bg-gray-800">
             {{ userProfile.role.role === 'admin' ? '👑 Adminisztrátor' : '👤 Felhasználó' }}
           </div>
         </div>
@@ -60,7 +60,7 @@
           <label class="block text-primary text-sm font-bold mb-2" for="status">
             Fiók állapota
           </label>
-          <div class="shadow appearance-none rounded w-full py-2 px-3 text-primary leading-tight bg-gray-100 dark:bg-gray-800">
+          <div class="shadow appearance-none rounded w-full py-2 px-3 text-primary btnbackground leading-tight bg-gray-100 dark:bg-gray-800">
             {{ userProfile.status ? '✅ Aktív' : '❌ Inaktív' }}
           </div>
         </div>
@@ -132,9 +132,9 @@
   </div>
 
   <!-- Veszélyes műveletek -->
-  <div class="mt-8 p-4 border-l-4 border-red-500 bg-red-50 dark:bg-red-900/20 rounded">
+  <div class="mt-8 p-4 border-l-4 border-red-500 danger-zone rounded">
     <h3 class="text-lg font-bold text-red-700 dark:text-red-400 mb-2">Veszélyes műveletek</h3>
-    <p class="text-sm text-red-600 dark:text-red-300 mb-4">
+    <p class="text-sm text-primary mb-4">
       Ezek a műveletek visszavonhatatlanok. Kérjük, gondosan gondolja át a döntését.
     </p>
     <button

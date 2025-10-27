@@ -1,1 +1,52 @@
-<p>navbar works!</p>
+<nav class="navbar-container">
+  <div class="navbar-content">
+    <!-- Logo -->
+    <div class="navbar-logo">
+      <img src="images/logo.png" alt="MoneyManager" class="logo-image" />
+      <span class="logo-text">MoneyManager</span>
+    </div>
+
+    <!-- Quest Navigation (Guest users) -->
+    <div class="navbar-quest" *ngIf="!isLoggedIn">
+      <ul class="nav-list">
+        <li *ngFor="let item of questNavItems" class="nav-item">
+          <a [routerLink]="item.link" class="nav-link">
+            <span class="nav-icon">{{ item.icon }}</span>
+            <span class="nav-text">{{ item.text }}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- User Navigation (Logged in users) -->
+    <div class="navbar-user" *ngIf="isLoggedIn">
+      <ul class="nav-list">
+        <li *ngFor="let item of userNavItems" class="nav-item">
+          <a [routerLink]="item.link" class="nav-link" *ngIf="item.action !== 'logout'">
+            <span class="nav-icon">{{ item.icon }}</span>
+            <span class="nav-text">{{ item.text }}</span>
+          </a>
+          <button 
+            (click)="logout()" 
+            class="nav-link nav-button" 
+            *ngIf="item.action === 'logout'"
+          >
+            <span class="nav-icon">{{ item.icon }}</span>
+            <span class="nav-text">{{ item.text }}</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Dark mode toggle -->
+    <div class="navbar-theme-toggle">
+      <button 
+        (click)="toggleDarkMode()" 
+        class="theme-toggle-btn"
+        [attr.aria-label]="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
+      >
+        <span class="theme-icon">{{ isDarkMode ? '☀️' : '🌙' }}</span>
+      </button>
+    </div>
+  </div>
+</nav>
