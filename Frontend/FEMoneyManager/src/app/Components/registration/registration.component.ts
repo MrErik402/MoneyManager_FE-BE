@@ -14,13 +14,9 @@ export class RegistrationComponent implements OnInit {
   constructor(private api: ApiService) {}
 
   ngOnInit() {
-    // Check initial theme state
-    this.checkThemeState();
+
   }
 
-  checkThemeState() {
-    this.isDarkMode = document.documentElement.classList.contains('dark');
-  }
 
 
   registrationHandler() {

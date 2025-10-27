@@ -1,1 +1,59 @@
-<p>login works!</p>
+<div class="w-full max-w-lg flex flex-col mx-auto mb-10">
+  <h1 class="text-2xl text-center p-4 text-primary">Bejelentkezés</h1>
+  <form class="background shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <div class="mb-4">
+      <label class="block text-primary text-sm font-bold mb-2" for="username">
+        E-mail cím
+      </label>
+      <input
+        class="shadow appearance-none rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline placeholder-gray-600 dark:placeholder-gray-400"
+        id="email"
+        type="email"
+        placeholder="Pl.: jani@gmail.com"
+      />
+    </div>
+
+    <div class="mb-6">
+      <label class="block text-primary text-sm font-bold mb-2" for="password">
+        Jelszó
+      </label>
+      <input
+        class="shadow appearance-none rounded w-full py-2 px-3 mb-3 text-primary leading-tight focus:outline-none focus:shadow-outline placeholder-gray-600 dark:placeholder-gray-400"
+        id="password"
+        type="password"
+        placeholder="******************"
+      />
+    </div>
+    <div class="md:flex mb-6">
+      <div class="md:w-1/3"></div>
+      <label class="md:w-2/3 block font-bold">
+        <input class="mr-2 leading-tight" type="checkbox" />
+        <span class="text-sm text-primary">
+          Bejelentkezéi adataim elmentése
+        </span>
+      </label>
+    </div>
+    <div class="flex items-center justify-between">
+      <button
+        (click)="registrationHandler()"
+        class="text-primary btnbackground hover:bg-blue-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        type="button"
+      >
+        Bejelentkezés
+      </button>
+    </div>
+
+    <div class="flex flex-col mt-5">
+      <p class="text-primary">Még nincs fiókod? Regisztrálj!</p>
+      <a
+        class="inline-block align-baseline font-bold text-sm underline link"
+        href="/registration"
+      >
+        Regisztráció
+      </a>
+    </div>
+  </form>
+  <p class="text-center text-xs text-primary">
+    &copy;2025 Bajai SZC Türr István Technikum
+  </p>
+</div>

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LandingPageComponent } from './Components/landing-page/landing-page.component';
 import { TranzakcioFelvetelComponent } from './Components/tranzakcio-felvetel/tranzakcio-felvetel.component';
 import { RegistrationComponent } from './Components/registration/registration.component';
+import { LoginComponent } from './Components/login/login.component';
 
 export const routes: Routes = [
   {
@@ -19,5 +20,9 @@ export const routes: Routes = [
   {
     path: 'registration',
     component: RegistrationComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
   },
 ];
