@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../Services/api.service';
 
 @Component({
@@ -8,7 +8,23 @@ import { ApiService } from '../../Services/api.service';
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.scss',
 })
-export class RegistrationComponent {
+export class RegistrationComponent implements OnInit {
+  isDarkMode = false;
+
   constructor(private api: ApiService) {}
-  registrationHandler() {}
+
+  ngOnInit() {
+    // Check initial theme state
+    this.checkThemeState();
+  }
+
+  checkThemeState() {
+    this.isDarkMode = document.documentElement.classList.contains('dark');
+  }
+
+
+  registrationHandler() {
+    // TODO: Implement registration logic
+    console.log('Registration handler called');
+  }
 }
