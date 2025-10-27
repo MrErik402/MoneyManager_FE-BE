@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
-import { ApiResponse } from '../interfaces/ApiResponse';
+import { ApiResponse } from '../Interfaces/ApiResponse';
 
 @Injectable({
   providedIn: 'root',
