@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+.footer-container {
+  @apply w-full mt-auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+:host-context(.dark) .footer-container {
+  background-color: rgba(17, 24, 39, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-content {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8;
+}
+
+.footer-main {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8;
+}
+
+.footer-section {
+  @apply flex flex-col;
+}
+
+.footer-brand {
+  @apply flex flex-col;
+}
+
+.footer-logo {
+  @apply mb-3;
+}
+
+.logo-image {
+  @apply w-12 h-12 object-contain;
+}
+
+.brand-name {
+  @apply text-xl font-bold mb-2;
+  color: var(--white-text-primary);
+  font-family: "Montserrat", sans-serif;
+}
+
+:host-context(.dark) .brand-name {
+  color: var(--dark-text-primary);
+}
+
+.brand-description {
+  @apply text-sm;
+  color: var(--white-text-secondary);
+}
+
+:host-context(.dark) .brand-description {
+  color: var(--dark-text-secondary);
+}
+
+.footer-title {
+  @apply text-lg font-semibold mb-4;
+  color: var(--white-text-primary);
+}
+
+:host-context(.dark) .footer-title {
+  color: var(--dark-text-primary);
+}
+
+.footer-links {
+  @apply list-none p-0 m-0 space-y-2;
+}
+
+.footer-links li {
+  @apply mb-2;
+}
+
+.footer-link {
+  @apply text-sm transition-colors duration-200;
+  color: var(--white-text-secondary);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--white-accent-primary);
+    text-decoration: underline;
+  }
+}
+
+:host-context(.dark) .footer-link {
+  color: var(--dark-text-secondary);
+
+  &:hover {
+    color: var(--dark-accent-primary);
+  }
+}
+
+.footer-info {
+  @apply text-sm;
+  color: var(--white-text-secondary);
+}
+
+:host-context(.dark) .footer-info {
+  color: var(--dark-text-secondary);
+}
+
+.footer-bottom {
+  @apply border-t pt-6 flex flex-col sm:flex-row justify-between items-center;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+:host-context(.dark) .footer-bottom {
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.footer-copyright {
+  @apply mb-4 sm:mb-0;
+}
+
+.copyright-text {
+  @apply text-sm text-center sm:text-left;
+  color: var(--white-text-muted);
+}
+
+:host-context(.dark) .copyright-text {
+  color: var(--dark-text-muted);
+}
+
+.footer-social {
+  @apply flex gap-4;
+}
+
+/* Reszponzív design */
+@media (max-width: 768px) {
+  .footer-main {
+    @apply grid-cols-1 gap-6;
+  }
+
+  .footer-section {
+    @apply text-center;
+  }
+
+  .footer-brand {
+    @apply items-center text-center;
+  }
+}
+

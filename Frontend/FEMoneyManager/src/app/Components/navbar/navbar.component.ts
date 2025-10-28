@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../Services/auth.service';
+import { SessionService } from '../../Services/session.service';
+import { Subscription } from 'rxjs';
 
 interface NavItem {
   text: string;
@@ -17,16 +19,13 @@ interface NavItem {
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
   isDarkMode = false;
+  isMenuOpen = false;
+  private userSubscription?: Subscription;
 
   questNavItems: NavItem[] = [
-    {
-      text: 'Főoldal',
-      link: '/',
-      icon: '🏠'
-    },
     {
       text: 'Regisztráció',
       link: '/registration',
@@ -41,6 +40,11 @@ export class NavbarComponent implements OnInit {
 
   userNavItems: NavItem[] = [
     {
+      text: 'Főoldal',
+      link: '/home',
+      icon: '🏠'
+    },
+    {
       text: 'Profilom',
       link: '/myaccount',
       icon: '👤'
@@ -53,17 +57,33 @@ export class NavbarComponent implements OnInit {
     }
   ];
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private sessionService: SessionService
+  ) {}
 
   ngOnInit() {
     this.checkLoginStatus();
     this.checkThemeState();
+    this.subscribeToUserChanges();
+  }
+
+  ngOnDestroy() {
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
+  }
+
+  subscribeToUserChanges() {
+    // Subscribe to user changes to automatically update login status
+    this.userSubscription = this.sessionService.user$.subscribe(() => {
+      this.checkLoginStatus();
+    });
   }
 
   checkLoginStatus() {
-    // Check if user is logged in
-    const token = localStorage.getItem('token');
-    this.isLoggedIn = !!token;
+    // Check if user is logged in using SessionService
+    this.isLoggedIn = this.sessionService.isLoggedIn();
   }
 
   checkThemeState() {
@@ -83,20 +103,35 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  closeMenu() {
+    this.isMenuOpen = false;
+  }
+
   logout() {
     const confirmed = confirm('Biztosan ki szeretne jelentkezni?');
     if (confirmed) {
-      // Clear token and user data
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
+      // Close menu
+      this.isMenuOpen = false;
       
-      // Update login status
-      this.isLoggedIn = false;
-      
-      // Redirect to home page
-      window.location.href = '/';
-      
-      console.log('User logged out successfully');
+      // Call auth service logout (which also clears session via SessionService)
+      this.authService.logout().then(() => {
+        // Update login status (will be automatically updated via subscription)
+        this.checkLoginStatus();
+        
+        // Redirect to home page
+        window.location.href = '/';
+        
+        console.log('User logged out successfully');
+      }).catch((error) => {
+        console.error('Logout error:', error);
+        // Even if logout fails, clear local state
+        this.checkLoginStatus();
+        window.location.href = '/';
+      });
     }
   }
 }

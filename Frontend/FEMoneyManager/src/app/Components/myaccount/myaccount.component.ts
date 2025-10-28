@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { ApiService } from '../../Services/api.service';
 import { NotificationsService } from '../../Services/notifications.service';
 import { SessionService } from '../../Services/session.service';
+import axios from 'axios';
 
 @Component({
   selector: 'app-myaccount',
@@ -68,25 +69,57 @@ export class MyaccountComponent implements OnInit {
       return;
     }
 
-    // Update user profile via API
-    this.apiService.patch('http://localhost:3000/users', parseInt(this.userProfile.id), {
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(this.userProfile.email)) {
+      this.notificationsService.show('error', 'Hiba', 'Érvényes email címet adjon meg!');
+      return;
+    }
+
+    // Update user profile via auth API (using auth.js update-profile endpoint)
+    // Note: This endpoint doesn't use ID in URL, it uses session, so we use axios directly
+    axios.patch('http://localhost:3000/auth/update-profile', {
       name: this.userProfile.name,
       email: this.userProfile.email
-    }).then((response: any) => {
+    }, { withCredentials: true })
+    .then((response: any) => {
       if (response.status === 200) {
+        // Update session with new data
+        if (response.data && response.data.user) {
+          this.sessionService.setUser(response.data.user);
+        } else {
+          // Fallback: update session with current form data
+          const updatedUser = {
+            ...this.userProfile,
+            name: this.userProfile.name,
+            email: this.userProfile.email
+          };
+          this.sessionService.setUser(updatedUser);
+        }
+        
+        // Refresh user profile to get latest data from backend
+        this.loadUserProfile();
+        
         this.notificationsService.show('success', 'Siker', 'Profil sikeresen mentve!');
       } else {
-        this.notificationsService.show('error', 'Hiba', 'Sikertelen profil mentés!');
+        const errorMessage = response.data?.message || 'Sikertelen profil mentés!';
+        this.notificationsService.show('error', 'Hiba', errorMessage);
       }
-    }).catch((error) => {
+    }).catch((error: any) => {
       console.error('Error saving profile:', error);
-      this.notificationsService.show('error', 'Hiba', 'Hiba történt a profil mentése során!');
+      const errorMessage = error.response?.data?.message || error.message || 'Hiba történt a profil mentése során!';
+      this.notificationsService.show('error', 'Hiba', errorMessage);
     });
   }
 
   changePassword() {
     if (!this.passwordData.currentPassword) {
       this.notificationsService.show('error', 'Hiba', 'Kérjük, adja meg a jelenlegi jelszót!');
+      return;
+    }
+
+    if (!this.passwordData.newPassword) {
+      this.notificationsService.show('error', 'Hiba', 'Kérjük, adja meg az új jelszót!');
       return;
     }
 
@@ -100,8 +133,8 @@ export class MyaccountComponent implements OnInit {
       return;
     }
 
-    // Update password via API
-    this.apiService.patch('http://localhost:3000/users', parseInt(this.userProfile.id), {
+    // Update password via auth API (using auth.js change-password endpoint)
+    this.apiService.post('http://localhost:3000/auth/change-password', {
       currentPassword: this.passwordData.currentPassword,
       newPassword: this.passwordData.newPassword
     }).then((response: any) => {
@@ -114,11 +147,13 @@ export class MyaccountComponent implements OnInit {
           confirmPassword: ''
         };
       } else {
-        this.notificationsService.show('error', 'Hiba', 'Sikertelen jelszó módosítás!');
+        const errorMessage = response.data?.message || 'Sikertelen jelszó módosítás!';
+        this.notificationsService.show('error', 'Hiba', errorMessage);
       }
-    }).catch((error) => {
+    }).catch((error: any) => {
       console.error('Error changing password:', error);
-      this.notificationsService.show('error', 'Hiba', 'Hiba történt a jelszó módosítása során!');
+      const errorMessage = error.response?.data?.message || error.message || 'Hiba történt a jelszó módosítása során!';
+      this.notificationsService.show('error', 'Hiba', errorMessage);
     });
   }
 
@@ -129,33 +164,42 @@ export class MyaccountComponent implements OnInit {
       'Minden adata (tranzakciók, pénztárcák, statisztikák) véglegesen törlésre kerül.'
     );
 
-    if (confirmed) {
-      const doubleConfirmed = confirm(
-        'Utolsó figyelmeztetés!\n\n' +
-        'A fiók törlése után nem lehet helyreállítani az adatokat.\n' +
-        'Biztosan folytatja?'
-      );
-
-      if (doubleConfirmed) {
-        this.apiService.delete('http://localhost:3000/users', parseInt(this.userProfile.id)).then((response: any) => {
-          console.log(response);
-          if (response.status === 200) {
-            this.notificationsService.show('success', 'Siker', 'Fiók sikeresen törölve!');
-            this.sessionService.clearUser();
-            // Redirect to login or home page after successful deletion
-            setTimeout(() => {
-              window.location.href = '/';
-            }, 2000);
-          } else {
-            this.notificationsService.show('error', 'Hiba', 'Sikertelen fiók törlés!');
-          }
-        }).catch((error: any) => {
-          console.error('Error deleting account:', error);
-          this.notificationsService.show('error', 'Hiba', 'Hiba történt a fiók törlése során!');
-        });
-      } else {
-        this.notificationsService.show('info', 'Mégse', 'Fiók törlése megtagadva!');
-      }
+    if (!confirmed) {
+      return;
     }
+
+    const doubleConfirmed = confirm(
+      'Utolsó figyelmeztetés!\n\n' +
+      'A fiók törlése után nem lehet helyreállítani az adatokat.\n' +
+      'Biztosan folytatja?'
+    );
+
+    if (!doubleConfirmed) {
+      this.notificationsService.show('info', 'Mégse', 'Fiók törlése megtagadva!');
+      return;
+    }
+
+    // Delete account via auth API (using auth.js delete-account endpoint)
+    // Note: This endpoint doesn't use ID in URL, it uses session, so we use axios directly
+    axios.delete('http://localhost:3000/auth/delete-account', {
+      withCredentials: true
+    })
+    .then((response: any) => {
+      if (response.status === 200) {
+        this.notificationsService.show('success', 'Siker', 'Fiók sikeresen törölve!');
+        this.sessionService.clearUser();
+        // Redirect to home page after successful deletion
+        setTimeout(() => {
+          window.location.href = '/home';
+        }, 2000);
+      } else {
+        const errorMessage = response.data?.message || 'Sikertelen fiók törlés!';
+        this.notificationsService.show('error', 'Hiba', errorMessage);
+      }
+    }).catch((error: any) => {
+      console.error('Error deleting account:', error);
+      const errorMessage = error.response?.data?.message || error.response?.data?.error || error.message || 'Hiba történt a fiók törlése során!';
+      this.notificationsService.show('error', 'Hiba', errorMessage);
+    });
   }
 }

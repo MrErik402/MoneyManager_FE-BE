@@ -1,0 +1,71 @@
+<div class="w-full max-w-4xl flex flex-col items-center justify-center mx-auto mb-10 mt-10">
+  <!-- 404 tartalom -->
+  <div class="relative z-10 flex flex-col items-center justify-center px-4 text-center">
+    <!-- Nagy 404 szám -->
+    <div class="mb-6">
+      <h1 class="text-8xl md:text-9xl font-bold text-primary opacity-70 select-none">
+        404
+      </h1>
+    </div>
+
+    <!-- Üzenet -->
+    <div class="space-y-4 mb-8">
+      <h2 class="text-3xl md:text-5xl font-bold text-primary">
+        Oops! Az oldal nem található
+      </h2>
+      <p class="text-lg md:text-xl text-secondary max-w-2xl px-4">
+        Sajnos a keresett oldal nem létezik vagy el lett távolítva.
+      </p>
+      <p class="text-base md:text-lg text-muted max-w-xl px-4">
+        Lehet, hogy hibás linket követett, vagy az oldal át lett helyezve egy másik címre.
+      </p>
+    </div>
+
+    <!-- Gombok -->
+    <div class="flex flex-col sm:flex-row gap-4 mt-8">
+      <a
+        [routerLink]="'/home'"
+        class="btn-primary hover:ring-1 hover:ring-red-300 text-center transition-all duration-300"
+      >
+        🏠 Főoldalra
+      </a>
+      <button
+        (click)="goBack()"
+        class="btn-secondary transition-all duration-300"
+      >
+        ← Vissza
+      </button>
+    </div>
+
+    <!-- Hasznos linkek -->
+    <div class="mt-12 w-full max-w-3xl">
+      <h3 class="text-xl font-semibold text-primary mb-6">Hasznos linkek</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <a
+          [routerLink]="'/home'"
+          class="feature-card flex flex-col items-center justify-center p-6 hover:scale-105 transition-transform"
+        >
+          <div class="text-4xl mb-2">🏠</div>
+          <h4 class="font-semibold text-lg text-primary mb-1">Főoldal</h4>
+          <p class="text-sm text-muted text-center">Visszatérés a kezdőlapra</p>
+        </a>
+        <a
+          [routerLink]="'/login'"
+          class="feature-card flex flex-col items-center justify-center p-6 hover:scale-105 transition-transform"
+        >
+          <div class="text-4xl mb-2">🔑</div>
+          <h4 class="font-semibold text-lg text-primary mb-1">Bejelentkezés</h4>
+          <p class="text-sm text-muted text-center">Jelentkezz be a fiókodba</p>
+        </a>
+        <a
+          [routerLink]="'/registration'"
+          class="feature-card flex flex-col items-center justify-center p-6 hover:scale-105 transition-transform"
+        >
+          <div class="text-4xl mb-2">📝</div>
+          <h4 class="font-semibold text-lg text-primary mb-1">Regisztráció</h4>
+          <p class="text-sm text-muted text-center">Hozz létre új fiókot</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

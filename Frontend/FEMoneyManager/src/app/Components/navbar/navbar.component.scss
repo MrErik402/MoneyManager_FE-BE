@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .navbar-container {
-  @apply w-full shadow-lg;
+  @apply w-full shadow-lg relative;
 }
 
 .navbar-content {
@@ -10,7 +10,7 @@
 }
 
 .navbar-logo {
-  @apply flex items-center space-x-2;
+  @apply flex items-center space-x-2 z-50 relative;
 }
 
 .logo-image {
@@ -66,21 +66,169 @@
   @apply text-lg;
 }
 
-/* Mobile responsive */
-@media (max-width: 640px) {
+/* Hamburger Button */
+.hamburger-btn {
+  @apply flex-col justify-center items-center w-8 h-8 cursor-pointer z-50 relative;
+  display: none;
+  flex-direction: column;
+  background: transparent;
+  border: none;
+  padding: 0;
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.hamburger-line {
+  @apply w-6 h-0.5 transition-all duration-300 ease-in-out;
+  display: block;
+  background-color: currentColor;
+  margin: 3px 0;
+
+  &:nth-child(1) {
+    &.open {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+  }
+
+  &:nth-child(2) {
+    &.open {
+      opacity: 0;
+    }
+  }
+
+  &:nth-child(3) {
+    &.open {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+  }
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  @apply fixed inset-0 hidden;
+  z-index: 40;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  &.open {
+    @apply block;
+    opacity: 1;
+  }
+}
+
+.mobile-menu {
+  @apply fixed top-16 right-0;
+  height: calc(100vh - 4rem);
+  width: 16rem;
+  z-index: 50;
+  background-color: rgba(255, 255, 255, 0.98);
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+
+  &.open {
+    transform: translateX(0);
+  }
+}
+
+/* Dark mode support for mobile menu */
+:host-context(.dark) .mobile-menu {
+  background-color: rgba(17, 24, 39, 0.98);
+}
+
+.mobile-nav-section {
+  @apply py-4;
+}
+
+.mobile-nav-list {
+  @apply list-none p-0 m-0;
+}
+
+.mobile-nav-item {
+  @apply border-b border-gray-200;
+}
+
+:host-context(.dark) .mobile-nav-item {
+  @apply border-gray-700;
+}
+
+.mobile-nav-link {
+  @apply flex items-center space-x-3 px-6 py-4 text-base font-medium transition-colors duration-200;
+  text-decoration: none;
+  display: flex;
+  width: 100%;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
+
+:host-context(.dark) .mobile-nav-link {
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.mobile-nav-button {
+  @apply cursor-pointer border-none bg-transparent w-full text-left;
+}
+
+.mobile-nav-icon {
+  @apply text-lg;
+}
+
+.mobile-nav-text {
+  @apply flex-1;
+}
+
+.mobile-theme-toggle {
+  @apply border-t border-gray-200 px-6 py-4;
+}
+
+:host-context(.dark) .mobile-theme-toggle {
+  @apply border-gray-700;
+}
+
+.mobile-theme-toggle-btn {
+  @apply flex items-center space-x-3 w-full text-left bg-transparent border-none cursor-pointer text-base font-medium py-2 transition-colors duration-200;
+
+  &:hover {
+    @apply opacity-80;
+  }
+}
+
+.mobile-theme-icon {
+  @apply text-lg;
+}
+
+.mobile-theme-text {
+  @apply flex-1;
+}
+
+/* Responsive */
+.desktop-nav {
+  @apply hidden md:flex;
+}
+
+.mobile-nav {
+  @apply flex md:hidden;
+}
+
+@media (max-width: 768px) {
   .navbar-content {
-    @apply px-2;
-  }
-  
-  .nav-text {
-    @apply hidden;
-  }
-  
-  .nav-link {
-    @apply px-2;
+    @apply px-4;
   }
   
   .logo-text {
-    @apply hidden;
+    @apply hidden sm:block;
+  }
+
+  .hamburger-btn {
+    display: flex;
   }
 }

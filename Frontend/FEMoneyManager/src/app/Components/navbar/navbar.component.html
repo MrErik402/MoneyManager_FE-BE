@@ -6,8 +6,9 @@
       <span class="logo-text">MoneyManager</span>
     </div>
 
+    <!-- Desktop Navigation -->
     <!-- Quest Navigation (Guest users) -->
-    <div class="navbar-quest" *ngIf="!isLoggedIn">
+    <div class="navbar-quest desktop-nav" *ngIf="!isLoggedIn">
       <ul class="nav-list">
         <li *ngFor="let item of questNavItems" class="nav-item">
           <a [routerLink]="item.link" class="nav-link">
@@ -19,7 +20,7 @@
     </div>
 
     <!-- User Navigation (Logged in users) -->
-    <div class="navbar-user" *ngIf="isLoggedIn">
+    <div class="navbar-user desktop-nav" *ngIf="isLoggedIn">
       <ul class="nav-list">
         <li *ngFor="let item of userNavItems" class="nav-item">
           <a [routerLink]="item.link" class="nav-link" *ngIf="item.action !== 'logout'">
@@ -38,8 +39,8 @@
       </ul>
     </div>
 
-    <!-- Dark mode toggle -->
-    <div class="navbar-theme-toggle">
+    <!-- Desktop Dark mode toggle -->
+    <div class="navbar-theme-toggle desktop-nav">
       <button 
         (click)="toggleDarkMode()" 
         class="theme-toggle-btn"
@@ -47,6 +48,72 @@
       >
         <span class="theme-icon">{{ isDarkMode ? '☀️' : '🌙' }}</span>
       </button>
+    </div>
+
+    <!-- Hamburger Menu Button -->
+    <button 
+      class="hamburger-btn mobile-nav"
+      (click)="toggleMenu()"
+      [attr.aria-label]="isMenuOpen ? 'Close menu' : 'Open menu'"
+      [attr.aria-expanded]="isMenuOpen"
+    >
+      <span class="hamburger-line" [class.open]="isMenuOpen"></span>
+      <span class="hamburger-line" [class.open]="isMenuOpen"></span>
+      <span class="hamburger-line" [class.open]="isMenuOpen"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" [class.open]="isMenuOpen" (click)="closeMenu()">
+    <div class="mobile-menu" [class.open]="isMenuOpen" (click)="$event.stopPropagation()">
+      <!-- Mobile Quest Navigation -->
+      <div class="mobile-nav-section" *ngIf="!isLoggedIn">
+        <ul class="mobile-nav-list">
+          <li *ngFor="let item of questNavItems" class="mobile-nav-item">
+            <a [routerLink]="item.link" class="mobile-nav-link" (click)="closeMenu()">
+              <span class="mobile-nav-icon">{{ item.icon }}</span>
+              <span class="mobile-nav-text text-primary">{{ item.text }}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Mobile User Navigation -->
+      <div class="mobile-nav-section" *ngIf="isLoggedIn">
+        <ul class="mobile-nav-list">
+          <li *ngFor="let item of userNavItems" class="mobile-nav-item">
+            <a 
+              [routerLink]="item.link" 
+              class="mobile-nav-link" 
+              *ngIf="item.action !== 'logout'"
+              (click)="closeMenu()"
+            >
+              <span class="mobile-nav-icon">{{ item.icon }}</span>
+              <span class="mobile-nav-text text-primary">{{ item.text }}</span>
+            </a>
+            <button 
+              (click)="logout()" 
+              class="mobile-nav-link mobile-nav-button" 
+              *ngIf="item.action === 'logout'"
+            >
+              <span class="mobile-nav-icon">{{ item.icon }}</span>
+              <span class="mobile-nav-text text-primary">{{ item.text }}</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Mobile Dark mode toggle -->
+      <div class="mobile-theme-toggle">
+        <button 
+          (click)="toggleDarkMode()" 
+          class="mobile-theme-toggle-btn"
+          [attr.aria-label]="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
+        >
+          <span class="mobile-theme-icon">{{ isDarkMode ? '☀️' : '🌙' }}</span>
+          <span class="mobile-theme-text text-primary">{{ isDarkMode ? 'Világos mód' : 'Sötét mód' }}</span>
+        </button>
+      </div>
     </div>
   </div>
 </nav>

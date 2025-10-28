@@ -54,3 +54,20 @@
 =======
 >>>>>>> f1d419bd41c6487e93b84a5261428887ea486c7e
 >>>>>>> 2ac23727c22e971370cd9f91568a35250ab4485d
+[2025-10-28 08:43:45] - [36mverbose[39m: [AUTH /login] bejelentkezve: mr.erik402@gmail.com
+[2025-10-28 08:44:40] - [36mverbose[39m: [AUTH /logout] kijelentkezve: mr.erik402@gmail.com
+[2025-10-28 08:56:11] - [36mverbose[39m: [AUTH /login] bejelentkezve: mr.erik402@gmail.com
+[2025-10-28 08:56:29] - [36mverbose[39m: [AUTH /change-password] jelszó megváltoztatva: mr.erik402@gmail.com
+[2025-10-28 08:56:33] - [36mverbose[39m: [AUTH /logout] kijelentkezve: mr.erik402@gmail.com
+[2025-10-28 08:56:47] - [36mverbose[39m: [AUTH /login] bejelentkezve: mr.erik402@gmail.com
+[2025-10-28 08:56:51] - [36mverbose[39m: [AUTH /logout] kijelentkezve: mr.erik402@gmail.com
+[2025-10-28 09:41:58] - [36mverbose[39m: [AUTH /login] bejelentkezve: mr.erik402@gmail.com
+[2025-10-28 09:42:17] - [36mverbose[39m: [PATCH /users] -> undefined rekord küldve válaszként
+[2025-10-28 09:44:39] - [36mverbose[39m: [AUTH /login] bejelentkezve: mr.erik402@gmail.com
+[2025-10-28 09:44:47] - [36mverbose[39m: [AUTH /update-profile] profil frissítve: 85ce617f-b48b-4135-a31a-e31ce7a0bc4d
+[2025-10-28 09:44:58] - [36mverbose[39m: [AUTH /update-profile] profil frissítve: 85ce617f-b48b-4135-a31a-e31ce7a0bc4d
+[2025-10-28 09:45:06] - [36mverbose[39m: [AUTH /update-profile] profil frissítve: 85ce617f-b48b-4135-a31a-e31ce7a0bc4d
+[2025-10-28 09:45:17] - [36mverbose[39m: [GET /users] -> undefined rekord küldve válaszként
+[2025-10-28 09:45:32] - [36mverbose[39m: [AUTH /login] bejelentkezve: mr.erik402@gmail.com
+[2025-10-28 09:59:14] - [36mverbose[39m: [AUTH /login] bejelentkezve: mr.erik402@gmail.com
+[2025-10-28 09:59:25] - [36mverbose[39m: [AUTH /delete-account] fiók törölve: mr.erik402@gmail.com
