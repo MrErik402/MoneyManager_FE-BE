@@ -1,0 +1,25 @@
+<div class="space-y-6">
+  <div class="flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-semibold theme-text">Pénztárcák</h1>
+      <p class="theme-muted">Kezeld a fiókjaidat és egyenlegeidet.</p>
+    </div>
+    <button class="btn-primary" type="button" (click)="create()">Új pénztárca</button>
+  </div>
+  <div class="grid gap-4 md:grid-cols-2">
+    <div class="card space-y-3" *ngFor="let wallet of wallets$ | async">
+      <div class="flex items-center justify-between">
+        <div>
+          <div class="text-lg font-semibold theme-text">{{ wallet.name }}</div>
+          <div class="theme-muted">Egyenleg: {{ wallet.balance | number:'1.2-2' }} Ft</div>
+        </div>
+        <div class="flex gap-2">
+          <button class="btn-ghost" type="button" (click)="openTransactions(wallet)">Tranzakciók</button>
+          <button class="btn-ghost" type="button" (click)="edit(wallet)">Szerkesztés</button>
+          <button class="btn-ghost" type="button" (click)="remove(wallet)">Törlés</button>
+        </div>
+      </div>
+    </div>
+    <div class="theme-muted" *ngIf="(wallets$ | async)?.length === 0">Nincs még pénztárca. Hozz létre egyet.</div>
+  </div>
+</div>

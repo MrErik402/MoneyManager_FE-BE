@@ -1,0 +1,19 @@
+<div class="space-y-6">
+  <div class="flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-semibold theme-text">Kategóriák</h1>
+      <p class="theme-muted">Rendszerezd a tranzakciókat kategóriák szerint.</p>
+    </div>
+    <button class="btn-primary" type="button" (click)="create()">Új kategória</button>
+  </div>
+  <div class="grid gap-4 md:grid-cols-2">
+    <div class="card flex items-center justify-between" *ngFor="let category of categories$ | async">
+      <div class="theme-text">{{ category.name }}</div>
+      <div class="flex gap-2">
+        <button class="btn-ghost" type="button" (click)="edit(category)">Szerkesztés</button>
+        <button class="btn-ghost" type="button" (click)="remove(category)">Törlés</button>
+      </div>
+    </div>
+    <div class="theme-muted" *ngIf="(categories$ | async)?.length === 0">Nincs még kategória.</div>
+  </div>
+</div>

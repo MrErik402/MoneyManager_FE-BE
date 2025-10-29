@@ -1,0 +1,17 @@
+<div class="max-w-lg mx-auto card space-y-6">
+  <div>
+    <h1 class="text-2xl font-semibold theme-text">{{ id ? 'Kategória szerkesztése' : 'Új kategória' }}</h1>
+    <p class="theme-muted">Adj meg kategória nevet.</p>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="save()" class="space-y-4">
+    <div>
+      <label class="theme-text block mb-2">Név</label>
+      <input class="input" formControlName="name" type="text">
+      <div class="text-sm text-red-500 mt-1" *ngIf="form.get('name')?.touched && form.get('name')?.invalid">Kötelező mező.</div>
+    </div>
+    <div class="flex justify-between items-center">
+      <button class="btn-primary" type="submit" [disabled]="loading">{{ loading ? 'Mentés...' : 'Mentés' }}</button>
+      <button class="btn-ghost" type="button" *ngIf="id" (click)="delete()">Törlés</button>
+    </div>
+  </form>
+</div>
