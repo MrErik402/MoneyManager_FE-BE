@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { WalletService } from '../../../core/services/wallet.service';
-import { NotificationService } from '../../../core/services/notification.service';
+import { NotificationsService } from '../../../Services/notifications.service';
+import { ApiService } from '../../../Services/api.service';
+import { Wallet } from '../../../Interfaces/Wallet';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-penztarca-urlap',
@@ -13,20 +15,35 @@ import { NotificationService } from '../../../core/services/notification.service
   styleUrls: ['./penztarca-urlap.component.scss']
 })
 export class PenztarcaUrlap {
-  id = this.route.snapshot.paramMap.get('id');
-  form = this.fb.group({
-    name: ['', Validators.required],
-    balance: [0, [Validators.required]]
-  });
+  id: string | null = null;
+  form: any;
   loading = false;
+  private apiUrl = 'http://localhost:3000/wallets';
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private wallets: WalletService, private router: Router, private notifications: NotificationService) {
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private api: ApiService,
+    private router: Router,
+    private notifications: NotificationsService
+  ) {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.form = this.fb.group({
+      name: ['', Validators.required],
+      balance: [0, [Validators.required]]
+    });
+    
     const state = history.state?.entity;
     if (state) {
       this.form.patchValue({ name: state.name, balance: state.balance });
     } else if (this.id) {
-      this.wallets.getById(this.id).subscribe(wallet => {
-        this.form.patchValue({ name: wallet.name, balance: wallet.balance });
+      from(this.api.getOne<Wallet>(this.apiUrl, this.id as any)).subscribe({
+        next: (response) => {
+          if (response.data) {
+            this.form.patchValue({ name: response.data.name, balance: response.data.balance });
+          }
+        },
+        error: () => this.notifications.show('error', 'Hiba', 'Nem sikerült betölteni a pénztárcát')
       });
     }
   }
@@ -38,17 +55,24 @@ export class PenztarcaUrlap {
     }
     this.loading = true;
     const value = this.form.getRawValue();
-    const payload = { name: value.name ?? '', balance: Number(value.balance ?? 0) };
-    const request = this.id ? this.wallets.update(this.id, payload) : this.wallets.create(payload);
+    
+    const mm_session = localStorage.getItem('mm_session');
+    const userID = JSON.parse(mm_session || '{}').user.user.id;
+    const payload = { name: value.name ?? '', balance: Number(value.balance ?? 0), userID: userID };
+    
+    const request = this.id
+      ? from(this.api.patch(this.apiUrl, this.id as any, payload))
+      : from(this.api.post(this.apiUrl, payload));
+    
     request.subscribe({
       next: () => {
         this.loading = false;
-        this.notifications.info('Pénztárca mentve');
+        this.notifications.show('success', 'Siker', 'Pénztárca mentve');
         this.router.navigate(['/penztarcak']);
       },
       error: () => {
         this.loading = false;
-        this.notifications.error('Nem sikerült menteni');
+        this.notifications.show('error', 'Hiba', 'Nem sikerült menteni');
       }
     });
   }
@@ -57,12 +81,12 @@ export class PenztarcaUrlap {
     if (!this.id) {
       return;
     }
-    this.wallets.delete(this.id).subscribe({
+    from(this.api.delete(this.apiUrl, this.id as any)).subscribe({
       next: () => {
-        this.notifications.warn('Pénztárca törölve');
+        this.notifications.show('warning', 'Figyelem', 'Pénztárca törölve');
         this.router.navigate(['/penztarcak']);
       },
-      error: () => this.notifications.error('Nem sikerült törölni')
+      error: () => this.notifications.show('error', 'Hiba', 'Nem sikerült törölni')
     });
   }
 }

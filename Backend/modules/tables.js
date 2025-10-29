@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {query} = require("../utils/database");
 const logger = require("../utils/logger")
+const { v4: uuidv4 } = require("uuid");
 
 // Select ALL RECORD FROM TABLE
 router.get("/:table", (req, res) => {
@@ -33,6 +34,10 @@ router.get("/:table/:id", (req, res) => {
 router.post("/:table", (req, res) => {
   const table = req.params.table;
   const data = req.body;
+  const createdID = uuidv4();
+  data.id = createdID;
+
+  console.log(data)
   query(`INSERT INTO ${table} SET ?`, [data], (err, results) => {
     if (err) {
       return res.status(500).json({ error: err.message });

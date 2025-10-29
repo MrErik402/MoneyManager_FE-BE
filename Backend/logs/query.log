@@ -71,3 +71,47 @@
 [2025-10-28 09:45:32] - [36mverbose[39m: [AUTH /login] bejelentkezve: mr.erik402@gmail.com
 [2025-10-28 09:59:14] - [36mverbose[39m: [AUTH /login] bejelentkezve: mr.erik402@gmail.com
 [2025-10-28 09:59:25] - [36mverbose[39m: [AUTH /delete-account] fiók törölve: mr.erik402@gmail.com
+[2025-10-29 08:43:02] - [36mverbose[39m: [AUTH /register] user létrehozva: gasdgadsgasglksmdgbasdk@gmail.com
+[2025-10-29 08:43:32] - [36mverbose[39m: [AUTH /register] user létrehozva: gasdgadsgasglksmdgb2asdk@gmail.com
+[2025-10-29 08:43:39] - [36mverbose[39m: [AUTH /login] bejelentkezve: gasdgadsgasglksmdgb2asdk@gmail.com
+[2025-10-29 08:51:49] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-10-29 08:52:25] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-10-29 08:52:32] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-10-29 08:52:50] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-10-29 08:52:56] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-10-29 08:54:15] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-10-29 08:54:19] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-10-29 08:54:23] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-10-29 08:54:35] - [36mverbose[39m: [PATCH /wallets] -> undefined rekord küldve válaszként
+[2025-10-29 08:54:35] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-10-29 08:54:37] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-10-29 08:54:45] - [36mverbose[39m: [PATCH /wallets] -> undefined rekord küldve válaszként
+[2025-10-29 08:54:45] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-10-29 08:55:12] - [36mverbose[39m: [GET /wallets] -> undefined rekord küldve válaszként
+[2025-10-29 08:55:12] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-10-29 08:55:23] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-10-29 08:55:24] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-10-29 08:55:31] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-10-29 08:55:36] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-10-29 08:56:39] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-10-29 08:58:15] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-10-29 08:58:19] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-10-29 08:59:09] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-10-29 08:59:16] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-10-29 09:00:16] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-10-29 09:00:43] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-10-29 09:01:01] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-10-29 09:01:44] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-10-29 09:01:58] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-10-29 09:02:31] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-10-29 09:02:56] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-10-29 09:03:13] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-10-29 09:03:26] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-10-29 09:03:58] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-10-29 09:04:03] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-10-29 09:05:58] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-10-29 09:06:18] - [36mverbose[39m: [POST /wallets] -> undefined rekord küldve válaszként
+[2025-10-29 09:06:18] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-10-29 09:06:27] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-10-29 09:06:31] - [36mverbose[39m: [PATCH /wallets] -> undefined rekord küldve válaszként
+[2025-10-29 09:06:31] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként

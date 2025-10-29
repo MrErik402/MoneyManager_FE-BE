@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Wallet } from '../../../core/models/wallet.model';
-import { WalletService } from '../../../core/services/wallet.service';
-import { NotificationService } from '../../../core/services/notification.service';
+import { BehaviorSubject, Observable, from } from 'rxjs';
+import { Wallet } from '../../../Interfaces/Wallet';
+import { ApiService } from '../../../Services/api.service';
+import { NotificationsService } from '../../../Services/notifications.service';
 
 @Component({
   selector: 'app-penztarca-kezeles',
@@ -14,10 +14,23 @@ import { NotificationService } from '../../../core/services/notification.service
   styleUrls: ['./penztarca-kezeles.component.scss']
 })
 export class PenztarcaKezeles {
-  wallets$: Observable<Wallet[]> = this.wallets.wallets$;
+  private walletsSubject = new BehaviorSubject<Wallet[]>([]);
+  wallets$: Observable<Wallet[]> = this.walletsSubject.asObservable();
+  private apiUrl = 'http://localhost:3000/wallets';
 
-  constructor(private wallets: WalletService, private router: Router, private notifications: NotificationService) {
-    this.wallets.loadMine();
+  constructor(private api: ApiService, private router: Router, private notifications: NotificationsService) {
+    this.loadWallets();
+  }
+
+  loadWallets() {
+    from(this.api.getAll(this.apiUrl)).subscribe({
+      next: (response: any) => {
+        this.walletsSubject.next(response.data || []);
+      },
+      error: () => {
+        this.notifications.show('error', 'Hiba', 'Nem sikerült betölteni a pénztárcákat');
+      }
+    });
   }
 
   create() {
@@ -29,9 +42,12 @@ export class PenztarcaKezeles {
   }
 
   remove(wallet: Wallet) {
-    this.wallets.delete(wallet.id).subscribe({
-      next: () => this.notifications.warn('Pénztárca törölve'),
-      error: () => this.notifications.error('Nem sikerült törölni')
+    from(this.api.delete(this.apiUrl, wallet.id as any)).subscribe({
+      next: () => {
+        this.notifications.show('warning', 'Figyelem', 'Pénztárca törölve');
+        this.loadWallets();
+      },
+      error: () => this.notifications.show('error', 'Hiba', 'Nem sikerült törölni')
     });
   }
 

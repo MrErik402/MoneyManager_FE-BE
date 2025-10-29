@@ -7,8 +7,26 @@ import { MyaccountComponent } from './Components/myaccount/myaccount.component';
 import { Page404Component } from './Components/page-404/page-404.component';
 import { RedirectComponent } from './Components/redirect/redirect.component';
 import { authGuard } from './guards/auth.guard';
+import { PenztarcaKezeles } from './Components/penztarcak/penztarca-kezeles/penztarca-kezeles.component';
+import { PenztarcaUrlap } from './Components/penztarcak/penztarca-urlap/penztarca-urlap.component';
 
 export const routes: Routes = [
+  {
+    path: 'penztarcak',
+    component: PenztarcaKezeles,
+  },
+  {
+    path: 'penztarcak/uj',
+    component: PenztarcaUrlap,
+  },
+  {
+    path: 'penztarcak/:id/szerkesztes',
+    component: PenztarcaUrlap,
+  },
+  {
+    path: 'penztarcak/:id',
+    component: PenztarcaKezeles,
+  },
   {
     path: 'home',
     component: LandingPageComponent,
@@ -45,4 +63,5 @@ export const routes: Routes = [
     path: '**',
     component: Page404Component,
   },
+  
 ];
