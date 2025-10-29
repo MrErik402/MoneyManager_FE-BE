@@ -1,0 +1,318 @@
+@import "tailwindcss";
+
+/* =========================================================
+   WALLET FORM STYLES — LIGHT & DARK
+   ========================================================= */
+
+.wallet-form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.wallet-form-card {
+  background: var(--white-bg-popup);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 1.25rem;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--white-accent-primary), var(--white-accent-secondary));
+  }
+}
+
+.dark .wallet-form-card {
+  background: var(--dark-bg-card);
+  border-color: var(--dark-border-primary);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+
+  &::before {
+    background: linear-gradient(90deg, var(--dark-accent-primary), var(--dark-accent-secondary));
+  }
+}
+
+.wallet-form-header {
+  margin-bottom: 2rem;
+  text-align: center;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    font-family: "Montserrat", sans-serif;
+    color: var(--white-text-primary);
+    margin: 0 0 0.5rem 0;
+  }
+
+  p {
+    color: var(--white-text-muted);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+}
+
+.dark .wallet-form-header {
+  h1 {
+    color: var(--dark-text-primary);
+  }
+
+  p {
+    color: var(--dark-text-muted);
+  }
+}
+
+.wallet-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  color: var(--white-text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.dark .form-label {
+  color: var(--dark-text-primary);
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  font-family: "Montserrat", sans-serif;
+  color: var(--white-text-primary);
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+    border-color: var(--white-accent-primary);
+    box-shadow: 0 0 0 3px rgba(82, 181, 247, 0.1);
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  &:hover:not(:focus) {
+    border-color: rgba(82, 181, 247, 0.5);
+  }
+
+  &::placeholder {
+    color: var(--white-text-muted);
+    opacity: 0.6;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.dark .form-input {
+  color: var(--dark-text-primary);
+  background: var(--dark-bg-tertiary);
+  border-color: var(--dark-border-primary);
+
+  &:focus {
+    border-color: var(--dark-accent-primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    background: var(--dark-bg-secondary);
+  }
+
+  &:hover:not(:focus) {
+    border-color: var(--dark-border-secondary);
+  }
+
+  &::placeholder {
+    color: var(--dark-text-muted);
+  }
+
+  &:disabled {
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.form-error {
+  font-size: 0.875rem;
+  color: var(--white-accent-error);
+  margin-top: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-weight: 500;
+}
+
+.dark .form-error {
+  color: var(--dark-accent-error);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.btn-submit {
+  @apply px-8 py-3 rounded-lg font-semibold text-white transition-all duration-300;
+  background: linear-gradient(135deg, var(--white-accent-primary), var(--white-accent-secondary));
+  box-shadow: 0 4px 12px rgba(82, 181, 247, 0.3);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 140px;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(82, 181, 247, 0.4);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.dark .btn-submit {
+  background: linear-gradient(135deg, var(--dark-accent-primary), var(--dark-accent-secondary));
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+
+  &:hover:not(:disabled) {
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+  }
+}
+
+.btn-delete {
+  @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300;
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--white-accent-error);
+  border: 2px solid rgba(239, 68, 68, 0.3);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  &:hover {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: var(--white-accent-error);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(239, 68, 68, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.dark .btn-delete {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--dark-accent-error);
+  border-color: rgba(239, 68, 68, 0.3);
+
+  &:hover {
+    background: rgba(239, 68, 68, 0.25);
+    border-color: var(--dark-accent-error);
+    box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
+  }
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Input number styling */
+input[type="number"] {
+  -moz-appearance: textfield;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .wallet-form-container {
+    padding: 1rem 0.75rem;
+  }
+
+  .wallet-form-card {
+    padding: 1.5rem;
+    border-radius: 1rem;
+  }
+
+  .wallet-form-header {
+    h1 {
+      font-size: 1.75rem;
+    }
+  }
+
+  .form-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-submit,
+  .btn-delete {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .wallet-form-header {
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .form-input {
+    padding: 0.75rem 0.875rem;
+    font-size: 0.95rem;
+  }
+}
+

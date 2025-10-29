@@ -57,53 +57,66 @@
 }
 
 .theme-toggle-btn {
-  @apply p-2 rounded-full transition-all duration-300;
+  @apply p-3 rounded-full transition-all duration-300;
   border: none;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &:hover {
+    @apply opacity-80;
+    transform: scale(1.1);
+  }
 }
 
 .theme-icon {
-  @apply text-lg;
+  @apply w-8 h-8 object-contain;
+  transition: transform 0.3s ease;
 }
 
 /* Hamburger Button */
 .hamburger-btn {
-  @apply flex-col justify-center items-center w-8 h-8 cursor-pointer z-50 relative;
+  @apply flex-col justify-center items-center w-10 h-10 cursor-pointer z-50 relative;
   display: none;
   flex-direction: column;
   background: transparent;
   border: none;
   padding: 0;
   transition: all 0.3s ease;
+  gap: 4px;
 
   &:focus {
     outline: none;
   }
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &.open {
+    .hamburger-line {
+      &:nth-child(1) {
+        transform: rotate(45deg) translateY(10px);
+      }
+
+      &:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+
+      &:nth-child(3) {
+        transform: rotate(-45deg) translateY(-10px);
+      }
+    }
+  }
 }
 
 .hamburger-line {
-  @apply w-6 h-0.5 transition-all duration-300 ease-in-out;
+  @apply w-7 h-0.5 transition-all duration-300 ease-in-out;
   display: block;
   background-color: currentColor;
-  margin: 3px 0;
-
-  &:nth-child(1) {
-    &.open {
-      transform: rotate(45deg) translate(8px, 8px);
-    }
-  }
-
-  &:nth-child(2) {
-    &.open {
-      opacity: 0;
-    }
-  }
-
-  &:nth-child(3) {
-    &.open {
-      transform: rotate(-45deg) translate(7px, -7px);
-    }
-  }
+  transform-origin: center;
 }
 
 /* Mobile Menu Overlay */
@@ -111,6 +124,7 @@
   @apply fixed inset-0 hidden;
   z-index: 40;
   background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
   opacity: 0;
   transition: opacity 0.3s ease;
 
@@ -123,13 +137,16 @@
 .mobile-menu {
   @apply fixed top-16 right-0;
   height: calc(100vh - 4rem);
-  width: 16rem;
+  width: 280px;
+  max-width: 85vw;
   z-index: 50;
   background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
   transform: translateX(100%);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 
   &.open {
     transform: translateX(0);
@@ -162,8 +179,10 @@
   text-decoration: none;
   display: flex;
   width: 100%;
+  align-items: center;
 
-  &:hover {
+  &:hover,
+  &:active {
     background-color: rgba(0, 0, 0, 0.05);
   }
 }
@@ -182,6 +201,11 @@
   @apply text-lg;
 }
 
+.mobile-nav-icon-img {
+  @apply w-6 h-6 object-contain;
+  flex-shrink: 0;
+}
+
 .mobile-nav-text {
   @apply flex-1;
 }
@@ -196,14 +220,29 @@
 
 .mobile-theme-toggle-btn {
   @apply flex items-center space-x-3 w-full text-left bg-transparent border-none cursor-pointer text-base font-medium py-2 transition-colors duration-200;
+  align-items: center;
 
-  &:hover {
+  &:hover,
+  &:active {
     @apply opacity-80;
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
+
+:host-context(.dark) .mobile-theme-toggle-btn {
+  &:hover,
+  &:active {
+    background-color: rgba(255, 255, 255, 0.05);
   }
 }
 
 .mobile-theme-icon {
   @apply text-lg;
+}
+
+.mobile-theme-icon-img {
+  @apply w-8 h-8 object-contain;
+  flex-shrink: 0;
 }
 
 .mobile-theme-text {
@@ -230,5 +269,19 @@
 
   .hamburger-btn {
     display: flex;
+  }
+
+  .navbar-theme-toggle {
+    order: -1;
+    margin-right: auto;
+    margin-left: 8px;
+  }
+
+  .theme-toggle-btn {
+    @apply p-2;
+  }
+
+  .theme-icon {
+    @apply w-7 h-7;
   }
 }

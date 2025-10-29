@@ -11,34 +11,50 @@
     class="mainBackground rounded-lg shadow-lg border border-gray-200 p-6 mb-6"
   >
     <div class="mb-6">
-      <h2 class="h4-text mb-1">Új tranzakció felvétele</h2>
+      <h2 class="h4-text mb-1">{{ isEditMode ? 'Tranzakció szerkesztése' : 'Új tranzakció felvétele' }}</h2>
       <div class="w-12 h-0.5 bg-gray-700"></div>
     </div>
 
-    <form class="space-y-6">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label for="wallet" class="mini-text-no-center block mb-1">
             Pénztárca
           </label>
-          <input
-            type="number"
+          <select
             id="wallet"
+            formControlName="walletID"
             class="form-input-ugly"
-            placeholder="Melyik pénztárcádhoz tartozik?"
-          />
+            [class.error]="form.get('walletID')?.invalid && form.get('walletID')?.touched"
+          >
+            <option value="">Válassz pénztárcát</option>
+            <option *ngFor="let wallet of wallets" [value]="wallet.id">
+              {{ wallet.name }}
+            </option>
+          </select>
+          <div *ngIf="form.get('walletID')?.invalid && form.get('walletID')?.touched" class="text-red-500 text-sm mt-1">
+            Kérlek válassz pénztárcát
+          </div>
         </div>
 
         <div>
           <label for="category" class="mini-text-no-center block mb-1">
             Kategória
           </label>
-          <input
-            type="text"
+          <select
             id="category"
+            formControlName="categoryID"
             class="form-input-ugly"
-            placeholder="Melyik kategóriába tartozik?"
-          />
+            [class.error]="form.get('categoryID')?.invalid && form.get('categoryID')?.touched"
+          >
+            <option value="">Válassz kategóriát</option>
+            <option *ngFor="let category of categories" [value]="category.id">
+              {{ category.name }}
+            </option>
+          </select>
+          <div *ngIf="form.get('categoryID')?.invalid && form.get('categoryID')?.touched" class="text-red-500 text-sm mt-1">
+            Kérlek válassz kategóriát
+          </div>
         </div>
       </div>
 
@@ -49,33 +65,50 @@
           </label>
           <input
             type="number"
-            min="0"
             id="amount"
+            formControlName="amount"
+            min="1"
             max="999999999"
             class="form-input-ugly"
             placeholder="Mennyiség"
+            [class.error]="form.get('amount')?.invalid && form.get('amount')?.touched"
           />
+          <div *ngIf="form.get('amount')?.invalid && form.get('amount')?.touched" class="text-red-500 text-sm mt-1">
+            <div *ngIf="form.get('amount')?.errors?.['required']">Kérlek add meg a mennyiséget</div>
+            <div *ngIf="form.get('amount')?.errors?.['min']">A mennyiség legalább 1 legyen</div>
+          </div>
         </div>
 
-        <div class="">
+        <div>
           <label for="type" class="mini-text-no-center block mb-1">
             Típus
           </label>
-          <select id="type" class="form-input-ugly">
-            <option class="" value="">Válassz típust</option>
+          <select
+            id="type"
+            formControlName="type"
+            class="form-input-ugly"
+            [class.error]="form.get('type')?.invalid && form.get('type')?.touched"
+          >
+            <option value="">Válassz típust</option>
             <option value="income">Bevétel</option>
             <option value="expense">Kiadás</option>
           </select>
+          <div *ngIf="form.get('type')?.invalid && form.get('type')?.touched" class="text-red-500 text-sm mt-1">
+            Kérlek válassz típust
+          </div>
         </div>
       </div>
 
-      <div class="flex justify-center pt-2">
-        <button type="submit" class="form-button-ugly">
-          Tranzakció felvétele
+      <div class="flex justify-center gap-3 pt-2">
+        <button type="submit" class="form-button-ugly" [disabled]="loading">
+          <span *ngIf="!loading">{{ isEditMode ? 'Tranzakció frissítése' : 'Tranzakció felvétele' }}</span>
+          <span *ngIf="loading">Feldolgozás...</span>
+        </button>
+        <button *ngIf="isEditMode" type="button" class="form-button-ugly bg-gray-500 hover:bg-gray-600" (click)="cancelEdit()" [disabled]="loading">
+          Mégse
         </button>
       </div>
     </form>
   </div>
 </div>
 
-<app-tranzakcio-megjelenit></app-tranzakcio-megjelenit>

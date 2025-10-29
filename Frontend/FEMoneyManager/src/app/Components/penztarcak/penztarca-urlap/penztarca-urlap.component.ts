@@ -55,10 +55,7 @@ export class PenztarcaUrlap {
     }
     this.loading = true;
     const value = this.form.getRawValue();
-    
-    const mm_session = localStorage.getItem('mm_session');
-    const userID = JSON.parse(mm_session || '{}').user.user.id;
-    const payload = { name: value.name ?? '', balance: Number(value.balance ?? 0), userID: userID };
+    const payload = { name: value.name ?? '', balance: Number(value.balance ?? 0) };
     
     const request = this.id
       ? from(this.api.patch(this.apiUrl, this.id as any, payload))

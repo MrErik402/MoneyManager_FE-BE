@@ -1,3 +1,4 @@
+<app-tranzakcio-felvetel></app-tranzakcio-felvetel>
 <div class="w-full max-w-6xl mx-auto px-3 pb-6">
   <div class="border-2 border-gray-500/50 rounded-lg shadow-lg p-6">
     <div class="mb-6">
@@ -26,16 +27,13 @@
         <thead>
           <tr class="border-b border-gray-200">
             <th class="text-left py-3 px-2 mini-text-no-center uppercase">
-              Dátum
+              Pénztárca
             </th>
             <th class="text-left py-3 px-2 mini-text-no-center uppercase">
               Kategória
             </th>
             <th class="text-left py-3 px-2 mini-text-no-center uppercase">
-              Pénztárca
-            </th>
-            <th class="text-left py-3 px-2 mini-text-no-center uppercase">
-              Leírás
+              Típus
             </th>
             <th class="text-right py-3 px-2 mini-text-no-center uppercase">
               Összeg
@@ -46,52 +44,38 @@
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-100 bg-slate-100/20 m-2">
-          <tr class="transition-colors duration-150">
-            <td class="py-3 px-2 mini-text">2024-01-15</td>
-            <td class="py-3 px-2">
-              <span
-                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800"
-              >
-                Bevétel
-              </span>
-            </td>
-            <td class="py-3 px-2 mini-text">Fő pénztárca</td>
-            <td class="py-3 px-2 mini-text">Fizetés</td>
-            <td class="py-3 px-2 text-sm text-right font-semibold mini-text">
-              +500,000 Ft
-            </td>
-            <td class="py-3 px-2 text-center">
-              <div class="flex justify-center space-x-1">
-                <button class="action-button-ugly">
-                  <span class="text-2xl">✏️</span>
-                </button>
-                <button class="action-button-ugly text-red-600">
-                  <span class="text-2xl">🗑️</span>
-                </button>
-              </div>
-            </td>
+          <tr *ngIf="loading">
+            <td colspan="5" class="py-6 text-center mini-text">Betöltés...</td>
           </tr>
-
-          <tr class="transition-colors duration-150">
-            <td class="py-3 px-2 mini-text">2024-01-14</td>
-            <td class="py-3 px-2">
+          <tr *ngIf="!loading && error">
+            <td colspan="5" class="py-6 text-center text-red-600 mini-text">{{ error }}</td>
+          </tr>
+          <tr *ngIf="!loading && !error && transactions.length === 0">
+            <td colspan="5" class="py-6 text-center mini-text">Nincsenek tranzakciók</td>
+          </tr>
+          <tr *ngFor="let transaction of transactions" class="transition-colors duration-150">
+            <td class="py-3 px-2 mini-text">{{ getWalletName(transaction.walletID) }}</td>
+            <td class="py-3 px-2 mini-text">{{ getCategoryName(transaction.categoryID) }}</td>
+            <td class="py-3 px-2 mini-text">
               <span
-                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800"
+                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                [ngClass]="transaction.type === 'bevétel' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"
               >
-                Kiadás
+                {{ transaction.type === 'bevétel' ? 'Bevétel' : 'Kiadás' }}
               </span>
             </td>
-            <td class="py-3 px-2 mini-text">Fő pénztárca</td>
-            <td class="py-3 px-2 mini-text">Bevásárlás</td>
-            <td class="py-3 px-2 text-sm text-right font-semibold mini-text">
-              -15,000 Ft
+            <td
+              class="py-3 px-2 text-sm text-right font-semibold mini-text"
+              [ngClass]="transaction.type === 'bevétel' ? 'text-green-600' : 'text-red-600'"
+            >
+              {{ transaction.type === 'bevétel' ? '+' : '-' }}{{ transaction.amount | number : '1.0-0' }} Ft
             </td>
             <td class="py-3 px-2 text-center">
               <div class="flex justify-center space-x-1">
-                <button class="action-button-ugly">
+                <button class="action-button-ugly" (click)="editTransaction(transaction)" title="Szerkesztés">
                   <span class="text-2xl">✏️</span>
                 </button>
-                <button class="action-button-ugly text-red-600">
+                <button class="action-button-ugly text-red-600" (click)="deleteTransaction(transaction)" title="Törlés">
                   <span class="text-2xl">🗑️</span>
                 </button>
               </div>
@@ -102,16 +86,8 @@
     </div>
 
     <div class="mt-8 flex items-center justify-between">
-      <div class="text-sm text-gray-700">1-2 / 2 tranzakció</div>
-      <div class="flex space-x-1">
-        <button class="pagination-button-ugly" disabled>
-          <span class="text-2xl">‹</span>
-        </button>
-        <button class="pagination-button-ugly active">1</button>
-        <button class="pagination-button-ugly" disabled>
-          <span class="text-2xl">›</span>
-        </button>
-      </div>
+      <div class="text-sm text-gray-700">{{ transactions.length }} tranzakció</div>
+      <button class="form-button-ugly" type="button" (click)="getTransactions()">Frissítés</button>
     </div>
   </div>
 </div>

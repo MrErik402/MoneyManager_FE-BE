@@ -9,6 +9,7 @@ import { RedirectComponent } from './Components/redirect/redirect.component';
 import { authGuard } from './guards/auth.guard';
 import { PenztarcaKezeles } from './Components/penztarcak/penztarca-kezeles/penztarca-kezeles.component';
 import { PenztarcaUrlap } from './Components/penztarcak/penztarca-urlap/penztarca-urlap.component';
+import { TranzakcioMegjelenitComponent } from './Components/tranzakcio-megjelenit/tranzakcio-megjelenit.component';
 
 export const routes: Routes = [
   {
@@ -28,20 +29,19 @@ export const routes: Routes = [
     component: PenztarcaKezeles,
   },
   {
+    path: 'tranzakciok',
+    component: TranzakcioMegjelenitComponent,
+  },
+  {
+    path: 'tranzakciok/:id',
+    component: TranzakcioMegjelenitComponent,
+  },
+  {
     path: 'home',
     component: LandingPageComponent,
     canActivate: [authGuard],
   },
-  {
-    path: 'tranzakciok',
-    component: TranzakcioFelvetelComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'tranzakciok/:id',
-    component: TranzakcioFelvetelComponent,
-    canActivate: [authGuard],
-  },
+
   {
     path: 'registration',
     component: RegistrationComponent,

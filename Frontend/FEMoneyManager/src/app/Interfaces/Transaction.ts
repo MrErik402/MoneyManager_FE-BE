@@ -1,11 +1,7 @@
-type Type = {
-    type : "kiadás" | "bevétel";
-}
-
-export interface Category {
+export interface Transaction {
     id: string; //UniqID
     walletID: string; //UniqID-t kap
     amount: number;
     categoryID: string; //UniqID-t kap
-    type: Type
+    type: "kiadás" | "bevétel";
 }

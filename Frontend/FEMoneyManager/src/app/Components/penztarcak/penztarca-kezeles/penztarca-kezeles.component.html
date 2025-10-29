@@ -1,25 +1,41 @@
-<div class="space-y-6">
-  <div class="flex items-center justify-between">
+<div class="wallet-management-container min-h-[calc(100vh-40vh)]">
+  <div class="wallet-header">
     <div>
-      <h1 class="text-2xl font-semibold theme-text">Pénztárcák</h1>
-      <p class="theme-muted">Kezeld a fiókjaidat és egyenlegeidet.</p>
+      <h1 class="bg-slate-400 p-2 rounded-md">Pénztárcák</h1>
+      <p class="mini-text">Kezeld a fiókjaidat és egyenlegeidet.</p>
     </div>
-    <button class="btn-primary" type="button" (click)="create()">Új pénztárca</button>
+    <button class="btn-create-wallet" type="button" (click)="create()">
+      <span>Új pénztárca</span>
+    </button>
   </div>
-  <div class="grid gap-4 md:grid-cols-2">
-    <div class="card space-y-3" *ngFor="let wallet of wallets$ | async">
-      <div class="flex items-center justify-between">
-        <div>
-          <div class="text-lg font-semibold theme-text">{{ wallet.name }}</div>
-          <div class="theme-muted">Egyenleg: {{ wallet.balance | number:'1.2-2' }} Ft</div>
+  
+  <div class="wallet-grid">
+    <div class="wallet-card" *ngFor="let wallet of wallets$ | async">
+      <div class="wallet-card-content">
+        <div class="wallet-info">
+          <h3 class="wallet-name">{{ wallet.name }}</h3>
+          <div class="wallet-balance">
+            <span class="balance-label">Egyenleg:</span>
+            <span class="balance-amount">{{ wallet.balance | number:'1.2-2' }}</span>
+            <span class="balance-currency">Ft</span>
+          </div>
         </div>
-        <div class="flex gap-2">
-          <button class="btn-ghost" type="button" (click)="openTransactions(wallet)">Tranzakciók</button>
-          <button class="btn-ghost" type="button" (click)="edit(wallet)">Szerkesztés</button>
-          <button class="btn-ghost" type="button" (click)="remove(wallet)">Törlés</button>
+        <div class="wallet-actions">
+          <button class="border-1 border-slate-400 rounded-md p-2 hover:cursor-pointer" type="button" (click)="openTransactions(wallet)">
+            Tranzakciók
+          </button>
+          <button class="btn-action btn-edit" type="button" (click)="edit(wallet)">
+            Szerkesztés
+          </button>
+          <button class="btn-action btn-delete" type="button" (click)="remove(wallet)">
+            Törlés
+          </button>
         </div>
       </div>
     </div>
-    <div class="theme-muted" *ngIf="(wallets$ | async)?.length === 0">Nincs még pénztárca. Hozz létre egyet.</div>
+    
+    <div class="empty-state" *ngIf="(wallets$ | async)?.length === 0">
+      <p>Nincs még pénztárca. Hozz létre egyet a fenti gombbal.</p>
+    </div>
   </div>
 </div>

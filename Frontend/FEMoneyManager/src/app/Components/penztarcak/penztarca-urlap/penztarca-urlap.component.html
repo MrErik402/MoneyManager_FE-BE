@@ -1,22 +1,49 @@
-<div class="max-w-lg mx-auto card space-y-6">
-  <div>
-    <h1 class="text-2xl font-semibold theme-text">{{ id ? 'Pénztárca szerkesztése' : 'Új pénztárca' }}</h1>
-    <p class="theme-muted">Adj meg nevet és induló egyenleget.</p>
+<div class="wallet-form-container">
+  <div class="wallet-form-card">
+    <div class="wallet-form-header">
+      <h1>{{ id ? 'Pénztárca szerkesztése' : 'Új pénztárca' }}</h1>
+      <p>Adj meg nevet és induló egyenleget.</p>
+    </div>
+    
+    <form [formGroup]="form" (ngSubmit)="save()" class="wallet-form">
+      <div class="form-group">
+        <label class="form-label" for="wallet-name">Név</label>
+        <input 
+          id="wallet-name"
+          class="form-input" 
+          formControlName="name" 
+          type="text"
+          placeholder="Pl. Fő pénztárca"
+        >
+        <div class="form-error" *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+          ! Kötelező mező.
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label" for="wallet-balance">Egyenleg</label>
+        <input 
+          id="wallet-balance"
+          class="form-input" 
+          formControlName="balance" 
+          type="number" 
+          step="0.01"
+          placeholder="0.00"
+        >
+        <div class="form-error" *ngIf="form.get('balance')?.touched && form.get('balance')?.invalid">
+          ! Kötelező mező.
+        </div>
+      </div>
+      
+      <div class="form-actions">
+        <button class="border-1 border-slate-400 rounded-md p-2 hover:cursor-pointer" type="submit" [disabled]="loading">
+          <span *ngIf="loading" class="loading-spinner"></span>
+          <span>{{ loading ? 'Mentés...' : 'Mentés' }}</span>
+        </button>
+        <button class="btn-delete" type="button" *ngIf="id" (click)="delete()">
+          <span>Törlés</span>
+        </button>
+      </div>
+    </form>
   </div>
-  <form [formGroup]="form" (ngSubmit)="save()" class="space-y-4">
-    <div>
-      <label class="theme-text block mb-2">Név</label>
-      <input class="input" formControlName="name" type="text">
-      <div class="text-sm text-red-500 mt-1" *ngIf="form.get('name')?.touched && form.get('name')?.invalid">Kötelező mező.</div>
-    </div>
-    <div>
-      <label class="theme-text block mb-2">Egyenleg</label>
-      <input class="input" formControlName="balance" type="number" step="0.01">
-      <div class="text-sm text-red-500 mt-1" *ngIf="form.get('balance')?.touched && form.get('balance')?.invalid">Kötelező mező.</div>
-    </div>
-    <div class="flex justify-between items-center">
-      <button class="btn-primary" type="submit" [disabled]="loading">{{ loading ? 'Mentés...' : 'Mentés' }}</button>
-      <button class="btn-ghost" type="button" *ngIf="id" (click)="delete()">Törlés</button>
-    </div>
-  </form>
 </div>
