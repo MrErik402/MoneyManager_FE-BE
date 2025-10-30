@@ -42,17 +42,32 @@ export class NavbarComponent implements OnInit, OnDestroy {
     {
       text: 'Főoldal',
       link: '/home',
-      icon: '🏠'
+      icon: 'https://cdn-icons-png.freepik.com/512/9239/9239307.png?ga=GA1.1.1194572750.1761656981'
     },
     {
       text: 'Profilom',
       link: '/myaccount',
-      icon: '👤'
+      icon: 'https://cdn-icons-png.freepik.com/512/16861/16861451.png?ga=GA1.1.1194572750.1761656981'
+    },
+    {
+      text: 'Pénztárcák',
+      link: '/penztarcak',
+      icon: 'https://cdn-icons-png.freepik.com/512/7653/7653271.png?ga=GA1.1.1194572750.1761656981'
+    },
+    {
+      text: 'Tranzakciók',
+      link: '/tranzakciok',
+      icon: 'https://cdn-icons-png.freepik.com/512/15355/15355096.png?ga=GA1.1.1194572750.1761656981'
+    },
+    {
+      text: 'Kategóriák',
+      link: '/kategoriak',
+      icon: 'https://cdn-icons-png.freepik.com/512/13087/13087931.png?ga=GA1.1.1194572750.1761656981'
     },
     {
       text: 'Kijelentkezés',
       link: '#',
-      icon: '🚪',
+      icon: 'https://cdn-icons-png.freepik.com/512/19006/19006867.png?ga=GA1.1.1194572750.1761656981',
       action: 'logout'
     }
   ];
@@ -72,6 +87,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     if (this.userSubscription) {
       this.userSubscription.unsubscribe();
     }
+    // Restore body scroll if menu was open
+    document.body.style.overflow = '';
   }
 
   subscribeToUserChanges() {
@@ -105,10 +122,20 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+    this.updateBodyScroll();
   }
 
   closeMenu() {
     this.isMenuOpen = false;
+    this.updateBodyScroll();
+  }
+
+  private updateBodyScroll() {
+    if (this.isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
   }
 
   logout() {

@@ -261,15 +261,17 @@ input {
 }
 
 .dark .nav-link {
-  color: var(--dark-text-primary);
+  color: black;
+  background-color: rgba(245, 245, 245, 0.685);
+
 }
 
 .nav-link:hover {
-  background-color: var(--white-bg-hover);
+  background-color: rgba(245, 222, 179, 0.473);
 }
 
 .dark .nav-link:hover {
-  background-color: var(--dark-bg-hover);
+  background-color: rgba(128, 128, 128, 0.705);
 }
 
 .nav-link.active {

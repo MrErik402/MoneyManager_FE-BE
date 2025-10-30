@@ -23,18 +23,18 @@
     <div class="navbar-user desktop-nav" *ngIf="isLoggedIn">
       <ul class="nav-list">
         <li *ngFor="let item of userNavItems" class="nav-item">
-          <a [routerLink]="item.link" class="nav-link" *ngIf="item.action !== 'logout'">
-            <span class="nav-icon">{{ item.icon }}</span>
+          <a [routerLink]="item.link" class="nav-link " *ngIf="item.action !== 'logout'">
+            <img [src]="item.icon" alt="Icon" class="nav-icon w-5 h-5 ">
             <span class="nav-text">{{ item.text }}</span>
           </a>
-          <button 
+          <a 
             (click)="logout()" 
-            class="nav-link nav-button" 
+            class="nav-link " 
             *ngIf="item.action === 'logout'"
           >
-            <span class="nav-icon">{{ item.icon }}</span>
+            <img [src]="item.icon" alt="Icon" class="nav-icon w-5 h-5">
             <span class="nav-text">{{ item.text }}</span>
-          </button>
+          </a>
         </li>
       </ul>
     </div>
@@ -46,20 +46,21 @@
         class="theme-toggle-btn"
         [attr.aria-label]="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
       >
-        <span class="theme-icon">{{ isDarkMode ? '☀️' : '🌙' }}</span>
-      </button>
+        <img [src]="isDarkMode ? 'https://cdn-icons-png.freepik.com/512/16066/16066460.png?ga=GA1.1.1194572750.1761656981' : 'https://cdn-icons-png.freepik.com/512/6853/6853935.png?ga=GA1.1.1194572750.1761656981'" class="theme-icon">
+      </button> 
     </div>
 
     <!-- Hamburger Menu Button -->
     <button 
       class="hamburger-btn mobile-nav"
+      [class.open]="isMenuOpen"
       (click)="toggleMenu()"
       [attr.aria-label]="isMenuOpen ? 'Close menu' : 'Open menu'"
       [attr.aria-expanded]="isMenuOpen"
     >
-      <span class="hamburger-line" [class.open]="isMenuOpen"></span>
-      <span class="hamburger-line" [class.open]="isMenuOpen"></span>
-      <span class="hamburger-line" [class.open]="isMenuOpen"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
     </button>
   </div>
 
@@ -88,15 +89,15 @@
               *ngIf="item.action !== 'logout'"
               (click)="closeMenu()"
             >
-              <span class="mobile-nav-icon">{{ item.icon }}</span>
+              <img [src]="item.icon" alt="Icon" class="mobile-nav-icon-img">
               <span class="mobile-nav-text text-primary">{{ item.text }}</span>
             </a>
             <button 
-              (click)="logout()" 
+              (click)="logout(); closeMenu()" 
               class="mobile-nav-link mobile-nav-button" 
               *ngIf="item.action === 'logout'"
             >
-              <span class="mobile-nav-icon">{{ item.icon }}</span>
+              <img [src]="item.icon" alt="Icon" class="mobile-nav-icon-img">
               <span class="mobile-nav-text text-primary">{{ item.text }}</span>
             </button>
           </li>
@@ -110,7 +111,7 @@
           class="mobile-theme-toggle-btn"
           [attr.aria-label]="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
         >
-          <span class="mobile-theme-icon">{{ isDarkMode ? '☀️' : '🌙' }}</span>
+          <img [src]="isDarkMode ? 'https://cdn-icons-png.freepik.com/512/16066/16066460.png?ga=GA1.1.1194572750.1761656981' : 'https://cdn-icons-png.freepik.com/512/6853/6853935.png?ga=GA1.1.1194572750.1761656981'" class="mobile-theme-icon-img" alt="Theme">
           <span class="mobile-theme-text text-primary">{{ isDarkMode ? 'Világos mód' : 'Sötét mód' }}</span>
         </button>
       </div>

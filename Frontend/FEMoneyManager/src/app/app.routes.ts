@@ -7,16 +7,47 @@ import { MyaccountComponent } from './Components/myaccount/myaccount.component';
 import { Page404Component } from './Components/page-404/page-404.component';
 import { RedirectComponent } from './Components/redirect/redirect.component';
 import { authGuard } from './guards/auth.guard';
+<<<<<<< HEAD
 import { CalendarComponent } from './Components/calendar/calendar.component';
 import { KategoriaKezeles } from './Components/kategoriak/kategoria-kezeles/kategoria-kezeles.component';
 import { KategoriaUrlap } from './Components/kategoriak/kategoria-urlap/kategoria-urlap.component';
+=======
+import { PenztarcaKezeles } from './Components/penztarcak/penztarca-kezeles/penztarca-kezeles.component';
+import { PenztarcaUrlap } from './Components/penztarcak/penztarca-urlap/penztarca-urlap.component';
+import { TranzakcioMegjelenitComponent } from './Components/tranzakcio-megjelenit/tranzakcio-megjelenit.component';
+>>>>>>> fc6d356c37e2f3edbafd4d6980f3c07f897f3c67
 
 export const routes: Routes = [
+  {
+    path: 'penztarcak',
+    component: PenztarcaKezeles,
+  },
+  {
+    path: 'penztarcak/uj',
+    component: PenztarcaUrlap,
+  },
+  {
+    path: 'penztarcak/:id/szerkesztes',
+    component: PenztarcaUrlap,
+  },
+  {
+    path: 'penztarcak/:id',
+    component: PenztarcaKezeles,
+  },
+  {
+    path: 'tranzakciok',
+    component: TranzakcioMegjelenitComponent,
+  },
+  {
+    path: 'tranzakciok/:id',
+    component: TranzakcioMegjelenitComponent,
+  },
   {
     path: 'home',
     component: LandingPageComponent,
     canActivate: [authGuard],
   },
+<<<<<<< HEAD
   {
     path: 'calendar',
     component: CalendarComponent,
@@ -57,6 +88,9 @@ export const routes: Routes = [
     component: TranzakcioFelvetelComponent,
     canActivate: [authGuard],
   },
+=======
+
+>>>>>>> fc6d356c37e2f3edbafd4d6980f3c07f897f3c67
   {
     path: 'registration',
     component: RegistrationComponent,
@@ -78,4 +112,5 @@ export const routes: Routes = [
     path: '**',
     component: Page404Component,
   },
+  
 ];
