@@ -71,3 +71,7 @@
 [2025-10-28 09:45:32] - [36mverbose[39m: [AUTH /login] bejelentkezve: mr.erik402@gmail.com
 [2025-10-28 09:59:14] - [36mverbose[39m: [AUTH /login] bejelentkezve: mr.erik402@gmail.com
 [2025-10-28 09:59:25] - [36mverbose[39m: [AUTH /delete-account] fiók törölve: mr.erik402@gmail.com
+[2025-10-29 08:42:50] - [36mverbose[39m: [AUTH /register] user létrehozva: teszt@teszt.hu
+[2025-10-29 08:43:01] - [36mverbose[39m: [AUTH /login] bejelentkezve: teszt@teszt.hu
+[2025-10-29 08:46:48] - [36mverbose[39m: [AUTH /logout] kijelentkezve: teszt@teszt.hu
+[2025-10-29 09:33:11] - [36mverbose[39m: [AUTH /login] bejelentkezve: teszt@teszt.hu

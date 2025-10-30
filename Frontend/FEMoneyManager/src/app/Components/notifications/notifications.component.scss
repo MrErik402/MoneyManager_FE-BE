@@ -1,0 +1,26 @@
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.progress-bar__fill {
+  height: 100%;
+  width: 100%;
+  transform-origin: right center; /* Jobbról balra fogyjon */
+  animation-name: mm-progress-shrink;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes mm-progress-shrink {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
