@@ -27,28 +27,25 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   questNavItems: NavItem[] = [
     {
-      text: 'Regisztráció',
-      link: '/registration',
-      icon: '📝'
-    },
-    {
-      text: 'Bejelentkezés',
-      link: '/login',
-      icon: '🔑'
-    }
-  ];
-
-  userNavItems: NavItem[] = [
-    {
       text: 'Főoldal',
       link: '/home',
       icon: 'https://cdn-icons-png.freepik.com/512/9239/9239307.png?ga=GA1.1.1194572750.1761656981'
     },
     {
-      text: 'Profilom',
-      link: '/myaccount',
-      icon: 'https://cdn-icons-png.freepik.com/512/16861/16861451.png?ga=GA1.1.1194572750.1761656981'
+      text: 'Regisztráció',
+      link: '/registration',
+      icon: 'https://cdn-icons-png.freepik.com/512/10416/10416185.png'
     },
+    {
+      text: 'Bejelentkezés',
+      link: '/login',
+      icon: 'https://cdn-icons-png.freepik.com/512/14897/14897480.png'
+    }
+  ];
+
+  userNavItems: NavItem[] = [
+    
+    
     {
       text: 'Pénztárcák',
       link: '/penztarcak',
@@ -63,6 +60,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
       text: 'Kategóriák',
       link: '/kategoriak',
       icon: 'https://cdn-icons-png.freepik.com/512/13087/13087931.png?ga=GA1.1.1194572750.1761656981'
+    },
+    {
+      text: 'Profilom',
+      link: '/myaccount',
+      icon: 'https://cdn-icons-png.freepik.com/512/16861/16861451.png?ga=GA1.1.1194572750.1761656981'
     },
     {
       text: 'Kijelentkezés',

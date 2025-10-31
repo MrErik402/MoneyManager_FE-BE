@@ -1,13 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { SessionService } from '../../Services/session.service';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-landing-page',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss',
 })
-export class LandingPageComponent {
+export class LandingPageComponent implements OnInit {
+  
+  constructor(private sessionService: SessionService) {}
+  
+  isLoggedIn = false;
+  ngOnInit() {
+    this.isLoggedIn = this.sessionService.isLoggedIn();
+  }
+
   kartyak: any[] = [
     {
       title: 'Pénztárcák',

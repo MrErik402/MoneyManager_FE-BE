@@ -262,7 +262,7 @@ input {
 
 .dark .nav-link {
   color: black;
-  background-color: rgba(245, 245, 245, 0.685);
+  background-color: rgba(255, 255, 255, 0.767);
 
 }
 
@@ -295,4 +295,47 @@ input {
 
 .dark .theme-toggle-btn:hover {
   background-color: var(--dark-bg-hover);
+}
+
+.wallet-card {
+
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--white-accent-primary), var(--white-accent-secondary));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  
+}
+
+
+.dark .wallet-card {
+  background: rgba(37, 117, 68, 0.466);
+  border-color: var(--dark-border-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  color: white;
+
+  &::before {
+    background: linear-gradient(90deg, var(--dark-accent-primary), var(--dark-accent-secondary));
+  }
+
+  &:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    border-color: var(--dark-accent-primary);
+  }
 }

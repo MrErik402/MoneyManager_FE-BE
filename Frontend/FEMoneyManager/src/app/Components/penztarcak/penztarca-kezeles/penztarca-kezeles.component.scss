@@ -78,48 +78,11 @@
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.5rem;
   margin-top: 2rem;
-}
-
-.wallet-card {
-  background: var(--white-bg-popup);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 1rem;
-  padding: 1.5rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--white-accent-primary), var(--white-accent-secondary));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-  }
-
   
 }
 
-.dark .wallet-card {
-  background: var(--dark-bg-card);
-  border-color: var(--dark-border-primary);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 
-  &::before {
-    background: linear-gradient(90deg, var(--dark-accent-primary), var(--dark-accent-secondary));
-  }
 
-  &:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-    border-color: var(--dark-accent-primary);
-  }
-}
 
 .wallet-card-content {
   display: flex;

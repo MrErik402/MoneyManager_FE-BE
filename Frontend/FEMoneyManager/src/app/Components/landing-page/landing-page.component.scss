@@ -8,6 +8,14 @@
   color: var(--dark-text-primary);
 }
 
+.text-primary-secondary {
+  color: rgba(26, 26, 153, 0.685);
+}
+
+.dark .text-primary-secondary {
+  color: red;
+}
+
 .text-secondary {
   color: var(--white-text-secondary);
 }

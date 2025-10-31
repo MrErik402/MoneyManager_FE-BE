@@ -1,9 +1,9 @@
 <div
-  class="flex flex-col items-center justify-center w-full h-full overflow-hidden relative mx-3 mb-10"
+  class="flex flex-col items-center justify-center w-full h-full overflow-hidden relative mx-3 mb-10 "
 >
   <!-- Fo tartalom -->
   <div
-    class="relative z-10 flex flex-col items-center justify-center px-4 mt-2"
+    class="relative z-10 flex flex-col items-center justify-center px-4 mt-2 min-h-[calc(100vh-30vh)]"
   >
     <!-- Logo és cím -->
     <div class="logo-container">
@@ -19,7 +19,7 @@
     <!--Cím és a rövid leiras -->
     <div class="text-center space-y-8">
       <h1
-        class="text-xl md:text-5xl md:text-7xl font-bold text-primary tracking-tight mb-8"
+        class="text-xl md:text-5xl md:text-7xl font-bold text-primary-secondary tracking-tight mb-8"
       >
         Money<span class="text-accent-gradient">Manager</span>
       </h1>
@@ -36,17 +36,18 @@
     </div>
 
     <!-- Buttonok, külön classokkal -->
-    <div class="flex flex-col sm:flex-row gap-4 mt-8 animate-slide-up">
-      <button class="btn-primary hover:ring-1 hover:ring-red-300">
+    <div *ngIf="!isLoggedIn" class="flex flex-col sm:flex-row gap-4 mt-8 animate-slide-up">
+      <button [routerLink]="'/registration'" class="btn-primary hover:ring-1 hover:ring-red-300">
         Regisztráció
       </button>
-      <button class="btn-primary hover:ring-1 hover:ring-red-500">
+      <button [routerLink]="'/login'" class="btn-primary hover:ring-1 hover:ring-red-500">
         Bejelentkezés
       </button>
     </div>
 
     <!-- Alsó 'kártyák' amik a fo funckiokat mutatjak -->
     <div
+    *ngIf="isLoggedIn"
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-12 max-w-4xl border-1 border-black/10"
     >
       @for (karty of kartyak; track karty.title) {

@@ -10,6 +10,7 @@ import { authGuard } from './guards/auth.guard';
 import { PenztarcaKezeles } from './Components/penztarcak/penztarca-kezeles/penztarca-kezeles.component';
 import { PenztarcaUrlap } from './Components/penztarcak/penztarca-urlap/penztarca-urlap.component';
 import { TranzakcioMegjelenitComponent } from './Components/tranzakcio-megjelenit/tranzakcio-megjelenit.component';
+import { StatisticsComponent } from './Components/statistics/statistics.component';
 
 export const routes: Routes = [
   {
@@ -39,7 +40,7 @@ export const routes: Routes = [
   {
     path: 'home',
     component: LandingPageComponent,
-    canActivate: [authGuard],
+    
   },
 
   {
@@ -54,6 +55,10 @@ export const routes: Routes = [
     path: 'myaccount',
     component: MyaccountComponent,
     canActivate: [authGuard],
+  },
+  {
+    path: 'statistics',
+    component: StatisticsComponent,
   },
   {
     path: '',

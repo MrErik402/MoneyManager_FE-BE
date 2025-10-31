@@ -8,34 +8,53 @@
     <div class="mb-4 space-y-3">
       <div class="flex flex-col sm:flex-row gap-3">
         <div class="flex gap-2">
-          <select class="form-input-ugly w-auto mini-text">
-            <option value="">Kategória</option>
+          <select 
+            class="form-input-ugly w-auto mini-text"
+            [ngModel]="selectedWalletId"
+            (ngModelChange)="onWalletFilterChange($event)"
+          >
+            <option [ngValue]="'all'">Összes pénztárca</option>
+            <option *ngFor="let wallet of wallets" [ngValue]="wallet.id">
+              {{ wallet.name }}
+            </option>
+          </select>
+          <select 
+            class="form-input-ugly w-auto mini-text"
+            [value]="selectedCategoryId"
+            (change)="onCategoryFilterChange($any($event.target).value)"
+          >
+            <option value="all">Összes kategória</option>
+            <option *ngFor="let category of categories" [value]="category.id">
+              {{ category.name }}
+            </option>
+          </select>
+          <select 
+            class="form-input-ugly w-auto mini-text"
+            [value]="selectedType"
+            (change)="onTypeFilterChange($any($event.target).value)"
+          >
+            <option value="all">Összes típus</option>
             <option value="income">Bevétel</option>
             <option value="expense">Kiadás</option>
-          </select>
-          <select class="form-input-ugly w-auto mini-text">
-            <option value="">Pénztárca</option>
-            <option value="1">Pénztárca 1</option>
-            <option value="2">Pénztárca 2</option>
           </select>
         </div>
       </div>
     </div>
 
     <div class="overflow-x-auto">
-      <table class="w-full">
+      <table class="w-full ">
         <thead>
           <tr class="border-b border-gray-200">
-            <th class="text-left py-3 px-2 mini-text-no-center uppercase">
+            <th class="text-center py-3 px-2 mini-text-no-center uppercase">
               Pénztárca
             </th>
-            <th class="text-left py-3 px-2 mini-text-no-center uppercase">
+            <th class="text-center py-3 px-2 mini-text-no-center uppercase">
               Kategória
             </th>
-            <th class="text-left py-3 px-2 mini-text-no-center uppercase">
+            <th class="text-center py-3 px-2 mini-text-no-center uppercase">
               Típus
             </th>
-            <th class="text-right py-3 px-2 mini-text-no-center uppercase">
+            <th class="text-center py-3 px-2 mini-text-no-center uppercase">
               Összeg
             </th>
             <th class="text-center py-3 px-2 mini-text-no-center uppercase">
@@ -45,18 +64,18 @@
         </thead>
         <tbody class="divide-y divide-gray-100 bg-slate-100/20 m-2">
           <tr *ngIf="loading">
-            <td colspan="5" class="py-6 text-center mini-text">Betöltés...</td>
+            <td colspan="5" class="py-6 text-left mini-text">Betöltés...</td>
           </tr>
           <tr *ngIf="!loading && error">
-            <td colspan="5" class="py-6 text-center text-red-600 mini-text">{{ error }}</td>
+            <td colspan="5" class="py-6 text-left text-red-600 mini-text">{{ error }}</td>
           </tr>
-          <tr *ngIf="!loading && !error && transactions.length === 0">
-            <td colspan="5" class="py-6 text-center mini-text">Nincsenek tranzakciók</td>
+          <tr *ngIf="!loading && !error && filteredTransactions.length === 0">
+            <td colspan="5" class="py-6 text-left mini-text">Nincsenek tranzakciók</td>
           </tr>
-          <tr *ngFor="let transaction of transactions" class="transition-colors duration-150">
-            <td class="py-3 px-2 mini-text">{{ getWalletName(transaction.walletID) }}</td>
-            <td class="py-3 px-2 mini-text">{{ getCategoryName(transaction.categoryID) }}</td>
-            <td class="py-3 px-2 mini-text">
+          <tr *ngFor="let transaction of filteredTransactions" class="transition-colors duration-150 text-2xl">
+            <td class="py-3 px-2 mini-text text-left">{{ getWalletName(transaction.walletID) }}</td>
+            <td class="py-3 px-2 mini-text text-left">{{ getCategoryName(transaction.categoryID) }}</td>
+            <td class="py-3 px-2 mini-text text-left">
               <span
                 class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
                 [ngClass]="transaction.type === 'bevétel' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"
@@ -65,18 +84,18 @@
               </span>
             </td>
             <td
-              class="py-3 px-2 text-sm text-right font-semibold mini-text"
+              class="py-3 px-2 text-sm text-left font-semibold mini-text"
               [ngClass]="transaction.type === 'bevétel' ? 'text-green-600' : 'text-red-600'"
             >
               {{ transaction.type === 'bevétel' ? '+' : '-' }}{{ transaction.amount | number : '1.0-0' }} Ft
             </td>
-            <td class="py-3 px-2 text-center">
-              <div class="flex justify-center space-x-1">
+            <td class="py-3 px-2 text-left">
+              <div class="flex justify-start space-x-1">
                 <button class="action-button-ugly" (click)="editTransaction(transaction)" title="Szerkesztés">
-                  <span class="text-2xl">✏️</span>
+                  <img src="https://cdn-icons-png.freepik.com/512/16861/16861386.png?ga=GA1.1.1194572750.1761656981" alt="Szerkesztés" class="w-10 h-10">
                 </button>
                 <button class="action-button-ugly text-red-600" (click)="deleteTransaction(transaction)" title="Törlés">
-                  <span class="text-2xl">🗑️</span>
+                  <img src="https://cdn-icons-png.freepik.com/512/9213/9213913.png?ga=GA1.1.1194572750.1761656981" alt="Törlés" class="w-10 h-10">
                 </button>
               </div>
             </td>
@@ -86,7 +105,12 @@
     </div>
 
     <div class="mt-8 flex items-center justify-between">
-      <div class="text-sm text-gray-700">{{ transactions.length }} tranzakció</div>
+      <div class="text-sm text-gray-700">
+        {{ filteredTransactions.length }} tranzakció
+        <span *ngIf="filteredTransactions.length !== allTransactions.length" class="text-gray-500">
+          ({{ allTransactions.length }} összesen)
+        </span>
+      </div>
       <button class="form-button-ugly" type="button" (click)="getTransactions()">Frissítés</button>
     </div>
   </div>

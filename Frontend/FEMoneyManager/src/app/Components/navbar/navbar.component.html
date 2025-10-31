@@ -1,7 +1,7 @@
 <nav class="navbar-container">
   <div class="navbar-content">
     <!-- Logo -->
-    <div class="navbar-logo">
+    <div class="navbar-logo hover:cursor-pointer hover:bg-gray-50/10 p-1 rounded-sm" [routerLink]="'/home'">
       <img src="images/logo.png" alt="MoneyManager" class="logo-image" />
       <span class="logo-text">MoneyManager</span>
     </div>
@@ -12,7 +12,7 @@
       <ul class="nav-list">
         <li *ngFor="let item of questNavItems" class="nav-item">
           <a [routerLink]="item.link" class="nav-link">
-            <span class="nav-icon">{{ item.icon }}</span>
+            <img [src]="item.icon" alt="Icon" class="nav-icon w-5 h-5">
             <span class="nav-text">{{ item.text }}</span>
           </a>
         </li>
@@ -72,8 +72,8 @@
         <ul class="mobile-nav-list">
           <li *ngFor="let item of questNavItems" class="mobile-nav-item">
             <a [routerLink]="item.link" class="mobile-nav-link" (click)="closeMenu()">
-              <span class="mobile-nav-icon">{{ item.icon }}</span>
-              <span class="mobile-nav-text text-primary">{{ item.text }}</span>
+              <img [src]="item.icon" alt="Icon" class="mobile-nav-icon-img">
+              <span class="mobile-nav-text text-primary-secondary">{{ item.text }}</span>
             </a>
           </li>
         </ul>

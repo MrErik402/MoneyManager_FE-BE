@@ -13,7 +13,7 @@
     <div class="wallet-card" *ngFor="let wallet of wallets$ | async">
       <div class="wallet-card-content">
         <div class="wallet-info">
-          <h3 class="wallet-name">{{ wallet.name }}</h3>
+          <h3 class="wallet-name bg-white/50 text-center p-1 rounded-full">{{ wallet.name }}</h3>
           <div class="wallet-balance">
             <span class="balance-label">Egyenleg:</span>
             <span class="balance-amount">{{ wallet.balance | number:'1.2-2' }}</span>

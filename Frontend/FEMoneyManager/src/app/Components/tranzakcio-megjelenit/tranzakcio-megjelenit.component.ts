@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../Services/api.service';
 import { NotificationsService } from '../../Services/notifications.service';
 import { Transaction } from '../../Interfaces/Transaction';
@@ -12,7 +13,7 @@ import { TranzakcioFelvetelComponent } from '../tranzakcio-felvetel/tranzakcio-f
 @Component({
   selector: 'app-tranzakcio-megjelenit',
   standalone: true,
-  imports: [CommonModule, TranzakcioFelvetelComponent],
+  imports: [CommonModule, FormsModule, TranzakcioFelvetelComponent],
   templateUrl: './tranzakcio-megjelenit.component.html',
   styleUrl: './tranzakcio-megjelenit.component.scss',
 })
@@ -20,12 +21,18 @@ export class TranzakcioMegjelenitComponent {
   @ViewChild(TranzakcioFelvetelComponent) transactionForm!: TranzakcioFelvetelComponent;
   
   baseUrl = 'http://localhost:3000';
-  transactions: Transaction[] = [];
+  allTransactions: Transaction[] = []; // Store all transactions
+  filteredTransactions: Transaction[] = []; // Displayed transactions after filtering
   wallets: Wallet[] = [];
   categories: Category[] = [];
   walletId: string | null = null;
   loading = false;
   error: string | null = null;
+  
+  // Filter state
+  selectedWalletId: string = 'all';
+  selectedCategoryId: string = 'all';
+  selectedType: string = 'all';
 
   constructor(
     private api: ApiService,
@@ -33,6 +40,10 @@ export class TranzakcioMegjelenitComponent {
     private notifications: NotificationsService
   ) {
     this.walletId = this.route.snapshot.paramMap.get('id');
+    // Initialize filter with wallet ID from route if present
+    if (this.walletId) {
+      this.selectedWalletId = this.walletId;
+    }
     this.loadWallets();
     this.loadCategories();
     this.loadTransactions();
@@ -42,6 +53,19 @@ export class TranzakcioMegjelenitComponent {
     from(this.api.getAll(`${this.baseUrl}/wallets`)).subscribe({
       next: (response: any) => {
         this.wallets = response.data || [];
+        
+        // If wallet ID is in route params and wallets are loaded, ensure it's selected
+        if (this.walletId && this.wallets.length > 0) {
+          const walletExists = this.wallets.find(w => w.id === this.walletId);
+          if (walletExists) {
+            this.selectedWalletId = this.walletId;
+            // Reapply filters after setting the wallet selection
+            this.applyFilters();
+          } else {
+            // Wallet from route doesn't exist, reset to 'all'
+            this.selectedWalletId = 'all';
+          }
+        }
       },
       error: () => {
         this.notifications.show('error', 'Hiba', 'Nem sikerült betölteni a pénztárcákat');
@@ -65,14 +89,8 @@ export class TranzakcioMegjelenitComponent {
     this.error = null;
     from(this.api.getAll(`${this.baseUrl}/transactions`)).subscribe({
       next: (response: any) => {
-        const allTransactions = response.data || [];
-        
-        // Filter by wallet ID if provided
-        if (this.walletId) {
-          this.transactions = allTransactions.filter((t: Transaction) => t.walletID === this.walletId);
-        } else {
-          this.transactions = allTransactions;
-        }
+        this.allTransactions = response.data || [];
+        this.applyFilters();
         this.loading = false;
       },
       error: (error) => {
@@ -81,6 +99,55 @@ export class TranzakcioMegjelenitComponent {
         this.loading = false;
       }
     });
+  }
+
+  /**
+   * Applies filters to transactions based on selected wallet, category, and type
+   */
+  applyFilters() {
+    let filtered = [...this.allTransactions];
+
+    // Filter by wallet
+    if (this.selectedWalletId && this.selectedWalletId !== 'all') {
+      filtered = filtered.filter((t: Transaction) => t.walletID === this.selectedWalletId);
+    }
+
+    // Filter by category
+    if (this.selectedCategoryId && this.selectedCategoryId !== 'all') {
+      filtered = filtered.filter((t: Transaction) => t.categoryID === this.selectedCategoryId);
+    }
+
+    // Filter by type
+    if (this.selectedType && this.selectedType !== 'all') {
+      const backendType = this.selectedType === 'income' ? 'bevétel' : 'kiadás';
+      filtered = filtered.filter((t: Transaction) => t.type === backendType);
+    }
+
+    this.filteredTransactions = filtered;
+  }
+
+  /**
+   * Handles wallet filter change
+   */
+  onWalletFilterChange(walletId: string) {
+    this.selectedWalletId = walletId;
+    this.applyFilters();
+  }
+
+  /**
+   * Handles category filter change
+   */
+  onCategoryFilterChange(categoryId: string) {
+    this.selectedCategoryId = categoryId;
+    this.applyFilters();
+  }
+
+  /**
+   * Handles type filter change
+   */
+  onTypeFilterChange(type: string) {
+    this.selectedType = type;
+    this.applyFilters();
   }
 
   getWalletName(walletId: string): string {
@@ -109,7 +176,7 @@ export class TranzakcioMegjelenitComponent {
         from(this.api.delete(`${this.baseUrl}/transactions`, transaction.id as any)).subscribe({
           next: () => {
             this.notifications.show('warning', 'Figyelem', 'Tranzakció törölve');
-            this.loadTransactions();
+            this.loadTransactions(); // This will reload and reapply filters
           },
           error: () => {
             this.notifications.show('error', 'Hiba', 'Nem sikerült törölni a tranzakciót');

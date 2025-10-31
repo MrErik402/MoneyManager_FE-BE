@@ -11,9 +11,9 @@ export const authGuard: CanActivateFn = (route, state) => {
     return true;
   }
 
-  // Ha nincs bejelentkezve, átirányítjuk a login oldalra
+  // Ha nincs bejelentkezve, átirányítjuk a home oldalra
   // Opcionálisan menthetjük az eredeti URL-t, hogy bejelentkezés után oda menjünk vissza
-  router.navigate(['/login'], { 
+  router.navigate(['/home'], { 
     queryParams: { returnUrl: state.url } 
   });
   
