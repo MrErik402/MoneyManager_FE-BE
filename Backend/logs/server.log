@@ -71,6 +71,12 @@
 [2025-10-28 09:45:32] - [36mverbose[39m: [AUTH /login] bejelentkezve: mr.erik402@gmail.com
 [2025-10-28 09:59:14] - [36mverbose[39m: [AUTH /login] bejelentkezve: mr.erik402@gmail.com
 [2025-10-28 09:59:25] - [36mverbose[39m: [AUTH /delete-account] fiók törölve: mr.erik402@gmail.com
+<<<<<<< HEAD
+[2025-10-29 08:42:50] - [36mverbose[39m: [AUTH /register] user létrehozva: teszt@teszt.hu
+[2025-10-29 08:43:01] - [36mverbose[39m: [AUTH /login] bejelentkezve: teszt@teszt.hu
+[2025-10-29 08:46:48] - [36mverbose[39m: [AUTH /logout] kijelentkezve: teszt@teszt.hu
+[2025-10-29 09:33:11] - [36mverbose[39m: [AUTH /login] bejelentkezve: teszt@teszt.hu
+=======
 [2025-10-29 08:43:02] - [36mverbose[39m: [AUTH /register] user létrehozva: gasdgadsgasglksmdgbasdk@gmail.com
 [2025-10-29 08:43:32] - [36mverbose[39m: [AUTH /register] user létrehozva: gasdgadsgasglksmdgb2asdk@gmail.com
 [2025-10-29 08:43:39] - [36mverbose[39m: [AUTH /login] bejelentkezve: gasdgadsgasglksmdgb2asdk@gmail.com
@@ -1066,6 +1072,7 @@
 [2025-10-29 14:30:06] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
 [2025-10-29 14:30:06] - [36mverbose[39m: [GET /transactions] -> 1 rekord küldve válaszként
 [2025-10-29 14:30:06] - [36mverbose[39m: [GET /categories] -> 1 rekord küldve válaszként
+<<<<<<< HEAD
 [2025-10-29 15:56:55] - [36mverbose[39m: [AUTH /login] bejelentkezve: takeyoutohell@gmail.com
 [2025-10-29 16:01:44] - [36mverbose[39m: [GET /wallets] -> 3 rekord küldve válaszként
 [2025-10-29 16:02:21] - [36mverbose[39m: [GET /wallets] -> 3 rekord küldve válaszként
@@ -2124,3 +2131,6 @@
 [2025-10-31 20:32:00] - [36mverbose[39m: [GET /categories] -> 3 rekord küldve válaszként
 [2025-10-31 20:32:01] - [36mverbose[39m: [GET /categories] -> 3 rekord küldve válaszként
 [2025-10-31 20:32:04] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+=======
+>>>>>>> fc6d356c37e2f3edbafd4d6980f3c07f897f3c67
+>>>>>>> 13f67c61dbcfda67a56d4d5f036e2b243f1dd6ec

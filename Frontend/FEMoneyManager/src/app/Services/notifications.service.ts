@@ -10,6 +10,9 @@ export class NotificationsService {
 
   message$ = this.messageSubject.asObservable(); // Observable, amire fel lehet iratkozni -> kívülről erre lehet feliratkozni
 
+  // Automatikus eltűnés időtartama (ms)
+  readonly autoHideMs = 5000;
+
   constructor() {}
 
   show(severity: Message['severity'], title: string, msg: string) {
@@ -17,7 +20,7 @@ export class NotificationsService {
 
     setTimeout(() => {
       this.hide();
-    }, 5000);
+    }, this.autoHideMs);
   }
 
   hide() {

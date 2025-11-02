@@ -5,10 +5,24 @@
     'bg-blue-100 text-black border-blue-400': message?.severity === 'info',
     'bg-green-100 text-green-700 border-green-400': message?.severity === 'success',
   }"
-  class="border px-4 py-3 rounded absolute top-20 -right-32 transform -translate-x-1/2 w-full max-w-md"
+  class="border px-4 py-3 rounded absolute top-20 -right-32 transform -translate-x-1/2 w-full max-w-md overflow-hidden"
   role="alert"
   *ngIf="hidden === false"
 >
+  <!-- Felső haladó csík, színe megegyezik az oldalsó/border színnel, jobbról balra fogy -->
+  <div *ngIf="showBar" class="progress-bar">
+    <div
+      class="progress-bar__fill"
+      [ngClass]="{
+        'bg-red-400': message?.severity === 'error',
+        'bg-yellow-400': message?.severity === 'warning',
+        'bg-blue-400': message?.severity === 'info',
+        'bg-green-400': message?.severity === 'success'
+      }"
+      [style.animationDuration.ms]="durationMs"
+    ></div>
+  </div>
+
   <strong class="font-bold">{{ message?.title }}</strong>
   <br />
   <span class="block sm:inline">{{ message?.msg }}</span>
