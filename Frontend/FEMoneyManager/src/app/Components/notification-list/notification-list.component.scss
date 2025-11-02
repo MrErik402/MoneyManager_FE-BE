@@ -1,0 +1,17 @@
+.popbg {
+    background-color: rgba(230, 230, 230, 0.123);
+    
+}
+
+.dark .popbg {
+    background-color: #000000ef;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.1);
+    
+    
+}
+

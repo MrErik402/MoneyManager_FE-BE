@@ -11,6 +11,9 @@ import { PenztarcaKezeles } from './Components/penztarcak/penztarca-kezeles/penz
 import { PenztarcaUrlap } from './Components/penztarcak/penztarca-urlap/penztarca-urlap.component';
 import { TranzakcioMegjelenitComponent } from './Components/tranzakcio-megjelenit/tranzakcio-megjelenit.component';
 import { StatisticsComponent } from './Components/statistics/statistics.component';
+import { NotificationListComponent } from './Components/notification-list/notification-list.component';
+import { KategoriaMegjelenitComponent } from './Components/kategoriak/kategoria-megjelenit/kategoria-megjelenit.component';
+import { NotificationPreferencesComponent } from './Components/notification-preferences/notification-preferences.component';
 
 export const routes: Routes = [
   {
@@ -38,6 +41,10 @@ export const routes: Routes = [
     component: TranzakcioMegjelenitComponent,
   },
   {
+    path: 'kategoriak',
+    component: KategoriaMegjelenitComponent,
+  },
+  {
     path: 'home',
     component: LandingPageComponent,
     
@@ -59,6 +66,16 @@ export const routes: Routes = [
   {
     path: 'statistics',
     component: StatisticsComponent,
+  },
+  {
+    path: 'ertesitesek',
+    component: NotificationListComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'ertesites-beallitasok',
+    component: NotificationPreferencesComponent,
+    canActivate: [authGuard],
   },
   {
     path: '',

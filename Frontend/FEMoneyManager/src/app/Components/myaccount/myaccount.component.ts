@@ -69,26 +69,21 @@ export class MyaccountComponent implements OnInit {
       return;
     }
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(this.userProfile.email)) {
       this.notificationsService.show('error', 'Hiba', 'Érvényes email címet adjon meg!');
       return;
     }
 
-    // Update user profile via auth API (using auth.js update-profile endpoint)
-    // Note: This endpoint doesn't use ID in URL, it uses session, so we use axios directly
     axios.patch('http://localhost:3000/auth/update-profile', {
       name: this.userProfile.name,
       email: this.userProfile.email
     }, { withCredentials: true })
     .then((response: any) => {
       if (response.status === 200) {
-        // Update session with new data
         if (response.data && response.data.user) {
           this.sessionService.setUser(response.data.user);
         } else {
-          // Fallback: update session with current form data
           const updatedUser = {
             ...this.userProfile,
             name: this.userProfile.name,
@@ -97,7 +92,6 @@ export class MyaccountComponent implements OnInit {
           this.sessionService.setUser(updatedUser);
         }
         
-        // Refresh user profile to get latest data from backend
         this.loadUserProfile();
         
         this.notificationsService.show('success', 'Siker', 'Profil sikeresen mentve!');
@@ -133,14 +127,12 @@ export class MyaccountComponent implements OnInit {
       return;
     }
 
-    // Update password via auth API (using auth.js change-password endpoint)
     this.apiService.post('http://localhost:3000/auth/change-password', {
       currentPassword: this.passwordData.currentPassword,
       newPassword: this.passwordData.newPassword
     }).then((response: any) => {
       if (response.status === 200) {
         this.notificationsService.show('success', 'Siker', 'Jelszó sikeresen módosítva!');
-        // Clear password fields
         this.passwordData = {
           currentPassword: '',
           newPassword: '',
@@ -179,8 +171,6 @@ export class MyaccountComponent implements OnInit {
       return;
     }
 
-    // Delete account via auth API (using auth.js delete-account endpoint)
-    // Note: This endpoint doesn't use ID in URL, it uses session, so we use axios directly
     axios.delete('http://localhost:3000/auth/delete-account', {
       withCredentials: true
     })
@@ -188,7 +178,6 @@ export class MyaccountComponent implements OnInit {
       if (response.status === 200) {
         this.notificationsService.show('success', 'Siker', 'Fiók sikeresen törölve!');
         this.sessionService.clearUser();
-        // Redirect to home page after successful deletion
         setTimeout(() => {
           window.location.href = '/home';
         }, 2000);

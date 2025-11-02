@@ -28,7 +28,6 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    // Load categories and transactions when component initializes
     this.loadCategories();
     this.loadTransactions();
   }
@@ -37,7 +36,6 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
     from(this.apiService.getAll(`${this.baseUrl}/categories`)).subscribe({
       next: (response: any) => {
         this.categories = response.data || [];
-        // Update chart if transactions are already loaded
         if (this.transactions.length > 0 && this.chart) {
           this.updateChartWithTransactions();
         }
@@ -48,14 +46,12 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // Load the logged-in user's transactions, give the data to the chart
   loadTransactions() {
     this.loading = true;
     from(this.apiService.getAll(`${this.baseUrl}/transactions`)).subscribe({
       next: (response: any) => {
         this.transactions = response.data || [];
         this.loading = false;
-        // Update chart with transaction data after it's initialized and categories are loaded
         if (this.chart && this.categories.length > 0) {
           this.updateChartWithTransactions();
         }
@@ -68,11 +64,9 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // Wait for CanvasJS to be loaded
     if (typeof CanvasJS !== 'undefined') {
       this.initChart();
     } else {
-      // If CanvasJS is not loaded yet, wait for it
       const checkCanvasJS = setInterval(() => {
         if (typeof CanvasJS !== 'undefined') {
           clearInterval(checkCanvasJS);
@@ -82,25 +76,19 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  /**
-   * Updates the chart with transaction data
-   */
   private updateChartWithTransactions() {
     if (!this.chart || this.transactions.length === 0) {
       return;
     }
 
-    // Group transactions by date and calculate totals
     const transactionData = this.processTransactionData();
     
-    // Update chart options with transaction data
     this.chart.options.title.text = "Bevételek és Kiadások";
     this.chart.options.axisX.title = "Kategória";
     this.chart.options.axisX.valueFormatString = "";
     this.chart.options.axisY.title = "Összeg (Log)";
     this.chart.options.axisY2.title = "Összeg";
     
-    // Update data series
     this.chart.options.data = [
       {
         type: "column",
@@ -119,26 +107,18 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
       }
     ];
 
-    // Re-render chart
     this.chart.render();
   }
 
-  /**
-   * Get category name by ID
-   */
   private getCategoryName(categoryId: string): string {
     const category = this.categories.find(c => c.id === categoryId);
     return category ? category.name : 'Ismeretlen';
   }
 
-  /**
-   * Process transactions and group by category
-   */
   private processTransactionData(): { income: any[], expense: any[] } {
     const incomeMap = new Map<string, number>();
     const expenseMap = new Map<string, number>();
 
-    // Group transactions by category and type
     this.transactions.forEach((transaction: Transaction) => {
       const categoryId = transaction.categoryID;
       
@@ -151,7 +131,6 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
       }
     });
 
-    // Convert maps to dataPoints format with category names
     const income: any[] = [];
     const expense: any[] = [];
     let index = 0;
@@ -173,7 +152,6 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
       });
     });
 
-    // Sort by amount (descending)
     income.sort((a, b) => b.y - a.y);
     expense.sort((a, b) => b.y - a.y);
 
@@ -235,7 +213,6 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
 
     this.chart.render();
     
-    // Update chart with transaction data if transactions are already loaded
     if (this.transactions.length > 0) {
       this.updateChartWithTransactions();
     }

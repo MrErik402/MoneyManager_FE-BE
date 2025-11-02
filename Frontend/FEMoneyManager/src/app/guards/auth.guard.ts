@@ -6,13 +6,10 @@ export const authGuard: CanActivateFn = (route, state) => {
   const sessionService = inject(SessionService);
   const router = inject(Router);
 
-  // Ellenőrizzük, hogy be van-e jelentkezve
   if (sessionService.isLoggedIn()) {
     return true;
   }
 
-  // Ha nincs bejelentkezve, átirányítjuk a home oldalra
-  // Opcionálisan menthetjük az eredeti URL-t, hogy bejelentkezés után oda menjünk vissza
   router.navigate(['/home'], { 
     queryParams: { returnUrl: state.url } 
   });

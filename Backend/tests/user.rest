@@ -1,12 +1,5 @@
 @url = http://localhost:3000
 
-//"id": "u001",
-//"name": "Kiss Péter",
-//"email": "peter.kiss@example.com",
-//"password": "hashed_pw_123",
-//"role": "user",
-//"status": 1
-
 ### Get all users
 GET {{url}}/users
 

@@ -99,6 +99,59 @@
         </div>
       </div>
 
+      <div class="border-t pt-4">
+        <div class="flex items-center mb-4">
+          <input
+            type="checkbox"
+            id="isRecurring"
+            formControlName="isRecurring"
+            (change)="onRecurringChange()"
+            class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+          />
+          <label for="isRecurring" class="ml-2 mini-text-no-center">
+            Ismétlődő tranzakció?
+          </label>
+        </div>
+
+        <div *ngIf="showRecurrenceOptions" class="ml-6 space-y-3">
+          <div>
+            <label class="mini-text-no-center block mb-1">Ismétlődés gyakorisága</label>
+            <div class="space-y-2">
+              <label class="flex items-center">
+                <input
+                  type="radio"
+                  formControlName="recurrenceFrequency"
+                  value="daily"
+                  class="w-4 h-4 text-blue-600 border-gray-300"
+                />
+                <span class="ml-2 mini-text">Napi</span>
+              </label>
+              <label class="flex items-center">
+                <input
+                  type="radio"
+                  formControlName="recurrenceFrequency"
+                  value="weekly"
+                  class="w-4 h-4 text-blue-600 border-gray-300"
+                />
+                <span class="ml-2 mini-text">Heti</span>
+              </label>
+              <label class="flex items-center">
+                <input
+                  type="radio"
+                  formControlName="recurrenceFrequency"
+                  value="monthly"
+                  class="w-4 h-4 text-blue-600 border-gray-300"
+                />
+                <span class="ml-2 mini-text">Havi</span>
+              </label>
+            </div>
+            <div *ngIf="form.get('recurrenceFrequency')?.invalid && form.get('recurrenceFrequency')?.touched" class="text-red-500 text-sm mt-1">
+              Kérlek válassz ismétlődési gyakoriságot
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="flex justify-center gap-3 pt-2">
         <button type="submit" class="form-button-ugly" [disabled]="loading">
           <span *ngIf="!loading">{{ isEditMode ? 'Tranzakció frissítése' : 'Tranzakció felvétele' }}</span>

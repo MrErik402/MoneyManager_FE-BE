@@ -1,7 +1,5 @@
 @url = http://localhost:3000
 
-//	id	userID	name	balance	
-
 ### Get all wallets
 GET {{url}}/wallets
 

@@ -32,7 +32,6 @@
   color: var(--dark-accent-primary);
 }
 
-/* Buttons */
 .btn-primary {
   @apply px-8 py-3 rounded-full font-semibold text-white transition-all duration-300;
   @apply shadow-lg hover:bg-black;
@@ -55,8 +54,6 @@
   border-color: var(--dark-accent-primary);
   color: var(--dark-accent-primary);
 }
-
-/* Kartyak*/
 .feature-card {
   @apply p-5 rounded-2xl backdrop-blur-sm transition-all duration-300;
   @apply hover:bg-black/10 hover:shadow-xl cursor-pointer;

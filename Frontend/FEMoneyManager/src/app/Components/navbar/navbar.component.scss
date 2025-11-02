@@ -75,7 +75,6 @@
   transition: transform 0.3s ease;
 }
 
-/* Hamburger Button */
 .hamburger-btn {
   @apply flex-col justify-center items-center w-10 h-10 cursor-pointer z-50 relative;
   display: none;
@@ -119,7 +118,6 @@
   transform-origin: center;
 }
 
-/* Mobile Menu Overlay */
 .mobile-menu-overlay {
   @apply fixed inset-0 hidden;
   z-index: 40;
@@ -153,7 +151,6 @@
   }
 }
 
-/* Dark mode support for mobile menu */
 :host-context(.dark) .mobile-menu {
   background-color: rgba(17, 24, 39, 0.98);
 }
@@ -249,7 +246,6 @@
   @apply flex-1;
 }
 
-/* Responsive */
 .desktop-nav {
   @apply hidden md:flex;
 }

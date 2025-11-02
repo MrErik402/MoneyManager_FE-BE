@@ -55,7 +55,7 @@
             Felhasználói szerepkör
           </label>
           <div class="shadow appearance-none rounded w-full py-2 px-3 text-primary btnbackground leading-tight bg-gray-100 dark:bg-gray-800">
-            {{ userProfile.role.role === 'admin' ? '👑 Adminisztrátor' : '👤 Felhasználó' }}
+            {{ userProfile.role.role === 'admin' ? ' Adminisztrátor' : 'Felhasználó' }}
           </div>
         </div>
         <div>
@@ -63,7 +63,18 @@
             Fiók állapota
           </label>
           <div class="shadow appearance-none rounded w-full py-2 px-3 text-primary btnbackground leading-tight bg-gray-100 dark:bg-gray-800">
-            {{ userProfile.status ? '✅ Aktív' : '❌ Inaktív' }}
+            <ng-container *ngIf="userProfile.status; else inactiveAccount">
+              <div class="flex items-center gap-2 bg-green-500/20 rounded-md p-2">
+                <span class="text-green-500 text-sm">Fiók aktív.</span>
+
+              </div>
+            </ng-container>
+            <ng-template #inactiveAccount>
+              <div class="flex items-center gap-2">
+                <span class="text-red-500">Fiók inaktív.</span>
+                <img src="https://cdn-icons-png.freepik.com/512/10416/10416186.png" alt="Inaktív" class="w-4 h-4">
+              </div>
+            </ng-template>
           </div>
         </div>
       </div>
@@ -125,14 +136,20 @@
       class="btnbackground text-primary hover:opacity-80 font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline transition-opacity duration-300"
       type="button"
     >
-      💾 Adatok mentése
+      <div class="flex items-center gap-2 ">
+        <img src="https://cdn-icons-png.freepik.com/512/3917/3917263.png?ga=GA1.1.1194572750.1761656981" alt="Aktív" class="w-8 h-8 bg-white rounded-full p-0.5">
+        <span class="text-sm">Adatok mentése</span>
+      </div>
     </button>
     <button
       (click)="changePassword()"
       class="btnbackground text-primary hover:opacity-80 font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline transition-opacity duration-300"
       type="button"
     >
-      🔒 Jelszó módosítása
+      <div class="flex items-center gap-2 ">
+        <img src="https://cdn-icons-png.freepik.com/512/16497/16497904.png?ga=GA1.1.1194572750.1761656981" alt="Aktív" class="w-8 h-8 bg-white rounded-full p-0.5">
+        <span class="text-sm">Jelszó módosítása</span>
+      </div>
     </button>
   </div>
 

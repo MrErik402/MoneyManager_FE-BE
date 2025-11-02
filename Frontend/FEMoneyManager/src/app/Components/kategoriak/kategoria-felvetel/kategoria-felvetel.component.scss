@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+.form-input-ugly {
+  @apply w-full px-3 py-2 text-lg border-2 rounded;
+  @apply focus:outline-none;
+
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+
+  background-color: transparent;
+  color: gray;
+  border-color: var(--white-text-secondary);
+
+  &:hover {
+    border-color: var(--white-text-primary);
+  }
+
+  &:focus {
+    border-color: var(--white-accent-primary);
+  }
+
+  &::placeholder {
+    color: var(--white-text-muted);
+  }
+}
+
+.dark .form-input-ugly {
+  background-color: transparent;
+  border-color: var(--dark-text-secondary);
+
+  &:hover {
+    border-color: var(--dark-text-primary);
+  }
+
+  &:focus {
+    border-color: var(--dark-accent-primary);
+  }
+
+  &::placeholder {
+    color: var(--dark-text-muted);
+  }
+}
+
+option {
+  color: black;
+  background-color: white;
+}
+
+.dark option {
+  color: white;
+  background-color: black;
+}
+
+select {
+  background-color: white;
+}
+
+.form-button-ugly {
+  @apply px-6 py-2 text-lg font-medium rounded border-2;
+  @apply focus:outline-none;
+
+  font-family: "Montserrat", sans-serif;
+  background-color: var(--white-accent-primary);
+  color: white;
+  border-color: var(--white-text-secondary);
+
+  &:hover {
+    background-color: var(--white-accent-primary);
+    color: white;
+    transform: translateY(-1px);
+  }
+}
+
+.dark .form-button-ugly {
+  background-color: var(--dark-bg-secondary);
+  border-color: var(--dark-text-secondary);
+
+  &:hover {
+    background-color: var(--dark-accent-primary);
+    color: white;
+  }
+}
+
+.card-hover {
+  @apply transition-all duration-300 ease-in-out;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.page-title {
+  @apply text-4xl font-bold tracking-tight;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.025em;
+}
+
+.section-title {
+  @apply text-2xl font-semibold;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.form-input:focus {
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+select.form-input {
+  @apply appearance-none bg-white;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}

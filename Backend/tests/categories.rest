@@ -1,9 +1,5 @@
 @url = http://localhost:3000
 
-//	id	name	
-
-
-
 ### Get all categories
 GET {{url}}/categories
 

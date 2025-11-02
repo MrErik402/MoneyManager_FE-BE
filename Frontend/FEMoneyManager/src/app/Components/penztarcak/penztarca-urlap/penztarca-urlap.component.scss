@@ -1,9 +1,5 @@
 @import "tailwindcss";
 
-/* =========================================================
-   WALLET FORM STYLES — LIGHT & DARK
-   ========================================================= */
-
 .wallet-form-container {
   max-width: 600px;
   margin: 0 auto;
@@ -264,7 +260,6 @@
   }
 }
 
-/* Input number styling */
 input[type="number"] {
   -moz-appearance: textfield;
 
@@ -275,7 +270,6 @@ input[type="number"] {
   }
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .wallet-form-container {
     padding: 1rem 0.75rem;

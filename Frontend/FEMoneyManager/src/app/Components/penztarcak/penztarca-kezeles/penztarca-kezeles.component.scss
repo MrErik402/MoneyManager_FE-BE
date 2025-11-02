@@ -1,9 +1,5 @@
 @import "tailwindcss";
 
-/* =========================================================
-   WALLET MANAGEMENT STYLES — LIGHT & DARK
-   ========================================================= */
-
 .wallet-management-container {
   max-width: 1400px;
   margin: 0 auto;
@@ -245,8 +241,6 @@
   background: var(--dark-bg-card);
   border-color: var(--dark-border-primary);
 }
-
-/* Responsive Design */
 @media (max-width: 768px) {
   .wallet-management-container {
     padding: 1rem 0.75rem;

@@ -41,7 +41,7 @@ export class LandingPageComponent implements OnInit {
       title: 'Értesítések',
       description: 'Értesítéseid megtekintése',
       icon: 'ertesites.png',
-      link: '/ertesitek',
+      link: '/ertesitesek',
     },
     {
       title: 'Statisztikák',

@@ -23,9 +23,7 @@ body {
   --white-accent-error: #ef4444;
 }
 
-/* Dark mode theme improvements */
 .dark {
-  /* Dark mode background gradients */
   --dark-bg-primary: #0f0f23;
   --dark-bg-secondary: #1a1a2e;
   --dark-bg-tertiary: #16213e;
@@ -33,25 +31,21 @@ body {
   --dark-bg-card: #1e1e3f;
   --dark-bg-hover: #2a2a4a;
 
-  /* Dark mode text colors */
   --dark-text-primary: #e2e8f0;
   --dark-text-secondary: #94a3b8;
   --dark-text-muted: #64748b;
 
-  /* Dark mode accent colors */
   --dark-accent-primary: #3b82f6;
   --dark-accent-secondary: #8b5cf6;
   --dark-accent-success: #10b981;
   --dark-accent-warning: #f59e0b;
   --dark-accent-error: #ef4444;
 
-  /* Dark mode borders */
   --dark-border-primary: #374151;
   --dark-border-secondary: #4b5563;
   --dark-border-accent: #6b7280;
 }
 
-/* Dark mode utility classes */
 .dark .bg-dark-primary {
   background-color: var(--dark-bg-primary);
 }
@@ -182,7 +176,6 @@ input {
   color: lightblue
 }
 
-/* Profile page specific styles */
 .profile-card {
   background-color: var(--white-bg-popup);
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -235,7 +228,6 @@ input {
   background-color: rgba(239, 68, 68, 0.2);
 }
 
-/* Navbar specific styles */
 .navbar-container {
   background-color: var(--white-bg-popup);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -338,4 +330,12 @@ input {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     border-color: var(--dark-accent-primary);
   }
+}
+
+.szoveg {
+  color: black;
+}
+
+.dark .szoveg {
+  color: white;
 }

@@ -8,7 +8,6 @@ export class AuthService {
 
   constructor(private sessionService: SessionService) {}
 
-      // auth.service.ts
     register(name: string, email: string, password: string) {
       return axios.post(`${this.apiUrl}auth/register`, { name, email, password }, { withCredentials: true });
     }

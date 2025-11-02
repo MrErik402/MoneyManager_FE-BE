@@ -1,8 +1,5 @@
 @url = http://localhost:3000
 
-//	id	walletID	amount	categoryID	type	
-
-
 ### Get all transactions
 GET {{url}}/transactions
 

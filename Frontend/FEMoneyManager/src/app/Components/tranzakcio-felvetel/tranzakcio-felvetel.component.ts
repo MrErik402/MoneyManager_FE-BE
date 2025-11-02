@@ -4,9 +4,11 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../Services/api.service';
 import { NotificationsService } from '../../Services/notifications.service';
+import { PopupService } from '../../Services/popup.service';
 import { Wallet } from '../../Interfaces/Wallet';
 import { Category } from '../../Interfaces/Category';
 import { Transaction } from '../../Interfaces/Transaction';
+import { NotificationPreferences } from '../../Interfaces/NotificationPreferences';
 import { from } from 'rxjs';
 
 @Component({
@@ -24,7 +26,8 @@ export class TranzakcioFelvetelComponent {
   walletIdFromParams: string | null = null;
   editingTransactionId: string | null = null;
   isEditMode = false;
-  originalTransaction: Transaction | null = null; // Store original transaction for balance recalculation
+  originalTransaction: Transaction | null = null;
+  showRecurrenceOptions = false;
   
   private apiUrl = 'http://localhost:3000';
 
@@ -33,13 +36,27 @@ export class TranzakcioFelvetelComponent {
     private route: ActivatedRoute,
     private router: Router,
     private api: ApiService,
-    private notifications: NotificationsService
+    private notifications: NotificationsService,
+    private popupService: PopupService
   ) {
     this.form = this.fb.group({
       walletID: ['', Validators.required],
       categoryID: ['', Validators.required],
       amount: [0, [Validators.required, Validators.min(1)]],
-      type: ['', Validators.required]
+      type: ['', Validators.required],
+      isRecurring: [false],
+      recurrenceFrequency: ['']
+    });
+
+    this.form.get('isRecurring')?.valueChanges.subscribe((isRecurring: boolean) => {
+      const frequencyControl = this.form.get('recurrenceFrequency');
+      if (isRecurring) {
+        frequencyControl?.setValidators([Validators.required]);
+      } else {
+        frequencyControl?.clearValidators();
+        frequencyControl?.setValue('');
+      }
+      frequencyControl?.updateValueAndValidity();
     });
     
     this.walletIdFromParams = this.route.snapshot.paramMap.get('id');
@@ -52,7 +69,6 @@ export class TranzakcioFelvetelComponent {
       next: (response: any) => {
         this.wallets = response.data || [];
         
-        // If wallet ID is in params, pre-select it
         if (this.walletIdFromParams && this.wallets.length > 0) {
           const walletExists = this.wallets.find(w => w.id === this.walletIdFromParams);
           if (walletExists) {
@@ -80,21 +96,41 @@ export class TranzakcioFelvetelComponent {
   loadTransactionForEdit(transaction: Transaction) {
     this.isEditMode = true;
     this.editingTransactionId = transaction.id;
-    // Store the original transaction data for balance recalculation
     this.originalTransaction = { ...transaction };
     
-    // Convert backend type to form type
     const formType = transaction.type === 'bevétel' ? 'income' : 'expense';
+    const isRecurring = Boolean(transaction.isRecurring) || false;
     
     this.form.patchValue({
       walletID: transaction.walletID,
       categoryID: transaction.categoryID,
       amount: transaction.amount,
-      type: formType
+      type: formType,
+      isRecurring: isRecurring,
+      recurrenceFrequency: transaction.recurrenceFrequency || ''
     });
+    
+    this.showRecurrenceOptions = isRecurring;
+    if (isRecurring) {
+      this.form.get('recurrenceFrequency')?.setValidators([Validators.required]);
+      this.form.get('recurrenceFrequency')?.updateValueAndValidity();
+    }
+  }
+
+  onRecurringChange() {
+    this.showRecurrenceOptions = this.form.get('isRecurring')?.value || false;
+    if (!this.showRecurrenceOptions) {
+      this.form.patchValue({ recurrenceFrequency: '' });
+    }
   }
 
   onSubmit() {
+    if (this.form.get('isRecurring')?.value && !this.form.get('recurrenceFrequency')?.value) {
+      this.form.get('recurrenceFrequency')?.markAsTouched();
+      this.notifications.show('error', 'Hiba', 'Ha ismétlődő tranzakciót jelölsz be, válassz gyakoriságot is!');
+      return;
+    }
+
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
@@ -103,19 +139,43 @@ export class TranzakcioFelvetelComponent {
     this.loading = true;
     const value = this.form.getRawValue();
     
-    // Convert type from HTML values to backend values
     const type = value.type === 'income' ? 'bevétel' : 'kiadás';
     const newAmount = Number(value.amount ?? 0);
     const newWalletID = value.walletID ?? '';
     
-    const payload = {
+    const isRecurring = Boolean(value.isRecurring);
+    const recurrenceFrequency = value.recurrenceFrequency || null;
+    
+    const payload: any = {
       walletID: newWalletID,
       categoryID: value.categoryID ?? '',
       amount: newAmount,
-      type: type
+      type: type,
+      isRecurring: isRecurring ? 1 : 0
     };
 
-    // Update wallet balance based on transaction type
+    if (isRecurring && recurrenceFrequency) {
+      payload.recurrenceFrequency = recurrenceFrequency;
+      const nextDate = new Date();
+      if (recurrenceFrequency === 'daily') {
+        nextDate.setDate(nextDate.getDate() + 1);
+      } else if (recurrenceFrequency === 'weekly') {
+        nextDate.setDate(nextDate.getDate() + 7);
+      } else if (recurrenceFrequency === 'monthly') {
+        nextDate.setMonth(nextDate.getMonth() + 1);
+      }
+      payload.nextRecurrenceDate = nextDate.toISOString().slice(0, 19).replace('T', ' ');
+      if (!this.isEditMode && !this.originalTransaction?.id) {
+        payload.originalTransactionID = null;
+      } else if (this.isEditMode && this.originalTransaction?.originalTransactionID) {
+        payload.originalTransactionID = this.originalTransaction.originalTransactionID;
+      }
+    } else {
+      payload.recurrenceFrequency = null;
+      payload.nextRecurrenceDate = null;
+      payload.originalTransactionID = null;
+    }
+
     this.updateWalletBalance(type, newAmount, newWalletID);
 
     const request = this.isEditMode && this.editingTransactionId
@@ -128,14 +188,11 @@ export class TranzakcioFelvetelComponent {
         const message = this.isEditMode ? 'Tranzakció frissítve' : 'Tranzakció felvéve';
         this.notifications.show('success', 'Siker', message);
         
-        // Reset form and edit mode
         this.form.reset();
         this.isEditMode = false;
         this.editingTransactionId = null;
         this.originalTransaction = null;
-        
-        // Reload page to refresh transactions list
-        window.location.reload();
+        this.showRecurrenceOptions = false;
       },
       error: () => {
         this.loading = false;
@@ -145,83 +202,129 @@ export class TranzakcioFelvetelComponent {
     });
   }
 
-  /**
-   * Updates wallet balance correctly handling both new transactions and edits
-   */
   private updateWalletBalance(newType: string, newAmount: number, newWalletID: string) {
     if (this.isEditMode && this.originalTransaction) {
-      // EDIT MODE: First reverse the original transaction's effect, then apply the new one
       const originalAmount = this.originalTransaction.amount;
       const originalType = this.originalTransaction.type;
       const originalWalletID = this.originalTransaction.walletID;
       const walletChanged = originalWalletID !== newWalletID;
       
       if (walletChanged) {
-        // Wallet changed: update both wallets separately
-        // Reverse original transaction effect on original wallet
         const originalWallet = this.wallets.find(w => w.id === originalWalletID);
         if (originalWallet) {
           if (originalType === 'bevétel') {
-            // Original was income, so subtract it
             originalWallet.balance -= originalAmount;
           } else {
-            // Original was expense, so add it back
             originalWallet.balance += originalAmount;
           }
-          // Update the original wallet balance in the backend
-          from(this.api.patch(`${this.apiUrl}/wallets`, originalWalletID as any, { balance: originalWallet.balance })).subscribe();
+          from(this.api.patch(`${this.apiUrl}/wallets`, originalWalletID as any, { balance: originalWallet.balance })).subscribe({
+            next: () => {
+              this.checkBalanceAndNotify(originalWallet);
+            }
+          });
         }
         
-        // Apply new transaction effect on new wallet
         const newWallet = this.wallets.find(w => w.id === newWalletID);
         if (newWallet) {
           if (newType === 'bevétel') {
-            // New is income, add it
             newWallet.balance += newAmount;
           } else {
-            // New is expense, subtract it
             newWallet.balance -= newAmount;
           }
-          // Update the new wallet balance in the backend
-          from(this.api.patch(`${this.apiUrl}/wallets`, newWalletID as any, { balance: newWallet.balance })).subscribe();
+          from(this.api.patch(`${this.apiUrl}/wallets`, newWalletID as any, { balance: newWallet.balance })).subscribe({
+            next: () => {
+              this.checkBalanceAndNotify(newWallet);
+            }
+          });
         }
       } else {
-        // Same wallet: calculate net change and update once
         const wallet = this.wallets.find(w => w.id === newWalletID);
         if (wallet) {
-          // Reverse original transaction
           if (originalType === 'bevétel') {
             wallet.balance -= originalAmount;
           } else {
             wallet.balance += originalAmount;
           }
           
-          // Apply new transaction
           if (newType === 'bevétel') {
             wallet.balance += newAmount;
           } else {
             wallet.balance -= newAmount;
           }
           
-          // Single update to backend
-          from(this.api.patch(`${this.apiUrl}/wallets`, newWalletID as any, { balance: wallet.balance })).subscribe();
+          from(this.api.patch(`${this.apiUrl}/wallets`, newWalletID as any, { balance: wallet.balance })).subscribe({
+            next: () => {
+              this.checkBalanceAndNotify(wallet);
+            }
+          });
         }
       }
     } else {
-      // NEW TRANSACTION MODE: Simply apply the transaction effect
       const wallet = this.wallets.find(w => w.id === newWalletID);
       if (wallet) {
         if (newType === 'bevétel') {
-          // Income: add to balance
           wallet.balance += newAmount;
         } else {
-          // Expense: subtract from balance
           wallet.balance -= newAmount;
         }
-        // Update wallet balance in the backend
-        from(this.api.patch(`${this.apiUrl}/wallets`, newWalletID as any, { balance: wallet.balance })).subscribe();
+        from(this.api.patch(`${this.apiUrl}/wallets`, newWalletID as any, { balance: wallet.balance })).subscribe({
+          next: () => {
+            this.checkBalanceAndNotify(wallet);
+          }
+        });
       }
     }
+  }
+
+  private checkBalanceAndNotify(wallet: Wallet) {
+    from(this.api.getAll(`${this.apiUrl}/user_notification_preferences`)).subscribe({
+      next: (response: any) => {
+        const prefs: NotificationPreferences = response.data?.[0] || {
+          lowBalanceThreshold: 1000,
+          negativeBalanceEnabled: true,
+          highBalanceThreshold: 10000000
+        };
+
+        if (prefs.negativeBalanceEnabled && wallet.balance < 0) {
+          this.createNotification('info', 'Negatív egyenleg', `A(z) ${wallet.name} pénztárcád egyenlege ${wallet.balance} Ft.`);
+        } else if (wallet.balance < prefs.lowBalanceThreshold) {
+          this.createNotification('warning', 'Alacsony egyenleg', `A(z) ${wallet.name} pénztárcád egyenlege ${wallet.balance} Ft, ami ${prefs.lowBalanceThreshold} Ft alatt van.`);
+        } else if (wallet.balance > prefs.highBalanceThreshold) {
+          this.createNotification('info', 'Túl sok pénzed van. A napokban meg fog keresni a NAV.', `A(z) ${wallet.name} pénztárcád egyenlege ${wallet.balance} Ft, ami ${prefs.highBalanceThreshold} Ft felett van.`);
+        }
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      },
+      error: () => {
+        if (wallet.balance < 0) {
+          this.createNotification('info', 'Negatív egyenleg', `A(z) ${wallet.name} pénztárcád egyenlege ${wallet.balance} Ft.`);
+        } else if (wallet.balance < 1000) {
+          this.createNotification('warning', 'Alacsony egyenleg', `A(z) ${wallet.name} pénztárcád egyenlege ${wallet.balance} Ft, ami 1000 Ft alatt van.`);
+        } else if (wallet.balance > 10000000) {
+          this.createNotification('info', 'Túl sok pénzed van. A napokban meg fog keresni a NAV.', `A(z) ${wallet.name} pénztárcád egyenlege ${wallet.balance} Ft, ami 10 000 000 Ft felett van.`);
+        }
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      }
+    });
+  }
+
+  private createNotification(severity: string, title: string, message: string) {
+    const notification = {
+      severity: severity,
+      title: title,
+      message: message
+    };
+    from(this.api.post(`${this.apiUrl}/notifications`, notification)).subscribe({
+      next: () => {
+        this.popupService.show();
+      },
+      error: () => {
+      }
+    });
   }
 
   cancelEdit() {
@@ -229,5 +332,6 @@ export class TranzakcioFelvetelComponent {
     this.isEditMode = false;
     this.editingTransactionId = null;
     this.originalTransaction = null;
+    this.showRecurrenceOptions = false;
   }
 }

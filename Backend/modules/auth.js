@@ -48,7 +48,6 @@ router.post("/login", (req, res) => {
     if (!ok) return res.status(400).json({ message: "Hibás email vagy jelszó" });
     if (user.status !== 1) return res.status(403).json({ message: "A fiók nincs aktiválva" });
 
-    // session
     req.session.userId = user.id;
     req.session.email = user.email;
     req.session.role = user.role;

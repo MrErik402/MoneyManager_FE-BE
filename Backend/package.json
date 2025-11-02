@@ -17,6 +17,7 @@
     "express": "^5.1.0",
     "express-session": "^1.18.2",
     "mysql": "^2.18.1",
+    "node-cron": "^3.0.3",
     "uniqid": "^5.4.0",
     "uuid": "^13.0.0",
     "winston": "^3.18.3"

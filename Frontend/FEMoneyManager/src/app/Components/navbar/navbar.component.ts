@@ -89,19 +89,16 @@ export class NavbarComponent implements OnInit, OnDestroy {
     if (this.userSubscription) {
       this.userSubscription.unsubscribe();
     }
-    // Restore body scroll if menu was open
     document.body.style.overflow = '';
   }
 
   subscribeToUserChanges() {
-    // Subscribe to user changes to automatically update login status
     this.userSubscription = this.sessionService.user$.subscribe(() => {
       this.checkLoginStatus();
     });
   }
 
   checkLoginStatus() {
-    // Check if user is logged in using SessionService
     this.isLoggedIn = this.sessionService.isLoggedIn();
   }
 
@@ -143,21 +140,16 @@ export class NavbarComponent implements OnInit, OnDestroy {
   logout() {
     const confirmed = confirm('Biztosan ki szeretne jelentkezni?');
     if (confirmed) {
-      // Close menu
       this.isMenuOpen = false;
       
-      // Call auth service logout (which also clears session via SessionService)
       this.authService.logout().then(() => {
-        // Update login status (will be automatically updated via subscription)
         this.checkLoginStatus();
         
-        // Redirect to home page
         window.location.href = '/';
         
         console.log('User logged out successfully');
       }).catch((error) => {
         console.error('Logout error:', error);
-        // Even if logout fails, clear local state
         this.checkLoginStatus();
         window.location.href = '/';
       });

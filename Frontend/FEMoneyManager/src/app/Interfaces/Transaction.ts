@@ -1,7 +1,11 @@
 export interface Transaction {
-    id: string; //UniqID
-    walletID: string; //UniqID-t kap
+    id: string;
+    walletID: string;
     amount: number;
-    categoryID: string; //UniqID-t kap
+    categoryID: string;
     type: "kiadás" | "bevétel";
+    isRecurring?: boolean;
+    recurrenceFrequency?: "daily" | "weekly" | "monthly";
+    nextRecurrenceDate?: Date | string;
+    originalTransactionID?: string;
 }

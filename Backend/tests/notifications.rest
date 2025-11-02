@@ -1,0 +1,11 @@
+POST http://localhost:3000/notifications
+Content-Type: application/json
+
+{
+
+    "userID": "1b50e492-6d0c-4229-a40e-19d990e85839",
+    "severity": "error",
+    "title": "Test Notification",
+    "message": "This is a test notification",
+    "createdAt": "2025-10-31"
+}

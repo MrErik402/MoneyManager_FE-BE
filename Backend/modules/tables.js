@@ -12,7 +12,6 @@ function ensureAuthenticated(req, res) {
   return true;
 }
 
-// Select ALL RECORD FROM TABLE
 router.get("/:table", (req, res) => {
   const table = req.params.table;
   
@@ -40,6 +39,48 @@ router.get("/:table", (req, res) => {
     return;
   }
   
+  if (table === "notifications") {
+    if (!ensureAuthenticated(req, res)) return;
+    query(`SELECT * FROM ${table} WHERE userID = ? ORDER BY createdAt DESC`, [req.session.userId], (err, results) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+      logger.verbose(`[GET /${table}] -> ${results.length} rekord küldve válaszként`)
+      res.status(200).send(results);
+    }, req);
+    return;
+  }
+
+  if (table === "user_notification_preferences") {
+    if (!ensureAuthenticated(req, res)) return;
+    query(`SELECT * FROM ${table} WHERE userID = ?`, [req.session.userId], (err, results) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+      if (results.length === 0) {
+        const defaultPrefs = {
+          id: uuidv4(),
+          userID: req.session.userId,
+          lowBalanceThreshold: 1000,
+          negativeBalanceEnabled: 1,
+          highBalanceThreshold: 10000000,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        };
+        query(`INSERT INTO ${table} SET ?`, [defaultPrefs], (err2, results2) => {
+          if (err2) {
+            return res.status(500).json({ error: err2.message });
+          }
+          res.status(200).send([defaultPrefs]);
+        }, req);
+        return;
+      }
+      logger.verbose(`[GET /${table}] -> ${results.length} rekord küldve válaszként`)
+      res.status(200).send(results);
+    }, req);
+    return;
+  }
+  
   query(`SELECT * FROM ${table}`, [], (err, results) => {
     if (err) {
       return res.status(500).json({ error: err.message });
@@ -49,7 +90,6 @@ router.get("/:table", (req, res) => {
   }, req);
 });
 
-//SELECT ONE RECORD BY ID FROM TALBE
 router.get("/:table/:id", (req, res) => {
   const table = req.params.table;
   const id = req.params.id;
@@ -62,8 +102,6 @@ router.get("/:table/:id", (req, res) => {
   }, req); 
 });
 
-
-//POST ONE RECORD TO TABLE
 router.post("/:table", (req, res) => {
   const table = req.params.table;
   const data = req.body;
@@ -88,7 +126,6 @@ router.post("/:table", (req, res) => {
     if (!data.walletID) {
       return res.status(400).json({ error: "walletID is required" });
     }
-    // Verify wallet belongs to user
     query(`SELECT id FROM wallets WHERE id = ? AND userID = ?`, [data.walletID, req.session.userId], (err, results) => {
       if (err) {
         return res.status(500).json({ error: err.message });
@@ -107,6 +144,51 @@ router.post("/:table", (req, res) => {
     return;
   }
 
+  if (table === "notifications") {
+    if (!ensureAuthenticated(req, res)) return;
+    data.userID = req.session.userId;
+    data.createdAt = new Date();
+    query(`INSERT INTO ${table} SET ?`, [data], (err, results) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+      logger.verbose(`[POST /${table}] -> ${results.length} rekord küldve válaszként`)
+      res.status(201).send(results);
+    }, req);
+    return;
+  }
+
+  if (table === "user_notification_preferences") {
+    if (!ensureAuthenticated(req, res)) return;
+    query(`SELECT id FROM ${table} WHERE userID = ?`, [req.session.userId], (err, results) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+      data.userID = req.session.userId;
+      data.updatedAt = new Date();
+      if (results.length === 0) {
+        data.id = uuidv4();
+        data.createdAt = new Date();
+        query(`INSERT INTO ${table} SET ?`, [data], (err2, results2) => {
+          if (err2) {
+            return res.status(500).json({ error: err2.message });
+          }
+          logger.verbose(`[POST /${table}] -> ${results2.length} rekord küldve válaszként`)
+          res.status(201).send(results2);
+        }, req);
+      } else {
+        query(`UPDATE ${table} SET ? WHERE userID = ?`, [data, req.session.userId], (err2, results2) => {
+          if (err2) {
+            return res.status(500).json({ error: err2.message });
+          }
+          logger.verbose(`[PATCH /${table}] -> frissítve`)
+          res.status(200).send(results2);
+        }, req);
+      }
+    }, req);
+    return;
+  }
+
   console.log(data)
   query(`INSERT INTO ${table} SET ?`, [data], (err, results) => {
     if (err) {
@@ -117,7 +199,6 @@ router.post("/:table", (req, res) => {
   }, req);
 });
 
-//PATCH ONE RECORD BY ID FROM TABLE
 router.patch("/:table/:id", (req, res) => {
   const table = req.params.table;
   const id = req.params.id;
@@ -172,8 +253,6 @@ router.patch("/:table/:id", (req, res) => {
   }, req);
 });
 
-
-//DELETE ONE RECORD BY ID FROM TALBE
 router.delete("/:table/:id", (req, res) => {
   const table = req.params.table;
   const id = req.params.id;
@@ -227,9 +306,4 @@ router.delete("/:table/:id", (req, res) => {
   }, req);
 });
 
-
 module.exports = router;
-
-/*
-http://localhost:3000/user
-*/

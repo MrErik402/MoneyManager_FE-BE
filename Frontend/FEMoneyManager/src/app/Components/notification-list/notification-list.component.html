@@ -1,0 +1,51 @@
+<div class="container mx-auto px-4 py-8 ">
+  <h1 class="text-3xl font-bold mb-6 szoveg">Értesítések</h1>
+
+  <div *ngIf="loading" class="text-center py-8 szoveg">
+    <p>Betöltés...</p>
+  </div>
+
+  <div *ngIf="!loading && notifications.length === 0" class="text-center py-8 szoveg">
+    <p class="text-gray-500">Nincsenek értesítések</p>
+  </div>
+
+  <div *ngIf="!loading && notifications.length > 0" class="overflow-x-auto ">
+    <table class="min-w-full  rounded-lg shadow-lg  popbg">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider border-b">
+            Dátum
+          </th>
+          <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-b">
+            Súlyosság
+          </th>
+          <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-b">
+            Cím
+          </th>
+          <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-b">
+            Üzenet
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200 szoveg">
+        <tr *ngFor="let notification of notifications" class="hover:bg-gray-50/50">
+          <td class="px-6 py-4 whitespace-nowrap text-sm ">
+            {{ formatDate(notification.createdAt) }}
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <span class="px-3 py-1 text-xs font-semibold rounded-full {{ getSeverityClass(notification.severity) }}">
+              {{ notification.severity }}
+            </span>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+            {{ notification.title }}
+          </td>
+          <td class="px-6 py-4 text-sm ">
+            {{ notification.message }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

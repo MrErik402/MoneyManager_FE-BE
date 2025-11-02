@@ -58,19 +58,22 @@
               Összeg
             </th>
             <th class="text-center py-3 px-2 mini-text-no-center uppercase">
+              Következő ismétlődés
+            </th>
+            <th class="text-center py-3 px-2 mini-text-no-center uppercase">
               Műveletek
             </th>
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-100 bg-slate-100/20 m-2">
           <tr *ngIf="loading">
-            <td colspan="5" class="py-6 text-left mini-text">Betöltés...</td>
+            <td colspan="6" class="py-6 text-left mini-text">Betöltés...</td>
           </tr>
           <tr *ngIf="!loading && error">
-            <td colspan="5" class="py-6 text-left text-red-600 mini-text">{{ error }}</td>
+            <td colspan="6" class="py-6 text-left text-red-600 mini-text">{{ error }}</td>
           </tr>
           <tr *ngIf="!loading && !error && filteredTransactions.length === 0">
-            <td colspan="5" class="py-6 text-left mini-text">Nincsenek tranzakciók</td>
+            <td colspan="6" class="py-6 text-left mini-text">Nincsenek tranzakciók</td>
           </tr>
           <tr *ngFor="let transaction of filteredTransactions" class="transition-colors duration-150 text-2xl">
             <td class="py-3 px-2 mini-text text-left">{{ getWalletName(transaction.walletID) }}</td>
@@ -88,6 +91,17 @@
               [ngClass]="transaction.type === 'bevétel' ? 'text-green-600' : 'text-red-600'"
             >
               {{ transaction.type === 'bevétel' ? '+' : '-' }}{{ transaction.amount | number : '1.0-0' }} Ft
+            </td>
+            <td class="py-3 px-2 mini-text text-left">
+              <span *ngIf="transaction.isRecurring && transaction.nextRecurrenceDate" class="text-blue-600">
+                {{ formatDate(transaction.nextRecurrenceDate) }}
+              </span>
+              <span *ngIf="transaction.isRecurring && !transaction.nextRecurrenceDate" class="text-gray-400">
+                -
+              </span>
+              <span *ngIf="!transaction.isRecurring" class="text-gray-400">
+                -
+              </span>
             </td>
             <td class="py-3 px-2 text-left">
               <div class="flex justify-start space-x-1">

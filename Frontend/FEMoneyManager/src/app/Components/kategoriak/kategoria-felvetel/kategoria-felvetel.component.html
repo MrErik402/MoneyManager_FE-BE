@@ -1,0 +1,49 @@
+<div class="w-full max-w-6xl mx-auto px-3 py-6">
+  <div class="mb-8 text-center">
+    <h1 class="h1-text mb-3">Kategóriák kezelése</h1>
+    <p class="mini-text max-w-xl mx-auto">
+      Itt láthatod az összes kategóriákat, valamint itt tudsz felvenni,
+      szerkeszteni és törölni.
+    </p>
+  </div>
+
+  <div
+    class="mainBackground rounded-lg shadow-lg border border-gray-200 p-6 mb-6"
+  >
+    <div class="mb-6">
+      <h2 class="h4-text mb-1">{{ isEditMode ? 'Kategória szerkesztése' : 'Új kategória felvétele' }}</h2>
+      <div class="w-12 h-0.5 bg-gray-700"></div>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
+      <div>
+        <label for="name" class="mini-text-no-center block mb-1">
+          Kategória neve
+        </label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="form-input-ugly"
+          placeholder="Kategória neve"
+          [class.error]="form.get('name')?.invalid && form.get('name')?.touched"
+        />
+        <div *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="text-red-500 text-sm mt-1">
+          Kérlek add meg a kategória nevét
+        </div>
+      </div>
+
+      <div class="flex justify-center gap-3 pt-2">
+        <button type="submit" class="form-button-ugly" [disabled]="loading">
+          <span *ngIf="!loading">{{ isEditMode ? 'Kategória frissítése' : 'Kategória felvétele' }}</span>
+          <span *ngIf="loading">Feldolgozás...</span>
+        </button>
+        <button *ngIf="isEditMode" type="button" class="form-button-ugly bg-gray-500 hover:bg-gray-600" (click)="cancelEdit()" [disabled]="loading">
+          Mégse
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
