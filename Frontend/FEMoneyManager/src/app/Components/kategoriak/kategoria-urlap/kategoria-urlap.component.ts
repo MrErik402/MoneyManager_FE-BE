@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { CategoryService } from '../../../core/services/category.service';
-import { NotificationService } from '../../../core/services/notification.service';
+import { CategoryService } from '../../../Services/category.service';
+import { NotificationsService } from '../../../Services/notifications.service';
 
 @Component({
   selector: 'app-kategoria-urlap',
@@ -13,13 +13,16 @@ import { NotificationService } from '../../../core/services/notification.service
   styleUrls: ['./kategoria-urlap.component.scss']
 })
 export class KategoriaUrlap {
-  id = this.route.snapshot.paramMap.get('id');
-  form = this.fb.group({
-    name: ['', Validators.required]
-  });
+  id!: string | null;
+  form!: any;
   loading = false;
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private categories: CategoryService, private router: Router, private notifications: NotificationService) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private categories: CategoryService, private router: Router, private notifications: NotificationsService) {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.form = this.fb.group({
+      name: ['', Validators.required]
+    });
+    
     const state = history.state?.entity;
     if (state) {
       this.form.patchValue({ name: state.name });

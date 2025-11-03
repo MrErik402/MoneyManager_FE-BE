@@ -23,6 +23,22 @@ export class NotificationsService {
     }, this.autoHideMs);
   }
 
+  info(msg: string, title: string = 'Információ') {
+    this.show('info', title, msg);
+  }
+
+  warn(msg: string, title: string = 'Figyelmeztetés') {
+    this.show('warning', title, msg);
+  }
+
+  error(msg: string, title: string = 'Hiba') {
+    this.show('error', title, msg);
+  }
+
+  success(msg: string, title: string = 'Siker') {
+    this.show('success', title, msg);
+  }
+
   hide() {
     this.messageSubject.next(null);
   }

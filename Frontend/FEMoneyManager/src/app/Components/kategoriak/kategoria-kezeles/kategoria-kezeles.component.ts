@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Category } from '../../../core/models/category.model';
-import { CategoryService } from '../../../core/services/category.service';
-import { NotificationService } from '../../../core/services/notification.service';
+import { Category } from '../../../Interfaces/Category';
+import { CategoryService } from '../../../Services/category.service';
+import { NotificationsService } from '../../../Services/notifications.service';
 
 @Component({
   selector: 'app-kategoria-kezeles',
@@ -14,9 +14,10 @@ import { NotificationService } from '../../../core/services/notification.service
   styleUrls: ['./kategoria-kezeles.component.scss']
 })
 export class KategoriaKezeles {
-  categories$: Observable<Category[]> = this.categories.categories$;
+  categories$!: Observable<Category[]>;
 
-  constructor(private categories: CategoryService, private router: Router, private notifications: NotificationService) {
+  constructor(private categories: CategoryService, private router: Router, private notifications: NotificationsService) {
+    this.categories$ = this.categories.categories$;
     this.categories.loadAll();
   }
 

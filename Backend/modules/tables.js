@@ -6,7 +6,7 @@ const { v4: uuidv4 } = require("uuid");
 
 function ensureAuthenticated(req, res) {
   if (!req.session?.userId) {
-    res.status(401).json({ error: "Unauthorized" });
+    res.status(401).json({ error: "Nincs jogosultság" });
     return false;
   }
   return true;
@@ -124,14 +124,14 @@ router.post("/:table", (req, res) => {
   if (table === "transactions") {
     if (!ensureAuthenticated(req, res)) return;
     if (!data.walletID) {
-      return res.status(400).json({ error: "walletID is required" });
+      return res.status(400).json({ error: "Pénztárca azonosító kötelező" });
     }
     query(`SELECT id FROM wallets WHERE id = ? AND userID = ?`, [data.walletID, req.session.userId], (err, results) => {
       if (err) {
         return res.status(500).json({ error: err.message });
       }
       if (results.length === 0) {
-        return res.status(403).json({ error: "Wallet does not belong to user" });
+        return res.status(403).json({ error: "A pénztárca nem tartozik ehhez a felhasználóhoz" });
       }
       query(`INSERT INTO ${table} SET ?`, [data], (err2, results2) => {
         if (err2) {
@@ -211,7 +211,7 @@ router.patch("/:table/:id", (req, res) => {
         return res.status(500).json({ error: err.message });
       }
       if (results.length === 0) {
-        return res.status(403).json({ error: "Wallet does not belong to user" });
+        return res.status(403).json({ error: "A pénztárca nem tartozik ehhez a felhasználóhoz" });
       }
       query(`UPDATE ${table} SET ? WHERE id = ?`, [data, id], (err2, results2) => {
         if (err2) {
@@ -231,7 +231,7 @@ router.patch("/:table/:id", (req, res) => {
         return res.status(500).json({ error: err.message });
       }
       if (results.length === 0) {
-        return res.status(403).json({ error: "Transaction does not belong to user" });
+        return res.status(403).json({ error: "A tranzakció nem tartozik ehhez a felhasználóhoz" });
       }
       query(`UPDATE ${table} SET ? WHERE id = ?`, [data, id], (err2, results2) => {
         if (err2) {
@@ -264,7 +264,7 @@ router.delete("/:table/:id", (req, res) => {
         return res.status(500).json({ error: err.message });
       }
       if (results.length === 0) {
-        return res.status(403).json({ error: "Wallet does not belong to user" });
+        return res.status(403).json({ error: "A pénztárca nem tartozik ehhez a felhasználóhoz" });
       }
       query(`DELETE FROM ${table} WHERE id = ?`, [id], (err2, results2) => {
         if (err2) {
@@ -284,7 +284,7 @@ router.delete("/:table/:id", (req, res) => {
         return res.status(500).json({ error: err.message });
       }
       if (results.length === 0) {
-        return res.status(403).json({ error: "Transaction does not belong to user" });
+        return res.status(403).json({ error: "A tranzakció nem tartozik ehhez a felhasználóhoz" });
       }
       query(`DELETE FROM ${table} WHERE id = ?`, [id], (err2, results2) => {
         if (err2) {
