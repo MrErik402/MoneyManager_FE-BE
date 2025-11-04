@@ -133,6 +133,10 @@ router.post("/:table", (req, res) => {
       if (results.length === 0) {
         return res.status(403).json({ error: "A pénztárca nem tartozik ehhez a felhasználóhoz" });
       }
+      // Add date field if not provided
+      if (!data.date) {
+        data.date = new Date();
+      }
       query(`INSERT INTO ${table} SET ?`, [data], (err2, results2) => {
         if (err2) {
           return res.status(500).json({ error: err2.message });

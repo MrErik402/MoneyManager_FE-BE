@@ -1,1 +1,4 @@
-<p>calendar works!</p>
+<div class="calendar-container">
+  <div *ngIf="loading" class="loading-message">Betöltés...</div>
+  <full-calendar [options]="calendarOptions"></full-calendar>
+</div>

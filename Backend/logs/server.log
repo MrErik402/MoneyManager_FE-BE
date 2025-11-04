@@ -2134,3 +2134,95 @@
 =======
 >>>>>>> fc6d356c37e2f3edbafd4d6980f3c07f897f3c67
 >>>>>>> 13f67c61dbcfda67a56d4d5f036e2b243f1dd6ec
+[2025-11-04 18:08:16] - [36mverbose[39m: [AUTH /register] user létrehozva: admin@admin.hu
+[2025-11-04 18:08:27] - [36mverbose[39m: [AUTH /login] bejelentkezve: admin@admin.hu
+[2025-11-04 18:08:29] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-11-04 18:08:36] - [36mverbose[39m: [POST /wallets] -> undefined rekord küldve válaszként
+[2025-11-04 18:08:36] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 18:08:38] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 18:08:38] - [36mverbose[39m: [GET /categories] -> 3 rekord küldve válaszként
+[2025-11-04 18:08:38] - [36mverbose[39m: [GET /transactions] -> 0 rekord küldve válaszként
+[2025-11-04 18:08:38] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 18:08:38] - [36mverbose[39m: [GET /categories] -> 3 rekord küldve válaszként
+[2025-11-04 18:08:42] - [36mverbose[39m: [GET /categories] -> 3 rekord küldve válaszként
+[2025-11-04 18:08:44] - [36mverbose[39m: [DELETE /categories] -> törölve
+[2025-11-04 18:08:44] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:08:46] - [36mverbose[39m: [DELETE /categories] -> törölve
+[2025-11-04 18:08:46] - [36mverbose[39m: [GET /categories] -> 1 rekord küldve válaszként
+[2025-11-04 18:08:48] - [36mverbose[39m: [DELETE /categories] -> törölve
+[2025-11-04 18:08:48] - [36mverbose[39m: [GET /categories] -> 0 rekord küldve válaszként
+[2025-11-04 18:08:53] - [36mverbose[39m: [POST /categories] -> undefined rekord küldve válaszként
+[2025-11-04 18:08:53] - [36mverbose[39m: [GET /categories] -> 1 rekord küldve válaszként
+[2025-11-04 18:08:59] - [36mverbose[39m: [POST /categories] -> undefined rekord küldve válaszként
+[2025-11-04 18:09:00] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:09:02] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:09:03] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:09:05] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 18:09:05] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:09:05] - [36mverbose[39m: [GET /transactions] -> 0 rekord küldve válaszként
+[2025-11-04 18:09:05] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 18:09:05] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:09:16] - [36mverbose[39m: [PATCH /wallets] -> undefined rekord küldve válaszként
+[2025-11-04 18:09:18] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 18:09:18] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:09:18] - [36mverbose[39m: [GET /transactions] -> 0 rekord küldve válaszként
+[2025-11-04 18:09:18] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 18:09:18] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:09:20] - [36mverbose[39m: [GET /transactions] -> 0 rekord küldve válaszként
+[2025-11-04 18:09:21] - [36mverbose[39m: [GET /transactions] -> 0 rekord küldve válaszként
+[2025-11-04 18:09:21] - [36mverbose[39m: [GET /transactions] -> 0 rekord küldve válaszként
+[2025-11-04 18:09:21] - [36mverbose[39m: [GET /transactions] -> 0 rekord küldve válaszként
+[2025-11-04 18:09:22] - [36mverbose[39m: [GET /transactions] -> 0 rekord küldve válaszként
+[2025-11-04 18:09:30] - [36mverbose[39m: [PATCH /wallets] -> undefined rekord küldve válaszként
+[2025-11-04 18:09:30] - [36mverbose[39m: [GET /user_notification_preferences] -> 1 rekord küldve válaszként
+[2025-11-04 18:09:32] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 18:09:32] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:09:32] - [36mverbose[39m: [GET /transactions] -> 0 rekord küldve válaszként
+[2025-11-04 18:09:32] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:09:32] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 18:09:38] - [36mverbose[39m: [GET /transactions] -> 0 rekord küldve válaszként
+[2025-11-04 18:09:38] - [36mverbose[39m: [GET /transactions] -> 0 rekord küldve válaszként
+[2025-11-04 18:09:38] - [36mverbose[39m: [GET /transactions] -> 0 rekord küldve válaszként
+[2025-11-04 18:09:39] - [36mverbose[39m: [GET /transactions] -> 0 rekord küldve válaszként
+[2025-11-04 18:09:41] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:09:41] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 18:09:41] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:09:41] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 18:09:41] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:09:41] - [36mverbose[39m: [GET /transactions] -> 0 rekord küldve válaszként
+[2025-11-04 18:09:44] - [36mverbose[39m: [GET /transactions] -> 0 rekord küldve válaszként
+[2025-11-04 18:09:51] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 18:09:51] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:09:51] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 18:09:51] - [36mverbose[39m: [GET /transactions] -> 0 rekord küldve válaszként
+[2025-11-04 18:09:51] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:11:13] - [36mverbose[39m: [PATCH /wallets] -> undefined rekord küldve válaszként
+[2025-11-04 18:11:13] - [36mverbose[39m: [POST /transactions] -> undefined rekord küldve válaszként
+[2025-11-04 18:11:13] - [36mverbose[39m: [GET /user_notification_preferences] -> 1 rekord küldve válaszként
+[2025-11-04 18:11:15] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:11:15] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 18:11:15] - [36mverbose[39m: [GET /transactions] -> 1 rekord küldve válaszként
+[2025-11-04 18:11:15] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 18:11:15] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:11:22] - [36mverbose[39m: [GET /transactions] -> 1 rekord küldve válaszként
+[2025-11-04 18:11:38] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 18:11:38] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:11:38] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:11:38] - [36mverbose[39m: [GET /transactions] -> 1 rekord küldve válaszként
+[2025-11-04 18:11:38] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 18:11:39] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:11:40] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 18:11:40] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:11:40] - [36mverbose[39m: [GET /transactions] -> 1 rekord küldve válaszként
+[2025-11-04 18:11:40] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 18:11:40] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:11:47] - [36mverbose[39m: [PATCH /wallets] -> undefined rekord küldve válaszként
+[2025-11-04 18:11:47] - [36mverbose[39m: [POST /transactions] -> undefined rekord küldve válaszként
+[2025-11-04 18:11:47] - [36mverbose[39m: [GET /user_notification_preferences] -> 1 rekord küldve válaszként
+[2025-11-04 18:11:49] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 18:11:49] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:11:49] - [36mverbose[39m: [GET /transactions] -> 2 rekord küldve válaszként
+[2025-11-04 18:11:49] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 18:11:49] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 18:11:54] - [36mverbose[39m: [GET /transactions] -> 2 rekord küldve válaszként
+[2025-11-04 18:12:45] - [36mverbose[39m: [GET /transactions] -> 2 rekord küldve válaszként
