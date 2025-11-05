@@ -151,7 +151,8 @@ export class TranzakcioFelvetelComponent {
       categoryID: value.categoryID ?? '',
       amount: newAmount,
       type: type,
-      isRecurring: isRecurring ? 1 : 0
+      isRecurring: isRecurring ? 1 : 0,
+      date: value.date ? new Date(value.date).toISOString().slice(0, 19).replace('T', ' ') : new Date().toISOString().slice(0, 19).replace('T', ' ')
     };
 
     if (isRecurring && recurrenceFrequency) {

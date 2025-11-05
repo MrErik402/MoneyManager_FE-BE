@@ -4,6 +4,7 @@ export interface Transaction {
     amount: number;
     categoryID: string;
     type: "kiadás" | "bevétel";
+    date?: Date | string;
     isRecurring?: boolean;
     recurrenceFrequency?: "daily" | "weekly" | "monthly";
     nextRecurrenceDate?: Date | string;

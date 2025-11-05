@@ -1,0 +1,113 @@
+.calendar-container {
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.loading-message {
+  text-align: center;
+  padding: 2rem;
+  color: var(--white-text-primary);
+}
+
+.dark .loading-message {
+  color: var(--dark-text-primary);
+}
+
+// FullCalendar dark mode support
+:host ::ng-deep {
+  .fc {
+    color: var(--white-text-primary);
+    background-color: transparent;
+  }
+
+  .fc-toolbar-title {
+    color: var(--white-text-primary);
+    font-family: "Montserrat", sans-serif;
+  }
+
+  .fc-button {
+    background-color: var(--white-accent-primary);
+    border-color: var(--white-accent-primary);
+    color: white;
+  }
+
+  .fc-button:hover {
+    background-color: var(--white-accent-secondary);
+    border-color: var(--white-accent-secondary);
+  }
+
+  .fc-daygrid-day {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .fc-daygrid-day-top {
+    color: var(--white-text-primary);
+  }
+
+  .fc-col-header-cell {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white-text-primary);
+  }
+
+  .fc-daygrid-day-number {
+    color: var(--white-text-primary);
+  }
+
+  .fc-daygrid-day:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.dark :host ::ng-deep {
+  .fc {
+    color: var(--dark-text-primary);
+  }
+
+  .fc-toolbar-title {
+    color: var(--dark-text-primary);
+  }
+
+  .fc-button {
+    background-color: var(--dark-accent-primary);
+    border-color: var(--dark-accent-primary);
+  }
+
+  .fc-button:hover {
+    background-color: var(--dark-accent-secondary);
+    border-color: var(--dark-accent-secondary);
+  }
+
+  .fc-daygrid-day {
+    background-color: var(--dark-bg-card);
+    border-color: var(--dark-border-primary);
+  }
+
+  .fc-daygrid-day-top {
+    color: var(--dark-text-primary);
+  }
+
+  .fc-col-header-cell {
+    background-color: var(--dark-bg-tertiary);
+    color: var(--dark-text-primary);
+    border-color: var(--dark-border-primary);
+  }
+
+  .fc-daygrid-day-number {
+    color: var(--dark-text-primary);
+  }
+
+  .fc-daygrid-day:hover {
+    background-color: var(--dark-bg-hover);
+  }
+
+  .fc-day-today {
+    background-color: var(--dark-bg-tertiary) !important;
+  }
+
+  .fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
+    color: var(--dark-accent-primary);
+    font-weight: bold;
+  }
+}
+
