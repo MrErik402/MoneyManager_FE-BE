@@ -2134,3 +2134,87 @@
 =======
 >>>>>>> fc6d356c37e2f3edbafd4d6980f3c07f897f3c67
 >>>>>>> 13f67c61dbcfda67a56d4d5f036e2b243f1dd6ec
+[2025-11-04 08:12:18] - [36mverbose[39m: [AUTH /register] user létrehozva: teszt@teszt.hu
+[2025-11-04 08:12:37] - [36mverbose[39m: [AUTH /login] bejelentkezve: teszt@teszt.hu
+[2025-11-04 08:12:41] - [36mverbose[39m: [GET /categories] -> 3 rekord küldve válaszként
+[2025-11-04 08:12:49] - [36mverbose[39m: [DELETE /categories] -> törölve
+[2025-11-04 08:12:49] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 08:12:51] - [36mverbose[39m: [DELETE /categories] -> törölve
+[2025-11-04 08:12:51] - [36mverbose[39m: [GET /categories] -> 1 rekord küldve válaszként
+[2025-11-04 08:12:53] - [36mverbose[39m: [DELETE /categories] -> törölve
+[2025-11-04 08:12:53] - [36mverbose[39m: [GET /categories] -> 0 rekord küldve válaszként
+[2025-11-04 08:12:58] - [36mverbose[39m: [POST /categories] -> undefined rekord küldve válaszként
+[2025-11-04 08:12:58] - [36mverbose[39m: [GET /categories] -> 1 rekord küldve válaszként
+[2025-11-04 08:13:03] - [36mverbose[39m: [POST /categories] -> undefined rekord küldve válaszként
+[2025-11-04 08:13:03] - [36mverbose[39m: [GET /categories] -> 2 rekord küldve válaszként
+[2025-11-04 08:13:06] - [36mverbose[39m: [POST /categories] -> undefined rekord küldve válaszként
+[2025-11-04 08:13:07] - [36mverbose[39m: [GET /categories] -> 3 rekord küldve válaszként
+[2025-11-04 08:13:13] - [36mverbose[39m: [POST /categories] -> undefined rekord küldve válaszként
+[2025-11-04 08:13:13] - [36mverbose[39m: [GET /categories] -> 4 rekord küldve válaszként
+[2025-11-04 08:13:17] - [36mverbose[39m: [POST /categories] -> undefined rekord küldve válaszként
+[2025-11-04 08:13:17] - [36mverbose[39m: [GET /categories] -> 5 rekord küldve válaszként
+[2025-11-04 08:13:31] - [36mverbose[39m: [GET /categories] -> 5 rekord küldve válaszként
+[2025-11-04 08:13:31] - [36mverbose[39m: [GET /categories] -> 5 rekord küldve válaszként
+[2025-11-04 08:13:31] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-11-04 08:13:31] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-11-04 08:13:31] - [36mverbose[39m: [GET /transactions] -> 0 rekord küldve válaszként
+[2025-11-04 08:13:35] - [36mverbose[39m: [GET /wallets] -> 0 rekord küldve válaszként
+[2025-11-04 08:13:46] - [36mverbose[39m: [POST /wallets] -> undefined rekord küldve válaszként
+[2025-11-04 08:13:46] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 08:13:52] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 08:13:52] - [36mverbose[39m: [GET /categories] -> 5 rekord küldve válaszként
+[2025-11-04 08:13:52] - [36mverbose[39m: [GET /transactions] -> 0 rekord küldve válaszként
+[2025-11-04 08:13:52] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 08:13:52] - [36mverbose[39m: [GET /categories] -> 5 rekord küldve válaszként
+[2025-11-04 08:14:03] - [36mverbose[39m: [PATCH /wallets] -> undefined rekord küldve válaszként
+[2025-11-04 08:14:03] - [36mverbose[39m: [POST /transactions] -> undefined rekord küldve válaszként
+[2025-11-04 08:14:05] - [36mverbose[39m: [GET /categories] -> 5 rekord küldve válaszként
+[2025-11-04 08:14:05] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 08:14:06] - [36mverbose[39m: [GET /transactions] -> 1 rekord küldve válaszként
+[2025-11-04 08:14:06] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 08:14:06] - [36mverbose[39m: [GET /categories] -> 5 rekord küldve válaszként
+[2025-11-04 08:14:10] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 08:14:13] - [36mverbose[39m: [GET /categories] -> 5 rekord küldve válaszként
+[2025-11-04 08:14:19] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 08:14:19] - [36mverbose[39m: [GET /categories] -> 5 rekord küldve válaszként
+[2025-11-04 08:14:19] - [36mverbose[39m: [GET /transactions] -> 1 rekord küldve válaszként
+[2025-11-04 08:14:19] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 08:14:19] - [36mverbose[39m: [GET /categories] -> 5 rekord küldve válaszként
+[2025-11-04 08:14:21] - [36mverbose[39m: [GET /categories] -> 5 rekord küldve válaszként
+[2025-11-04 08:14:23] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 08:14:48] - [36mverbose[39m: [AUTH /logout] kijelentkezve: teszt@teszt.hu
+[2025-11-04 08:15:14] - [36mverbose[39m: [AUTH /register] user létrehozva: tesztes@teszt.hu
+[2025-11-04 08:15:30] - [36mverbose[39m: [AUTH /login] bejelentkezve: teszt@teszt.hu
+[2025-11-04 08:15:32] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 08:15:35] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 08:15:35] - [36mverbose[39m: [GET /categories] -> 5 rekord küldve válaszként
+[2025-11-04 08:15:35] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 08:15:35] - [36mverbose[39m: [GET /transactions] -> 1 rekord küldve válaszként
+[2025-11-04 08:15:35] - [36mverbose[39m: [GET /categories] -> 5 rekord küldve válaszként
+[2025-11-04 08:15:42] - [36mverbose[39m: [POST /transactions] -> undefined rekord küldve válaszként
+[2025-11-04 08:15:42] - [36mverbose[39m: [PATCH /wallets] -> undefined rekord küldve válaszként
+[2025-11-04 08:15:42] - [36mverbose[39m: [GET /user_notification_preferences] -> 1 rekord küldve válaszként
+[2025-11-04 08:15:44] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 08:15:44] - [36mverbose[39m: [GET /categories] -> 5 rekord küldve válaszként
+[2025-11-04 08:15:44] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 08:15:44] - [36mverbose[39m: [GET /transactions] -> 2 rekord küldve válaszként
+[2025-11-04 08:15:44] - [36mverbose[39m: [GET /categories] -> 5 rekord küldve válaszként
+[2025-11-04 08:15:47] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 08:15:49] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 08:15:49] - [36mverbose[39m: [GET /categories] -> 5 rekord küldve válaszként
+[2025-11-04 08:15:49] - [36mverbose[39m: [GET /transactions] -> 2 rekord küldve válaszként
+[2025-11-04 08:15:49] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 08:15:49] - [36mverbose[39m: [GET /categories] -> 5 rekord küldve válaszként
+[2025-11-04 08:16:01] - [36mverbose[39m: [POST /transactions] -> undefined rekord küldve válaszként
+[2025-11-04 08:16:01] - [36mverbose[39m: [PATCH /wallets] -> undefined rekord küldve válaszként
+[2025-11-04 08:16:01] - [36mverbose[39m: [GET /user_notification_preferences] -> 1 rekord küldve válaszként
+[2025-11-04 08:16:03] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 08:16:03] - [36mverbose[39m: [GET /categories] -> 5 rekord küldve válaszként
+[2025-11-04 08:16:03] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-04 08:16:03] - [36mverbose[39m: [GET /transactions] -> 3 rekord küldve válaszként
+[2025-11-04 08:16:03] - [36mverbose[39m: [GET /categories] -> 5 rekord küldve válaszként
+[2025-11-04 08:16:14] - [36mverbose[39m: [GET /categories] -> 5 rekord küldve válaszként
+[2025-11-04 08:16:23] - [36mverbose[39m: [PATCH /categories] -> undefined rekord küldve válaszként
+[2025-11-04 08:16:23] - [36mverbose[39m: [GET /categories] -> 5 rekord küldve válaszként
+[2025-11-04 08:16:36] - [36mverbose[39m: [AUTH /delete-account] fiók törölve: teszt@teszt.hu
+[2025-11-04 08:18:18] - [36mverbose[39m: [AUTH /register] user létrehozva: asdasd@asd.hu
