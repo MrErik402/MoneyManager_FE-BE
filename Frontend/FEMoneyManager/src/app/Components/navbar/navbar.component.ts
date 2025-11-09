@@ -57,6 +57,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
       icon: 'https://cdn-icons-png.freepik.com/512/15355/15355096.png?ga=GA1.1.1194572750.1761656981'
     },
     {
+      text: 'Statisztika',
+      link: '/statistics',
+      icon: 'https://cdn-icons-png.freepik.com/512/13424/13424711.png?ga=GA1.1.1194572750.1761656981'
+    },
+    {
       text: 'Kategóriák',
       link: '/kategoriak',
       icon: 'https://cdn-icons-png.freepik.com/512/13087/13087931.png?ga=GA1.1.1194572750.1761656981'
