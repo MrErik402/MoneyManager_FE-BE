@@ -9,11 +9,11 @@
 }
 
 .statistics-title {
-  @apply text-3xl font-semibold text-gray-900 dark:text-gray-100;
+  @apply text-3xl font-semibold;
 }
 
 .statistics-subtitle {
-  @apply text-gray-500 dark:text-gray-400;
+  @apply text-sm;
 }
 
 .statistics-chip {
@@ -21,15 +21,15 @@
 }
 
 .statistics-chip.balance-positive {
-  @apply bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300;
+  @apply bg-emerald-100 text-emerald-700;
 }
 
 .statistics-chip.balance-negative {
-  @apply bg-rose-100 text-rose-700 dark:bg-rose-500/10 dark:text-rose-300;
+  @apply bg-rose-100 text-rose-700;
 }
 
 .statistics-chip.balance-neutral {
-  @apply bg-gray-100 text-gray-700 dark:bg-gray-700/70 dark:text-gray-200;
+  @apply bg-gray-100 text-gray-700;
 }
 
 .stat-summary-grid {
@@ -37,7 +37,7 @@
 }
 
 .stat-card {
-  @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm flex flex-col gap-4;
+  @apply bg-white border border-gray-200 rounded-xl p-6 shadow-sm flex flex-col gap-4;
 }
 
 .stat-card-icon {
@@ -45,43 +45,43 @@
 }
 
 .income-icon {
-  @apply bg-emerald-100 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-300;
+  @apply bg-emerald-100 text-emerald-600;
 }
 
 .expense-icon {
-  @apply bg-rose-100 text-rose-600 dark:bg-rose-500/10 dark:text-rose-300;
+  @apply bg-rose-100 text-rose-600;
 }
 
 .balance-icon {
-  @apply bg-indigo-100 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-300;
+  @apply bg-indigo-100 text-indigo-600;
 }
 
 .stat-card-label {
-  @apply text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400;
+  @apply text-xs font-semibold uppercase tracking-wide text-gray-500;
 }
 
 .stat-card-value {
-  @apply text-2xl font-semibold text-gray-900 dark:text-gray-100;
+  @apply text-2xl font-semibold text-gray-900;
 }
 
 .stat-card-footer {
-  @apply flex flex-wrap items-center gap-3 text-sm text-gray-500 dark:text-gray-400;
+  @apply flex flex-wrap items-center gap-3 text-sm text-gray-500;
 }
 
 .balance-card.balance-positive {
-  @apply border-emerald-200 dark:border-emerald-500/40;
+  @apply border-emerald-200;
 }
 
 .balance-card.balance-negative {
-  @apply border-rose-200 dark:border-rose-500/40;
+  @apply border-rose-200;
 }
 
 .balance-card.balance-neutral {
-  @apply border-gray-200 dark:border-gray-700;
+  @apply border-gray-200;
 }
 
 .chart-wrapper {
-  @apply bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 space-y-4 border border-gray-200 dark:border-gray-700;
+  @apply bg-white rounded-lg shadow-lg p-6 space-y-4 border border-gray-200;
 }
 
 .chart-container {
@@ -95,15 +95,15 @@
 }
 
 .section-title {
-  @apply text-lg font-semibold text-gray-900 dark:text-gray-100;
+  @apply text-lg font-semibold text-gray-900;
 }
 
 .section-subtitle {
-  @apply text-sm text-gray-500 dark:text-gray-400;
+  @apply text-sm text-gray-500;
 }
 
 .breakdown-card {
-  @apply bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 space-y-6 border border-gray-200 dark:border-gray-700;
+  @apply bg-white rounded-lg shadow-lg p-6 space-y-6 border border-gray-200;
 }
 
 .breakdown-section {
@@ -111,7 +111,7 @@
 }
 
 .breakdown-heading {
-  @apply text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400;
+  @apply text-xs font-semibold uppercase tracking-wide text-gray-500;
 }
 
 .breakdown-row {
@@ -123,23 +123,23 @@
 }
 
 .breakdown-name {
-  @apply text-sm font-medium text-gray-900 dark:text-gray-100;
+  @apply text-sm font-medium text-gray-900;
 }
 
 .breakdown-meta {
-  @apply flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400;
+  @apply flex items-center gap-3 text-xs text-gray-500;
 }
 
 .breakdown-amount {
-  @apply font-semibold text-gray-700 dark:text-gray-300;
+  @apply font-semibold text-gray-700;
 }
 
 .breakdown-percentage {
-  @apply px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-200 font-semibold;
+  @apply px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 font-semibold;
 }
 
 .progress {
-  @apply h-2 w-full bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden;
+  @apply h-2 w-full bg-gray-200 rounded-full overflow-hidden;
 }
 
 .progress-fill {
@@ -159,11 +159,11 @@
 }
 
 .detail-card {
-  @apply bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-200 dark:border-gray-700 space-y-4;
+  @apply bg-white rounded-lg shadow-lg p-6 border border-gray-200 space-y-4;
 }
 
 .detail-title {
-  @apply text-lg font-semibold text-gray-900 dark:text-gray-100;
+  @apply text-lg font-semibold text-gray-900;
 }
 
 .detail-grid {
@@ -175,15 +175,15 @@
 }
 
 .detail-label {
-  @apply text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400;
+  @apply text-xs font-semibold uppercase tracking-wide text-gray-500;
 }
 
 .detail-value {
-  @apply text-base font-semibold text-gray-900 dark:text-gray-100;
+  @apply text-base font-semibold text-gray-900;
 }
 
 .statistics-loading {
-  @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 md:p-10 shadow-sm space-y-8;
+  @apply bg-white border border-gray-200 rounded-xl p-6 md:p-10 shadow-sm space-y-8;
 }
 
 .loading-header {
@@ -191,11 +191,11 @@
 }
 
 .loading-spinner {
-  @apply h-12 w-12 border-4 border-emerald-400 dark:border-emerald-500 border-t-transparent rounded-full animate-spin;
+  @apply h-12 w-12 border-4 border-emerald-400 border-t-transparent rounded-full animate-spin;
 }
 
 .loading-text {
-  @apply text-sm text-gray-500 dark:text-gray-400;
+  @apply text-sm text-gray-500;
 }
 
 .loading-content {
@@ -203,19 +203,19 @@
 }
 
 .statistics-empty {
-  @apply bg-white dark:bg-gray-800 border border-dashed border-gray-300 dark:border-gray-600 rounded-xl p-10 text-center space-y-2 shadow-sm;
+  @apply bg-white border border-dashed border-gray-300 rounded-xl p-10 text-center space-y-2 shadow-sm;
 }
 
 .statistics-empty h2 {
-  @apply text-xl font-semibold text-gray-900 dark:text-gray-100;
+  @apply text-xl font-semibold text-gray-900;
 }
 
 .statistics-empty p {
-  @apply text-sm text-gray-500 dark:text-gray-400;
+  @apply text-sm text-gray-500;
 }
 
 .empty-breakdown {
-  @apply text-sm text-gray-500 dark:text-gray-400;
+  @apply text-sm text-gray-500;
 }
 
 @keyframes shimmer {
@@ -228,7 +228,7 @@
 }
 
 .skeleton {
-  @apply relative overflow-hidden bg-gray-200 dark:bg-gray-700;
+  @apply relative overflow-hidden bg-gray-200;
 }
 
 .skeleton::after {

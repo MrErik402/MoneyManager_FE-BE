@@ -2513,3 +2513,37 @@
 =======
 >>>>>>> 97c72a11e624e201832cff2cfe4931345aaca65a
 >>>>>>> c4db021cc288691fa29d1fb56b32dd120bc0f791
+[2025-11-11 19:20:11] - [36mverbose[39m: [AUTH /login] bejelentkezve: takeyoutohell@gmail.com
+[2025-11-11 19:20:22] - [36mverbose[39m: [GET /wallets] -> 1 rekord küldve válaszként
+[2025-11-11 19:20:23] - [36mverbose[39m: [GET /categories] -> 3 rekord küldve válaszként
+[2025-11-11 19:20:23] - [36mverbose[39m: [GET /transactions] -> 7 rekord küldve válaszként
+[2025-11-11 19:22:58] - [36mverbose[39m: [GET /categories] -> 3 rekord küldve válaszként
+[2025-11-11 19:22:58] - [36mverbose[39m: [GET /transactions] -> 7 rekord küldve válaszként
+[2025-11-11 19:23:00] - [36mverbose[39m: [GET /categories] -> 3 rekord küldve válaszként
+[2025-11-11 19:23:00] - [36mverbose[39m: [GET /transactions] -> 7 rekord küldve válaszként
+[2025-11-11 19:23:09] - [36mverbose[39m: [GET /categories] -> 3 rekord küldve válaszként
+[2025-11-11 19:23:09] - [36mverbose[39m: [GET /transactions] -> 7 rekord küldve válaszként
+[2025-11-11 19:23:15] - [36mverbose[39m: [GET /categories] -> 3 rekord küldve válaszként
+[2025-11-11 19:23:15] - [36mverbose[39m: [GET /transactions] -> 7 rekord küldve válaszként
+[2025-11-11 19:23:20] - [36mverbose[39m: [GET /categories] -> 3 rekord küldve válaszként
+[2025-11-11 19:23:20] - [36mverbose[39m: [GET /transactions] -> 7 rekord küldve válaszként
+[2025-11-11 19:23:23] - [36mverbose[39m: [GET /categories] -> 3 rekord küldve válaszként
+[2025-11-11 19:23:23] - [36mverbose[39m: [GET /transactions] -> 7 rekord küldve válaszként
+[2025-11-11 19:23:30] - [36mverbose[39m: [GET /categories] -> 3 rekord küldve válaszként
+[2025-11-11 19:23:30] - [36mverbose[39m: [GET /transactions] -> 7 rekord küldve válaszként
+[2025-11-11 19:23:52] - [36mverbose[39m: [GET /categories] -> 3 rekord küldve válaszként
+[2025-11-11 19:23:52] - [36mverbose[39m: [GET /transactions] -> 7 rekord küldve válaszként
+[2025-11-11 19:25:08] - [36mverbose[39m: [GET /transactions] -> 7 rekord küldve válaszként
+[2025-11-11 19:25:08] - [36mverbose[39m: [GET /categories] -> 3 rekord küldve válaszként
+[2025-11-11 19:25:10] - [36mverbose[39m: [GET /categories] -> 3 rekord küldve válaszként
+[2025-11-11 19:25:10] - [36mverbose[39m: [GET /transactions] -> 7 rekord küldve válaszként
+[2025-11-11 19:27:29] - [36mverbose[39m: [GET /categories] -> 3 rekord küldve válaszként
+[2025-11-11 19:27:29] - [36mverbose[39m: [GET /transactions] -> 7 rekord küldve válaszként
+[2025-11-11 19:28:04] - [36mverbose[39m: [GET /categories] -> 3 rekord küldve válaszként
+[2025-11-11 19:28:04] - [36mverbose[39m: [GET /transactions] -> 7 rekord küldve válaszként
+[2025-11-11 19:28:51] - [36mverbose[39m: [GET /categories] -> 3 rekord küldve válaszként
+[2025-11-11 19:28:51] - [36mverbose[39m: [GET /transactions] -> 7 rekord küldve válaszként
+[2025-11-11 19:29:21] - [36mverbose[39m: [GET /categories] -> 3 rekord küldve válaszként
+[2025-11-11 19:29:21] - [36mverbose[39m: [GET /transactions] -> 7 rekord küldve válaszként
+[2025-11-11 19:29:28] - [36mverbose[39m: [GET /categories] -> 3 rekord küldve válaszként
+[2025-11-11 19:29:28] - [36mverbose[39m: [GET /transactions] -> 7 rekord küldve válaszként

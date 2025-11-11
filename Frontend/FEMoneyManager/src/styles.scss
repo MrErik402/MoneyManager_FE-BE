@@ -339,3 +339,165 @@ input {
 .dark .szoveg {
   color: white;
 }
+
+// Statistics component dark mode styles
+.dark .statistics-title {
+  color: var(--dark-text-primary);
+}
+
+.dark .statistics-subtitle {
+  color: var(--dark-text-secondary);
+}
+
+.dark .statistics-chip.balance-positive {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: rgb(110, 231, 183);
+}
+
+.dark .statistics-chip.balance-negative {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: rgb(252, 165, 165);
+}
+
+.dark .statistics-chip.balance-neutral {
+  background-color: rgba(55, 65, 81, 0.7);
+  color: var(--dark-text-primary);
+}
+
+.dark .stat-card {
+  background-color: var(--dark-bg-card);
+  border-color: var(--dark-border-primary);
+}
+
+.dark .income-icon {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: rgb(110, 231, 183);
+}
+
+.dark .expense-icon {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: rgb(252, 165, 165);
+}
+
+.dark .balance-icon {
+  background-color: rgba(99, 102, 241, 0.1);
+  color: rgb(165, 180, 252);
+}
+
+.dark .stat-card-label {
+  color: var(--dark-text-secondary);
+}
+
+.dark .stat-card-value {
+  color: var(--dark-text-primary);
+}
+
+.dark .stat-card-footer {
+  color: var(--dark-text-secondary);
+}
+
+.dark .balance-card.balance-positive {
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+.dark .balance-card.balance-negative {
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.dark .balance-card.balance-neutral {
+  border-color: var(--dark-border-primary);
+}
+
+.dark .chart-wrapper {
+  background-color: var(--dark-bg-card);
+  border-color: var(--dark-border-primary);
+}
+
+.dark .section-title {
+  color: var(--dark-text-primary);
+}
+
+.dark .section-subtitle {
+  color: var(--dark-text-secondary);
+}
+
+.dark .breakdown-card {
+  background-color: var(--dark-bg-card);
+  border-color: var(--dark-border-primary);
+}
+
+.dark .breakdown-heading {
+  color: var(--dark-text-secondary);
+}
+
+.dark .breakdown-name {
+  color: var(--dark-text-primary);
+}
+
+.dark .breakdown-meta {
+  color: var(--dark-text-secondary);
+}
+
+.dark .breakdown-amount {
+  color: var(--dark-text-primary);
+}
+
+.dark .breakdown-percentage {
+  background-color: var(--dark-bg-tertiary);
+  color: var(--dark-text-primary);
+}
+
+.dark .progress {
+  background-color: var(--dark-bg-tertiary);
+}
+
+.dark .detail-card {
+  background-color: var(--dark-bg-card);
+  border-color: var(--dark-border-primary);
+}
+
+.dark .detail-title {
+  color: var(--dark-text-primary);
+}
+
+.dark .detail-label {
+  color: var(--dark-text-secondary);
+}
+
+.dark .detail-value {
+  color: var(--dark-text-primary);
+}
+
+.dark .statistics-loading {
+  background-color: var(--dark-bg-card);
+  border-color: var(--dark-border-primary);
+}
+
+.dark .loading-spinner {
+  border-color: rgb(52, 211, 153);
+}
+
+.dark .loading-text {
+  color: var(--dark-text-secondary);
+}
+
+.dark .statistics-empty {
+  background-color: var(--dark-bg-card);
+  border-color: var(--dark-border-secondary);
+}
+
+.dark .statistics-empty h2 {
+  color: var(--dark-text-primary);
+}
+
+.dark .statistics-empty p {
+  color: var(--dark-text-secondary);
+}
+
+.dark .empty-breakdown {
+  color: var(--dark-text-secondary);
+}
+
+.dark .skeleton {
+  background-color: var(--dark-bg-tertiary);
+}

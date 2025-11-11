@@ -1,39 +1,24 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../Services/api.service';
 import { Transaction } from '../../Interfaces/Transaction';
 import { Category } from '../../Interfaces/Category';
-import { from } from 'rxjs';
+import { CategoryBreakdown } from '../../Interfaces/CategoryBreakdown';
+import { StatisticsSummary } from '../../Interfaces/StatisticsSummary';
 import { NotificationsService } from '../../Services/notifications.service';
 
 declare var CanvasJS: any;
-
-interface CategoryBreakdown {
-  name: string;
-  amount: number;
-  percentage: number;
-}
-
-interface StatisticsSummary {
-  incomeTotal: number;
-  expenseTotal: number;
-  netBalance: number;
-  incomeCount: number;
-  expenseCount: number;
-  incomeAverage: number;
-  expenseAverage: number;
-  coverage: number;
-}
 
 @Component({
   selector: 'app-statistics',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './statistics.component.html',
-  styleUrl: './statistics.component.scss'
+  styleUrl: './statistics.component.scss',
 })
-export class StatisticsComponent implements OnInit, AfterViewInit {
+export class StatisticsComponent implements OnInit, AfterViewInit, OnDestroy {
   private chart: any;
+  private canvasJSCheckInterval: any;
   transactions: Transaction[] = [];
   categories: Category[] = [];
   baseUrl = 'http://localhost:3000';
@@ -47,13 +32,16 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
     expenseCount: 0,
     incomeAverage: 0,
     expenseAverage: 0,
-    coverage: 0
+    coverage: 0,
   };
   topIncomeCategories: CategoryBreakdown[] = [];
   topExpenseCategories: CategoryBreakdown[] = [];
   balanceLabel = 'Egyensúly';
   balanceStatusClass = 'balance-neutral';
-  private chartData: { income: any[]; expense: any[] } = { income: [], expense: [] };
+  private chartData: { income: any[]; expense: any[] } = {
+    income: [],
+    expense: [],
+  };
   readonly skeletonSummaryCards = Array.from({ length: 3 });
   readonly skeletonBreakdownRows = Array.from({ length: 4 });
   readonly skeletonDetailCards = Array.from({ length: 2 });
@@ -70,93 +58,173 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
 
   private loadStatisticsData() {
     this.loading = true;
-    const categoriesRequest = this.apiService.getAll(`${this.baseUrl}/categories`);
-    const transactionsRequest = this.apiService.getAll(`${this.baseUrl}/transactions`);
+    const categoriesRequest = this.apiService.getAll(
+      `${this.baseUrl}/categories`
+    );
+    const transactionsRequest = this.apiService.getAll(
+      `${this.baseUrl}/transactions`
+    );
 
-    from(Promise.all([categoriesRequest, transactionsRequest])).subscribe({
-      next: ([categoriesResponse, transactionsResponse]) => {
-        this.categories = categoriesResponse?.data || [];
-        this.transactions = transactionsResponse?.data || [];
+    Promise.all([categoriesRequest, transactionsRequest])
+      .then(([categoriesResponse, transactionsResponse]) => {
+        this.categories = Array.isArray(categoriesResponse?.data)
+          ? categoriesResponse.data
+          : [];
+        this.transactions = Array.isArray(transactionsResponse?.data)
+          ? transactionsResponse.data
+          : [];
         this.loading = false;
         this.recalculateStatistics();
-      },
-      error: () => {
+      })
+      .catch((error) => {
+        console.error('Error loading statistics:', error);
         this.loading = false;
-        this.notifications.show('error', 'Hiba', 'Nem sikerült betölteni a statisztikákat');
+        this.notifications.show(
+          'error',
+          'Hiba',
+          'Nem sikerült betölteni a statisztikákat'
+        );
         this.resetStatistics();
-      }
-    });
+      });
   }
 
   ngAfterViewInit() {
-    if (typeof CanvasJS !== 'undefined') {
-      this.initChart();
-    } else {
-      const checkCanvasJS = setInterval(() => {
-        if (typeof CanvasJS !== 'undefined') {
-          clearInterval(checkCanvasJS);
-          this.initChart();
-        }
-      }, 100);
+    setTimeout(() => {
+      if (typeof CanvasJS !== 'undefined' && CanvasJS.Chart) {
+        this.initChart();
+      } else {
+        this.canvasJSCheckInterval = setInterval(() => {
+          if (typeof CanvasJS !== 'undefined' && CanvasJS.Chart) {
+            clearInterval(this.canvasJSCheckInterval);
+            this.initChart();
+          }
+        }, 100);
+
+        setTimeout(() => {
+          if (this.canvasJSCheckInterval) {
+            clearInterval(this.canvasJSCheckInterval);
+          }
+        }, 5000);
+      }
+    }, 100);
+  }
+
+  ngOnDestroy() {
+    if (this.canvasJSCheckInterval) {
+      clearInterval(this.canvasJSCheckInterval);
+    }
+    if (this.chart) {
+      this.chart.destroy();
     }
   }
 
   private updateChartWithTransactions() {
     if (!this.chart) {
+      if (typeof CanvasJS !== 'undefined' && CanvasJS.Chart) {
+        this.initChart();
+      }
       return;
     }
 
-    if (this.chartData.income.length === 0 && this.chartData.expense.length === 0) {
+    if (
+      this.chartData.income.length === 0 &&
+      this.chartData.expense.length === 0
+    ) {
       this.chart.options.data = [
         {
-          type: "column",
+          type: 'column',
           showInLegend: true,
-          name: "Bevételek",
-          color: "#10b981",
-          dataPoints: []
+          name: 'Bevételek',
+          color: '#10b981',
+          dataPoints: [],
         },
         {
-          type: "column",
-          axisYType: "secondary",
+          type: 'column',
+          axisYType: 'secondary',
           showInLegend: true,
-          name: "Kiadások",
-          color: "#ef4444",
-          dataPoints: []
-        }
+          name: 'Kiadások',
+          color: '#ef4444',
+          dataPoints: [],
+        },
       ];
       this.chart.render();
       return;
     }
 
-    this.chart.options.title.text = "Bevételek és Kiadások";
-    this.chart.options.axisX.title = "Kategória";
-    this.chart.options.axisX.valueFormatString = "";
-    this.chart.options.axisY.title = "Összeg (Log)";
-    this.chart.options.axisY2.title = "Összeg";
-    
+    const allCategories = new Set<string>();
+    this.chartData.income.forEach((point: any) => {
+      if (point.label) allCategories.add(point.label);
+    });
+    this.chartData.expense.forEach((point: any) => {
+      if (point.label) allCategories.add(point.label);
+    });
+
+    const categoryArray = Array.from(allCategories);
+
+    if (categoryArray.length === 0) {
+      this.chart.options.data = [
+        {
+          type: 'column',
+          showInLegend: true,
+          name: 'Bevételek',
+          color: '#10b981',
+          dataPoints: this.chartData.income,
+        },
+        {
+          type: 'column',
+          axisYType: 'secondary',
+          showInLegend: true,
+          name: 'Kiadások',
+          color: '#ef4444',
+          dataPoints: this.chartData.expense,
+        },
+      ];
+      this.chart.render();
+      return;
+    }
+
+    const incomeMap = new Map(
+      this.chartData.income.map((p: any) => [p.label, p.y])
+    );
+    const expenseMap = new Map(
+      this.chartData.expense.map((p: any) => [p.label, p.y])
+    );
+
+    const incomePoints = categoryArray.map((label, index) => ({
+      x: index,
+      y: incomeMap.get(label) || 0,
+      label: label,
+    }));
+
+    const expensePoints = categoryArray.map((label, index) => ({
+      x: index,
+      y: expenseMap.get(label) || 0,
+      label: label,
+    }));
+
     this.chart.options.data = [
       {
-        type: "column",
+        type: 'column',
         showInLegend: true,
-        name: "Bevételek",
-        color: "#10b981",
-        dataPoints: this.chartData.income
+        name: 'Bevételek',
+        color: '#10b981',
+        dataPoints: incomePoints,
       },
       {
-        type: "column",
-        axisYType: "secondary",
+        type: 'column',
+        axisYType: 'secondary',
         showInLegend: true,
-        name: "Kiadások",
-        color: "#ef4444",
-        dataPoints: this.chartData.expense
-      }
+        name: 'Kiadások',
+        color: '#ef4444',
+        dataPoints: expensePoints,
+      },
     ];
 
     this.chart.render();
   }
 
   private getCategoryName(categoryId: string): string {
-    const category = this.categories.find(c => c.id === categoryId);
+    const category = this.categories.find((c) => c.id === categoryId);
     return category ? category.name : 'Ismeretlen';
   }
 
@@ -179,7 +247,7 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
 
     this.transactions.forEach((transaction: Transaction) => {
       const categoryId = transaction.categoryID;
-      
+
       if (transaction.type === 'bevétel') {
         const current = incomeMap.get(categoryId) || 0;
         incomeMap.set(categoryId, current + transaction.amount);
@@ -198,7 +266,7 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
       .map(([categoryId, amount], index) => ({
         x: index,
         y: amount,
-        label: this.getCategoryName(categoryId)
+        label: this.getCategoryName(categoryId),
       }));
 
     const expensePoints = Array.from(expenseMap.entries())
@@ -206,93 +274,171 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
       .map(([categoryId, amount], index) => ({
         x: index,
         y: amount,
-        label: this.getCategoryName(categoryId)
+        label: this.getCategoryName(categoryId),
       }));
 
-    return { 
-      incomePoints, 
-      expensePoints, 
-      incomeMap, 
-      expenseMap, 
-      incomeTotal, 
+    return {
+      incomePoints,
+      expensePoints,
+      incomeMap,
+      expenseMap,
+      incomeTotal,
       expenseTotal,
       incomeCount,
-      expenseCount
+      expenseCount,
     };
   }
 
   private initChart() {
-    this.chart = new CanvasJS.Chart("chartContainer", {
+    const chartContainer = document.getElementById('chartContainer');
+    if (!chartContainer) {
+      console.error('Chart container not found');
+      return;
+    }
+
+    if (typeof CanvasJS === 'undefined' || !CanvasJS.Chart) {
+      console.error('CanvasJS is not loaded');
+      return;
+    }
+
+    this.chart = new CanvasJS.Chart('chartContainer', {
       animationEnabled: true,
       zoomEnabled: true,
-      theme: "dark2",
+      theme: 'light2',
+      backgroundColor: 'transparent',
       title: {
-        text: "Bevételek és Kiadások"
+        text: 'Bevételek és Kiadások',
+        fontFamily: 'Montserrat',
+        fontSize: 20,
+        fontWeight: 'bold',
       },
       axisX: {
-        title: "Kategória",
-        valueFormatString: "",
-        interval: 1
+        title: 'Kategória',
+        titleFontFamily: 'Montserrat',
+        valueFormatString: '',
+        interval: 1,
+        labelAngle: -45,
+        labelFontFamily: 'Montserrat',
       },
       axisY: {
-        logarithmic: true,
-        title: "Összeg (Log)",
-        titleFontColor: "#6D78AD",
-        lineColor: "#6D78AD",
-        gridThickness: 0,
-        lineThickness: 1,
-        labelFormatter: this.addSymbols.bind(this)
+        logarithmic: false,
+        title: 'Összeg (HUF)',
+        titleFontFamily: 'Montserrat',
+        titleFontColor: '#6D78AD',
+        lineColor: '#6D78AD',
+        gridThickness: 1,
+        gridColor: '#e5e7eb',
+        lineThickness: 2,
+        labelFontFamily: 'Montserrat',
+        labelFormatter: (e: any) => {
+          return this.formatCurrency(e.value);
+        },
       },
       axisY2: {
-        title: "Összeg",
-        titleFontColor: "#51CDA0",
+        title: 'Összeg (HUF)',
+        titleFontFamily: 'Montserrat',
+        titleFontColor: '#ef4444',
         logarithmic: false,
-        lineColor: "#51CDA0",
+        lineColor: '#ef4444',
         gridThickness: 0,
-        lineThickness: 1,
-        labelFormatter: this.addSymbols.bind(this)
+        lineThickness: 2,
+        labelFontFamily: 'Montserrat',
+        labelFormatter: (e: any) => {
+          return this.formatCurrency(e.value);
+        },
       },
       legend: {
-        verticalAlign: "top",
-        fontSize: 16,
-        dockInsidePlotArea: true
+        verticalAlign: 'top',
+        horizontalAlign: 'right',
+        fontSize: 14,
+        fontFamily: 'Montserrat',
+        cursor: 'pointer',
+        itemclick: (e: any) => {
+          e.dataSeries.visible = !(
+            typeof e.dataSeries.visible === 'undefined' || e.dataSeries.visible
+          );
+          e.chart.render();
+        },
       },
-      data: [{
-        type: "column",
-        showInLegend: true,
-        name: "Bevételek",
-        color: "#10b981",
-        dataPoints: []
+      toolTip: {
+        shared: true,
+        fontFamily: 'Montserrat',
+        contentFormatter: (e: any) => {
+          let content = '';
+          if (e.entries && e.entries.length > 0) {
+            content +=
+              '<strong>' + e.entries[0].dataSeries.name + '</strong><br/>';
+            e.entries.forEach((entry: any) => {
+              content +=
+                entry.dataSeries.name +
+                ': ' +
+                this.formatCurrency(entry.dataPoint.y) +
+                '<br/>';
+            });
+          }
+          return content;
+        },
       },
-      {
-        type: "column",
-        axisYType: "secondary",
-        showInLegend: true,
-        name: "Kiadások",
-        color: "#ef4444",
-        dataPoints: []
-      }]
+      data: [
+        {
+          type: 'column',
+          showInLegend: true,
+          name: 'Bevételek',
+          color: '#10b981',
+          dataPoints: [],
+        },
+        {
+          type: 'column',
+          axisYType: 'secondary',
+          showInLegend: true,
+          name: 'Kiadások',
+          color: '#ef4444',
+          dataPoints: [],
+        },
+      ],
     });
 
     this.chart.render();
-    
+
     if (this.transactions.length > 0) {
-      this.updateChartWithTransactions();
+      setTimeout(() => {
+        this.updateChartWithTransactions();
+      }, 100);
     }
   }
 
+  private formatCurrency(value: number): string {
+    if (value === 0) return '0';
+    if (Math.abs(value) >= 1000000) {
+      return (value / 1000000).toFixed(1) + 'M';
+    }
+    if (Math.abs(value) >= 1000) {
+      return (value / 1000).toFixed(1) + 'K';
+    }
+    return value.toFixed(0);
+  }
+
   private addSymbols(e: any): string {
-    const suffixes = ["", "K", "M", "B", "T"];
-    const order = Math.max(Math.floor(Math.log(Math.abs(e.value)) / Math.log(1000)), 0);
-    const suffixOrder = order > suffixes.length - 1 ? suffixes.length - 1 : order;
+    const suffixes = ['', 'K', 'M', 'B', 'T'];
+    const order = Math.max(
+      Math.floor(Math.log(Math.abs(e.value)) / Math.log(1000)),
+      0
+    );
+    const suffixOrder =
+      order > suffixes.length - 1 ? suffixes.length - 1 : order;
     const suffix = suffixes[suffixOrder];
-    return CanvasJS.formatNumber(e.value / Math.pow(1000, order), "#,##0.##") + suffix;
+    return (
+      CanvasJS.formatNumber(e.value / Math.pow(1000, order), '#,##0.##') +
+      suffix
+    );
   }
 
   private recalculateStatistics() {
     if (!this.transactions || this.transactions.length === 0) {
       this.resetStatistics();
-      this.updateChartWithTransactions();
+      setTimeout(() => {
+        this.updateChartWithTransactions();
+      }, 200);
       return;
     }
 
@@ -304,7 +450,7 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
       incomeTotal,
       expenseTotal,
       incomeCount,
-      expenseCount
+      expenseCount,
     } = this.processTransactionData();
 
     this.hasTransactions = true;
@@ -314,21 +460,28 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
     this.summary.incomeCount = incomeCount;
     this.summary.expenseCount = expenseCount;
     this.summary.incomeAverage = incomeCount ? incomeTotal / incomeCount : 0;
-    this.summary.expenseAverage = expenseCount ? expenseTotal / expenseCount : 0;
-    this.summary.coverage = expenseTotal === 0 ? 100 : Math.round((incomeTotal / expenseTotal) * 100);
+    this.summary.expenseAverage = expenseCount
+      ? expenseTotal / expenseCount
+      : 0;
+    this.summary.coverage =
+      expenseTotal === 0 ? 100 : Math.round((incomeTotal / expenseTotal) * 100);
 
     this.topIncomeCategories = this.mapToBreakdown(incomeMap, incomeTotal);
     this.topExpenseCategories = this.mapToBreakdown(expenseMap, expenseTotal);
 
-    this.balanceStatusClass = this.getBalanceStatusClass(this.summary.netBalance);
+    this.balanceStatusClass = this.getBalanceStatusClass(
+      this.summary.netBalance
+    );
     this.balanceLabel = this.getBalanceLabel(this.summary.netBalance);
 
     this.chartData = {
       income: incomePoints,
-      expense: expensePoints
+      expense: expensePoints,
     };
 
-    this.updateChartWithTransactions();
+    setTimeout(() => {
+      this.updateChartWithTransactions();
+    }, 200);
   }
 
   private resetStatistics() {
@@ -341,7 +494,7 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
       expenseCount: 0,
       incomeAverage: 0,
       expenseAverage: 0,
-      coverage: 0
+      coverage: 0,
     };
     this.topIncomeCategories = [];
     this.topExpenseCategories = [];
@@ -350,7 +503,10 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
     this.chartData = { income: [], expense: [] };
   }
 
-  private mapToBreakdown(map: Map<string, number>, total: number): CategoryBreakdown[] {
+  private mapToBreakdown(
+    map: Map<string, number>,
+    total: number
+  ): CategoryBreakdown[] {
     if (map.size === 0) {
       return [];
     }
@@ -359,7 +515,7 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
       .map(([categoryId, amount]) => ({
         name: this.getCategoryName(categoryId),
         amount,
-        percentage: total === 0 ? 0 : Math.round((amount / total) * 100)
+        percentage: total === 0 ? 0 : Math.round((amount / total) * 100),
       }))
       .sort((a, b) => b.amount - a.amount)
       .slice(0, 5);
@@ -387,5 +543,17 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
     }
 
     return 'Egyensúly';
+  }
+
+  get topIncomeCategoryName(): string {
+    return this.topIncomeCategories.length > 0
+      ? this.topIncomeCategories[0].name
+      : 'Nincs adat';
+  }
+
+  get topExpenseCategoryName(): string {
+    return this.topExpenseCategories.length > 0
+      ? this.topExpenseCategories[0].name
+      : 'Nincs adat';
   }
 }
