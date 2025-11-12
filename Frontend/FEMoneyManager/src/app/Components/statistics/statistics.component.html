@@ -69,7 +69,6 @@
           <p class="stat-card-value">{{ summary.incomeTotal | currency:'HUF':'symbol':'1.0-0':'hu' }}</p>
           <div class="stat-card-footer">
             <span>{{ summary.incomeCount }} tranzakció</span>
-            <span>Átlag: {{ summary.incomeAverage | currency:'HUF':'symbol':'1.0-0':'hu' }}</span>
           </div>
         </div>
 
@@ -79,7 +78,6 @@
           <p class="stat-card-value">{{ summary.expenseTotal | currency:'HUF':'symbol':'1.0-0':'hu' }}</p>
           <div class="stat-card-footer">
             <span>{{ summary.expenseCount }} tranzakció</span>
-            <span>Átlag: {{ summary.expenseAverage | currency:'HUF':'symbol':'1.0-0':'hu' }}</span>
           </div>
         </div>
 
@@ -144,17 +142,13 @@
         </div>
       </div>
 
-      <div class="stat-details-grid">
+      <div class="stat-details-grid ">
         <div class="detail-card">
           <h3 class="detail-title">Bevételi áttekintés</h3>
           <div class="detail-grid">
             <div class="detail-item">
               <span class="detail-label">Tranzakciók száma</span>
               <span class="detail-value">{{ summary.incomeCount }}</span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-label">Átlagos összeg</span>
-              <span class="detail-value">{{ summary.incomeAverage | currency:'HUF':'symbol':'1.0-0':'hu' }}</span>
             </div>
             <div class="detail-item">
               <span class="detail-label">Legdominánsabb kategória</span>
@@ -169,10 +163,6 @@
             <div class="detail-item">
               <span class="detail-label">Tranzakciók száma</span>
               <span class="detail-value">{{ summary.expenseCount }}</span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-label">Átlagos összeg</span>
-              <span class="detail-value">{{ summary.expenseAverage | currency:'HUF':'symbol':'1.0-0':'hu' }}</span>
             </div>
             <div class="detail-item">
               <span class="detail-label">Legdominánsabb kategória</span>
